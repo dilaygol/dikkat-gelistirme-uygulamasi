@@ -1,0 +1,167 @@
+// ============================================================
+// Number Sequence – Bileşen Stilleri
+// Layout kuralları: styles.scss | Değişkenler: styles/_design-tokens.scss
+// Kağıt kart + washi bant estetiği
+// ============================================================
+@use 'styles/design-tokens' as *;
+
+// ── Animasyonlar ───────────────────────────────────────────
+@keyframes shake {
+
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+
+    20% {
+        transform: translateX(-6px);
+    }
+
+    40% {
+        transform: translateX(6px);
+    }
+
+    60% {
+        transform: translateX(-4px);
+    }
+
+    80% {
+        transform: translateX(4px);
+    }
+}
+
+@keyframes popIn {
+    0% {
+        transform: scale(.8);
+        opacity: 0;
+    }
+
+    70% {
+        transform: scale(1.05);
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+// ── Yerel Renkler ─────────────────────────────────────────
+$color-error-bg: #fff3f0;
+$color-error-tx: #e55039;
+
+// ── Host ──────────────────────────────────────────────────
+:host {
+    display: flex;
+    width: 100%;
+    height: 100vh;
+    align-items: center;
+    justify-content: center;
+    background: $color-bg;
+    overflow: hidden;
+}
+
+// ── Soru Izgarası ─────────────────────────────────────────
+.questions-grid {
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+    gap: 20px 40px;
+    justify-items: center;
+    align-items: center;
+}
+
+.question-group {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+// ── Kartlar ───────────────────────────────────────────────
+.card {
+    @include flex-center;
+    width: 105px;
+    height: 105px;
+    background: #fff;
+    border-radius: 20px;
+    @include card-shadow($color-nav, .13);
+    position: relative;
+}
+
+.input-card {
+    transition: background .2s;
+
+    &.show-hint {
+        .number-input::placeholder {
+            color: rgba($color-nav, 0.6);
+            font-weight: 900;
+            opacity: 1;
+        }
+    }
+
+    &.error {
+        background: $color-error-bg;
+        animation: shake .45s ease;
+
+        .number-input {
+            color: $color-error-tx;
+        }
+    }
+}
+
+.number-input {
+    width: 100%;
+    height: 100%;
+    border: none;
+    outline: none;
+    background: transparent;
+    text-align: center;
+    font-family: 'Nunito', sans-serif;
+    font-size: 2rem;
+    font-weight: 900;
+    color: $color-text;
+    padding: 0;
+    border-radius: 16px;
+    cursor: text;
+    transition: color .2s;
+
+    &::placeholder {
+        color: #ccc;
+        font-weight: 700;
+    }
+
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+    }
+
+    &[type=number] {
+        appearance: textfield;
+    }
+}
+
+// ── Merkez Kart (washi bant) ──────────────────────────────
+.center-card {
+    background: #f0f4f8;
+    width: 115px;
+    height: 115px;
+
+    &::before {
+        content: '';
+        position: absolute;
+        top: -7px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 30px;
+        height: 8px;
+        background: var(--tape-color, #79d9b8);
+        border-radius: 3px;
+        opacity: .85;
+    }
+}
+
+.center-number {
+    font-family: 'Nunito', sans-serif;
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: $color-text;
+}

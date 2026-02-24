@@ -1,0 +1,56 @@
+<!-- Açıktan Koyuya Sıralama – Shade Sorting -->
+<div class="page-frame">
+
+    <!-- ── Yönerge (sabit 80px) ─────────────────────────── -->
+    <div class="frame-top">
+        <div class="instruction-card">
+            <span class="instruction-icon" aria-hidden="true">🎨</span>
+            <h1 class="instruction-text">
+                Üçgenleri en açık renkten en koyu renge doğru sırayla bul ve dokun!
+            </h1>
+        </div>
+    </div>
+
+    <!-- ── Oyun Alanı (flex-grow) ─────────────────────────── -->
+    <div class="frame-middle">
+
+        <button class="nav-btn" (click)="goPrev()" aria-label="Önceki etkinlik"><span
+                class="material-icons">arrow_back</span></button>
+
+        <!-- Kanvas: tüm orta alanı kaplar -->
+        <div class="game-content canvas-area">
+
+
+
+            @for (tri of triangles; track tri.id) {
+            <div class="triangle-wrap" [style.top]="tri.top" [style.left]="tri.left" [class.found]="tri.found"
+                [class.shake]="tri.isShaking" [class.hint-glow]="stepErrorCount >= 2 && tri.order === currentStep"
+                (click)="onTriangleClick(tri)" [attr.aria-label]="'Üçgen ' + tri.order" role="button" tabindex="0"
+                (keydown.enter)="onTriangleClick(tri)">
+                <div class="triangle" [style.background]="tri.shade"></div>
+                @if (tri.found) { <span class="step-label">{{ tri.foundStep }}</span> }
+            </div>
+            }
+
+        </div>
+
+        <button class="nav-btn" [class.locked]="!isNextUnlocked" [disabled]="!isNextUnlocked" (click)="goNext()"
+            aria-label="Sonraki etkinlik"><span class="material-icons">arrow_forward</span>
+        </button>
+
+    </div>
+
+    <!-- ── İlerleme Çubuğu (frame-middle ile frame-bottom arası) ── -->
+    <div class="progress-strip">
+        <div class="progress-bar-wrap" aria-label="İlerleme">
+            <div class="progress-bar-fill" [style.width.%]="((currentStep - 1) / 16) * 100"></div>
+            <span class="progress-text">{{ currentStep - 1 }} / 16</span>
+        </div>
+    </div>
+
+    <!-- ── Butonlar (sabit 120px – diğer sayfalarla aynı) ──────── -->
+    <div class="frame-bottom">
+        <app-action-buttons [checkAlwaysDisabled]="true" (reset)="restartGame()" />
+    </div>
+
+</div>
