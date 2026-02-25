@@ -125,6 +125,6 @@ export class SymbolMatchingComponent implements OnInit {
     goPrev(): void { this.router.navigate(['/number-sequence']); }
     goNext(): void {
         if (!this.isNextUnlocked) return;
-        this.router.navigate(['/animal-position']);
+        this.router.navigate(['/multi-condition-selection']);
     }
 }
