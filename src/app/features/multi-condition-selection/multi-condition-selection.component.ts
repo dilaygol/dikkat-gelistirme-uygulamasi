@@ -171,7 +171,7 @@ export class MultiConditionSelectionComponent implements OnInit {
     }
 
     goNext(): void {
-        // Son etkinlik, ileri butonu kilitli olabilir veya boş fonksiyon kalabilir.
-        // İleride yeni sayfa eklenirse burası güncellenir.
+        if (!this.isNextUnlocked) return;
+        this.router.navigate(['/animal-position']);
     }
 }
