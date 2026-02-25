@@ -150,6 +150,6 @@ export class ShapeColoringComponent implements OnInit {
 
     goNext(): void {
         if (!this.isNextUnlocked) return;
-        this.fb.showFeedback('success', 'Oyun sonuna ulaştınız!');
+        this.router.navigate(['/liquid-selection']);
     }
 }

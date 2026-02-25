@@ -107,7 +107,7 @@ export class AnimalPositionComponent implements OnInit {
     }
 
     goPrev(): void {
-        this.router.navigate(['/symbol-matching']);
+        this.router.navigate(['/multi-condition-selection']);
     }
 
     goNext(): void {
