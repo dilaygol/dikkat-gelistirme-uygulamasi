@@ -1,0 +1,137 @@
+import { Component, OnInit, computed, signal } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
+import { GameStateService } from '../../core/services/game-state.service';
+import { FeedbackService } from '../../core/services/feedback.service';
+import { ActionButtonsComponent } from '../../shared/action-buttons/action-buttons.component';
+
+// ─────────────────────────────────────────────────────────
+// 6x6 pattern, replicating the orange animal face from the image
+const PUZZLE_PAGES: boolean[][][] = [
+    [
+        [false, false, false, false, false, false],
+        [false, false, false, false, false, false],
+        [false, true, false, false, true, false],
+        [false, false, true, true, false, false],
+        [false, false, true, true, false, false],
+        [false, false, false, false, false, false],
+    ],
+];
+
+interface PatternTwoState {
+    userGrid: boolean[][];
+    feedbackState: 'correct' | 'wrong' | null;
+    errorCount: number;
+}
+
+const ID = 'pattern-2';
+
+@Component({
+    selector: 'app-pattern-matching-two',
+    standalone: true,
+    imports: [CommonModule, ActionButtonsComponent],
+    templateUrl: './pattern-matching-two.component.html',
+    styleUrl: './pattern-matching-two.component.scss',
+})
+export class PatternMatchingTwoComponent implements OnInit {
+    constructor(
+        private router: Router,
+        private gs: GameStateService,
+        private fb: FeedbackService
+    ) { }
+
+    readonly currentPage = signal(0);
+    readonly totalPages = PUZZLE_PAGES.length;
+    readonly targetGrid = computed(() => PUZZLE_PAGES[this.currentPage()]);
+
+    userGrid: boolean[][] = this.createEmptyGrid();
+    feedbackState: 'correct' | 'wrong' | null = null;
+    errorCount = 0;
+    showHints = false;
+
+    get isNextUnlocked(): boolean {
+        return this.feedbackState === 'correct' || this.gs.isCompleted(ID);
+    }
+
+    // ── Lifecycle ─────────────────────────────────────────
+    ngOnInit(): void {
+        const saved = this.gs.getData<PatternTwoState>(ID);
+        if (saved) {
+            this.userGrid = saved.userGrid.map(row => [...row]);
+            this.feedbackState = saved.feedbackState;
+            this.errorCount = saved.errorCount || 0;
+        }
+    }
+
+    // ── Yardımcı ──────────────────────────────────────────
+    private createEmptyGrid(): boolean[][] {
+        return Array.from({ length: 6 }, () => Array(6).fill(false));
+    }
+
+    private persist(): void {
+        this.gs.save(ID, {
+            userGrid: this.userGrid,
+            feedbackState: this.feedbackState,
+            errorCount: this.errorCount
+        });
+    }
+
+    // ── Etkileşim ─────────────────────────────────────────
+    toggleCell(row: number, col: number): void {
+        if (this.gs.isCompleted(ID) && this.feedbackState === 'correct') return; // locked if finished
+        this.userGrid[row][col] = !this.userGrid[row][col];
+        this.feedbackState = null;
+        this.showHints = false;
+        this.persist();
+    }
+
+    clearGrid(): void {
+        this.userGrid = this.createEmptyGrid();
+        this.feedbackState = null;
+        this.errorCount = 0;
+        this.showHints = false;
+        this.gs.clear(ID);
+    }
+
+    checkPattern(): void {
+        const target = this.targetGrid();
+        const isCorrect = target.every((row, r) =>
+            row.every((cell, c) => cell === this.userGrid[r][c])
+        );
+        this.feedbackState = isCorrect ? 'correct' : 'wrong';
+        if (isCorrect) {
+            this.gs.markCompleted(ID);
+            this.fb.showFeedback('success', 'Tebrikler! Deseni mükemmel kopyaladın!');
+        } else {
+            this.errorCount++;
+            if (this.errorCount >= 2) {
+                this.showHints = true; // Still use 2 hints here to match Pattern Matching 1 logic (the 3 errors is only for Question 6 animal position as requested)
+            }
+            this.fb.showFeedback('error', 'Tekrar Denemelisin');
+        }
+        this.persist();
+    }
+
+    isHintRemove(r: number, c: number): boolean {
+        if (!this.showHints) return false;
+        return this.userGrid[r][c] && !this.targetGrid()[r][c]; // Extra painted
+    }
+
+    isHintAdd(r: number, c: number): boolean {
+        if (!this.showHints) return false;
+        return !this.userGrid[r][c] && this.targetGrid()[r][c]; // Missing painted
+    }
+
+    // ── Navigasyon ────────────────────────────────────────
+    goPrev(): void {
+        this.router.navigate(['/animal-position']);
+    }
+
+    goNext(): void {
+        if (!this.isNextUnlocked) return;
+        this.router.navigate(['/shape-coloring']);
+    }
+
+    readonly rowIndices = [0, 1, 2, 3, 4, 5] as const;
+    readonly colIndices = [0, 1, 2, 3, 4, 5] as const;
+}

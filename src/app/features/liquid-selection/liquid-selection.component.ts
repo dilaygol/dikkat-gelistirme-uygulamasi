@@ -6,55 +6,42 @@ import { FeedbackService } from '../../core/services/feedback.service';
 import { ActionButtonsComponent } from '../../shared/action-buttons/action-buttons.component';
 
 interface OptionItem {
-    id: number; symbol: string; bgColor: string; isCorrect: boolean;
-    top: string; left: string; isShaking: boolean;
+    id: number;
+    name: string;
+    emoji: string;
+    isCorrect: boolean;
+    isShaking?: boolean;
 }
 
-interface SymbolMatchState {
+interface LiquidSelectionState {
     selectedId: number | null;
     feedbackState: 'correct' | 'wrong' | null;
     checkErrorCount: number;
 }
 
-const CENTER = { symbol: 'T', bgColor: '#4caf8a' };
-
-const RAW_OPTIONS = [
-    { id: 0, symbol: 'E', bgColor: '#bf4f6b', isCorrect: false },
-    { id: 1, symbol: 'T', bgColor: '#5b6fa6', isCorrect: true },
-    { id: 2, symbol: 'K', bgColor: '#c0614c', isCorrect: false },
-    { id: 3, symbol: 'F', bgColor: '#4caf8a', isCorrect: false },
-    { id: 4, symbol: 'A', bgColor: '#96445a', isCorrect: false },
-];
-
-function computeOrbitPositions(count: number): { top: string; left: string }[] {
-    const cx = 270, cy = 270, orbitR = 185, elemR = 67; // 540px canvas, 135px daireler
-    return Array.from({ length: count }, (_, i) => {
-        const rad = (90 - i * (360 / count)) * (Math.PI / 180);
-        return {
-            top: `${Math.round(cy - orbitR * Math.sin(rad) - elemR)}px`,
-            left: `${Math.round(cx + orbitR * Math.cos(rad) - elemR)}px`,
-        };
-    });
-}
-
-const ID = 'symbol-matching';
+const ID = 'liquid-selection';
 
 @Component({
-    selector: 'app-symbol-matching',
+    selector: 'app-liquid-selection',
     standalone: true,
     imports: [CommonModule, ActionButtonsComponent],
-    templateUrl: './symbol-matching.component.html',
-    styleUrl: './symbol-matching.component.scss',
+    templateUrl: './liquid-selection.component.html',
+    styleUrl: './liquid-selection.component.scss',
 })
-export class SymbolMatchingComponent implements OnInit {
+export class LiquidSelectionComponent implements OnInit {
     constructor(
         private router: Router,
         private gs: GameStateService,
         private fb: FeedbackService
     ) { }
 
-    readonly center = CENTER;
-    options: OptionItem[] = [];
+    options: OptionItem[] = [
+        { id: 1, name: 'Zeytin', emoji: '🫒', isCorrect: false },
+        { id: 2, name: 'Süt', emoji: '🥛', isCorrect: true }, // The target: Süt (Milk)
+        { id: 3, name: 'Elma', emoji: '🍎', isCorrect: false },
+        { id: 4, name: 'Peynir', emoji: '🧀', isCorrect: false },
+    ];
+
     selectedId: number | null = null;
     feedbackState: 'correct' | 'wrong' | null = null;
     checkErrorCount = 0;
@@ -64,12 +51,7 @@ export class SymbolMatchingComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        const positions = computeOrbitPositions(RAW_OPTIONS.length);
-        this.options = RAW_OPTIONS.map((o, i) => ({
-            ...o, ...positions[i], isShaking: false,
-        }));
-
-        const saved = this.gs.getData<SymbolMatchState>(ID);
+        const saved = this.gs.getData<LiquidSelectionState>(ID);
         if (saved) {
             this.selectedId = saved.selectedId;
             this.feedbackState = saved.feedbackState;
@@ -81,37 +63,35 @@ export class SymbolMatchingComponent implements OnInit {
         this.gs.save(ID, {
             selectedId: this.selectedId,
             feedbackState: this.feedbackState,
-            checkErrorCount: this.checkErrorCount
+            checkErrorCount: this.checkErrorCount,
         });
     }
 
-    /** Seçilen seçeneği işaretler; checkErrorCount sıfırlanmaz (hint için) */
     selectOption(id: number): void {
         if (this.feedbackState === 'correct') return;
         this.selectedId = id;
         this.feedbackState = null;
-        // checkErrorCount sıfırlanmıyor – 2 yanlıştan sonra ipucu gösterilsin
         this.persist();
     }
 
-    /** Tüm seçimi ve ilerlemeyi temizler */
     clearSelection(): void {
         this.selectedId = null;
         this.feedbackState = null;
         this.checkErrorCount = 0;
-        this.options.forEach(o => (o.isShaking = false));
+        this.options.forEach((o) => (o.isShaking = false));
         this.gs.clear(ID);
     }
 
-    /** Seçilen seçeneği doğrular; 2 hatadan sonra hint-glow devreye girer */
     checkAnswer(): void {
         if (this.selectedId === null) return;
-        const selected = this.options.find(o => o.id === this.selectedId)!;
+
+        const selected = this.options.find((o) => o.id === this.selectedId)!;
+
         if (selected.isCorrect) {
             this.feedbackState = 'correct';
             this.checkErrorCount = 0;
             this.gs.markCompleted(ID);
-            this.fb.showFeedback('success', 'Tebrikler! Doğru sembolü buldun!');
+            this.fb.showFeedback('success', 'Tebrikler! Doğru maddeyi buldun!');
         } else {
             this.feedbackState = 'wrong';
             this.checkErrorCount++;
@@ -122,9 +102,13 @@ export class SymbolMatchingComponent implements OnInit {
         this.persist();
     }
 
-    goPrev(): void { this.router.navigate(['/number-sequence']); }
+    goPrev(): void {
+        this.router.navigate(['/shape-coloring']);
+    }
+
     goNext(): void {
         if (!this.isNextUnlocked) return;
-        this.router.navigate(['/animal-position']);
+        // The user hasn't defined question 10 yet.
+        this.fb.showFeedback('success', 'Tüm soruları tamamladınız!');
     }
 }

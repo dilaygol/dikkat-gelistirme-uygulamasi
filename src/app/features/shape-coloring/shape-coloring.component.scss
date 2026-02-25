@@ -1,0 +1,164 @@
+@use 'sass:color';
+@use 'styles/design-tokens' as *;
+
+// ── Animasyonlar ───────────────────────────────────────────
+@keyframes shapePop {
+    0% {
+        transform: scale(0.8);
+    }
+
+    60% {
+        transform: scale(1.15);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+@keyframes svgHintPulse {
+
+    0%,
+    100% {
+        fill: rgba(241, 196, 15, 0.1);
+        stroke: rgba(241, 196, 15, 0.4);
+    }
+
+    50% {
+        fill: rgba(241, 196, 15, 0.35);
+        stroke: rgba(241, 196, 15, 1);
+    }
+}
+
+@keyframes hintShake {
+
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+
+    20%,
+    60% {
+        transform: translateX(-3px);
+    }
+
+    40%,
+    80% {
+        transform: translateX(3px);
+    }
+}
+
+// ── Yerel Renkler ─────────────────────────────────────────
+$color-container-bg: #ffffff;
+$color-shape-empty: #ecf3fb; // Light blue empty interior
+$color-shape-stroke: #c8d9ea; // Light blue outline
+
+// Correct colors per shape 
+$color-circle: #5b6fa6; // Blue (from Q5)
+$color-triangle: #4caf8a; // Green (from Q5)
+$color-heart: #bf4f6b; // Red (from Q5)
+
+// ── Host ──────────────────────────────────────────────────
+:host {
+    display: flex;
+    width: 100%;
+    height: 100vh;
+    align-items: center;
+    justify-content: center;
+    background: $color-bg;
+    overflow: hidden;
+}
+
+// ── Oyun İçeriği Kartı ────────────────────────────────────
+.interaction-card {
+    background: $color-container-bg;
+    border-radius: 24px;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 36px;
+    min-width: 600px;
+    @include card-shadow($color-nav, .12);
+}
+
+.shape-row {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.row-instruction {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.15rem;
+    font-weight: 800;
+    color: #3d4a5c;
+    margin: 0;
+    padding-left: 8px;
+}
+
+.shape-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+// ── Buton Şekiller ────────────────────────────────────────
+.shape-btn {
+    background: transparent;
+    border: none;
+    border-radius: 50%;
+    padding: 4px;
+    color: $color-shape-empty;
+    cursor: pointer;
+    outline: none;
+    transition: transform 0.1s ease, filter 0.2s ease;
+
+    svg {
+        display: block;
+        fill: $color-container-bg; // Inner color is white
+        stroke: $color-shape-stroke; // Outline is light blue
+        transition: fill 0.2s ease, stroke 0.2s ease;
+    }
+
+    &:hover {
+        transform: translateY(-2px);
+        filter: drop-shadow(0 4px 6px rgba(#b0c4d8, 0.4));
+    }
+
+    &:focus-visible {
+        border-radius: 8px;
+        outline: 2px solid #b0c4d8;
+        outline-offset: 4px;
+    }
+
+    &.filled {
+        animation: shapePop .25s ease;
+
+        &.circle svg {
+            fill: $color-circle;
+            stroke: $color-circle;
+        }
+
+        &.triangle svg {
+            fill: $color-triangle;
+            stroke: $color-triangle;
+        }
+
+        &.heart svg {
+            fill: $color-heart;
+            stroke: $color-heart;
+        }
+    }
+
+    // Hint Animasyonları
+    &.hint-remove {
+        animation: hintShake 0.4s ease-in-out infinite;
+        opacity: 0.7;
+    }
+
+    &.hint-add {
+        svg {
+            animation: svgHintPulse 1.2s ease-in-out infinite;
+        }
+    }
+}
