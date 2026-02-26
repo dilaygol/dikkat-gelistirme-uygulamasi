@@ -40,10 +40,3 @@ $color-hint: rgba(241, 196, 15, 0.9); // Hint-glow sarı
 @mixin btn-shadow($color) {
     box-shadow: 0 4px 16px rgba($color, 0.4);
 }
-
-/// Hint (ipucu) glow animasyonu – ortak animasyon tanımı
-/// Her component kendi @keyframes bloğunda bunu çağırır
-@mixin hint-glow-style {
-    outline: 4px solid rgba(241, 196, 15, 0.6);
-    outline-offset: 3px;
-}

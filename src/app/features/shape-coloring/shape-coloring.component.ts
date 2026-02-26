@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { GameStateService } from '../../core/services/game-state.service';
 import { FeedbackService } from '../../core/services/feedback.service';
+import { HintService } from '../../core/services/hint.service';
 import { ActionButtonsComponent } from '../../shared/action-buttons/action-buttons.component';
 
 interface ShapeColoringState {
@@ -10,7 +11,6 @@ interface ShapeColoringState {
     triangles: boolean[];
     hearts: boolean[];
     feedbackState: 'correct' | 'wrong' | null;
-    errorCount: number;
 }
 
 const ID = 'shape-coloring';
@@ -38,13 +38,16 @@ export class ShapeColoringComponent implements OnInit {
     readonly targetHearts = [false, false, true, false, false];
 
     feedbackState: 'correct' | 'wrong' | null = null;
-    errorCount = 0;
-    showHints = false;
+
+    get showHints(): boolean {
+        return this.hintService.shouldShowHint(ID);
+    }
 
     constructor(
         private router: Router,
         private gs: GameStateService,
-        private fb: FeedbackService
+        private fb: FeedbackService,
+        private hintService: HintService
     ) { }
 
     get isNextUnlocked(): boolean {
@@ -58,7 +61,6 @@ export class ShapeColoringComponent implements OnInit {
             this.triangles = [...saved.triangles];
             this.hearts = [...saved.hearts];
             this.feedbackState = saved.feedbackState;
-            this.errorCount = saved.errorCount || 0;
         }
     }
 
@@ -67,8 +69,7 @@ export class ShapeColoringComponent implements OnInit {
             circles: this.circles,
             triangles: this.triangles,
             hearts: this.hearts,
-            feedbackState: this.feedbackState,
-            errorCount: this.errorCount
+            feedbackState: this.feedbackState
         });
     }
 
@@ -92,7 +93,6 @@ export class ShapeColoringComponent implements OnInit {
 
     private resetFeedback(): void {
         this.feedbackState = null;
-        this.showHints = false;
         this.persist();
     }
 
@@ -101,9 +101,8 @@ export class ShapeColoringComponent implements OnInit {
         this.triangles.fill(false);
         this.hearts.fill(false);
         this.feedbackState = null;
-        this.errorCount = 0;
-        this.showHints = false;
         this.gs.clear(ID);
+        this.hintService.resetErrors(ID);
     }
 
     checkPattern(): void {
@@ -117,12 +116,10 @@ export class ShapeColoringComponent implements OnInit {
 
         if (isCorrect) {
             this.gs.markCompleted(ID);
+            this.hintService.resetErrors(ID);
             this.fb.showFeedback('success', 'Harika! Bütün şekilleri doğru boyadın!');
         } else {
-            this.errorCount++;
-            if (this.errorCount >= 2) {
-                this.showHints = true;
-            }
+            this.hintService.registerError(ID);
             this.fb.showFeedback('error', 'Bazı şekiller yanlış, tekrar deneyelim.');
         }
         this.persist();

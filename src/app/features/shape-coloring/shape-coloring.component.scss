@@ -102,6 +102,23 @@ $color-heart: #bf4f6b; // Red (from Q5)
     gap: 8px;
 }
 
+@keyframes svgHintPulseGlow {
+
+    0%,
+    100% {
+        filter: drop-shadow(0 0 4px rgba(241, 196, 15, 0.4));
+        box-shadow: none !important;
+        scale: 1;
+    }
+
+    50% {
+        filter: drop-shadow(0 0 14px rgba(241, 196, 15, 0.9));
+        box-shadow: none !important;
+        scale: 1.08;
+        /* slightly larger scale because svgs are smaller */
+    }
+}
+
 // ── Buton Şekiller ────────────────────────────────────────
 .shape-btn {
     background: transparent;
@@ -120,15 +137,30 @@ $color-heart: #bf4f6b; // Red (from Q5)
         transition: fill 0.2s ease, stroke 0.2s ease;
     }
 
-    &:hover {
-        transform: translateY(-2px);
-        filter: drop-shadow(0 4px 6px rgba(#b0c4d8, 0.4));
-    }
-
     &:focus-visible {
         border-radius: 8px;
         outline: 2px solid #b0c4d8;
         outline-offset: 4px;
+    }
+
+    &.hover {
+        border-color: transparent !important;
+
+        &:hover:not(.filled) {
+            box-shadow: none !important;
+
+            svg {
+                // No extra shadow on hover requested by user
+                filter: none;
+            }
+        }
+    }
+
+    &.hint {
+        animation: svgHintPulseGlow 1.5s ease-in-out infinite !important;
+        box-shadow: none !important;
+        border-color: transparent !important;
+        outline: none !important;
     }
 
     &.filled {

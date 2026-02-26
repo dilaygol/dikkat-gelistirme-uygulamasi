@@ -6,29 +6,29 @@ import { FeedbackService } from '../../core/services/feedback.service';
 import { HintService } from '../../core/services/hint.service';
 import { ActionButtonsComponent } from '../../shared/action-buttons/action-buttons.component';
 
-interface OptionItem {
+interface ColumnItem {
     id: number;
-    name: string;
-    emoji: string;
+    numbers: number[];
     isCorrect: boolean;
     isShaking?: boolean;
 }
 
-interface LiquidSelectionState {
+interface SequenceState {
     selectedId: number | null;
     feedbackState: 'correct' | 'wrong' | null;
 }
 
-const ID = 'liquid-selection';
+const ID = 'sequence-rule-breaker';
 
 @Component({
-    selector: 'app-liquid-selection',
+    selector: 'app-sequence-rule-breaker',
     standalone: true,
     imports: [CommonModule, ActionButtonsComponent],
-    templateUrl: './liquid-selection.component.html',
-    styleUrl: './liquid-selection.component.scss',
+    templateUrl: './sequence-rule-breaker.component.html',
+    styleUrl: './sequence-rule-breaker.component.scss'
 })
-export class LiquidSelectionComponent implements OnInit {
+export class SequenceRuleBreakerComponent implements OnInit {
+
     constructor(
         private router: Router,
         private gs: GameStateService,
@@ -36,11 +36,12 @@ export class LiquidSelectionComponent implements OnInit {
         private hintService: HintService
     ) { }
 
-    options: OptionItem[] = [
-        { id: 1, name: 'Zeytin', emoji: '🫒', isCorrect: false },
-        { id: 2, name: 'Süt', emoji: '🥛', isCorrect: true }, // The target: Süt (Milk)
-        { id: 3, name: 'Elma', emoji: '🍎', isCorrect: false },
-        { id: 4, name: 'Peynir', emoji: '🧀', isCorrect: false },
+    columns: ColumnItem[] = [
+        { id: 1, numbers: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10], isCorrect: false },
+        { id: 2, numbers: [1, 2, 3, 5, 4, 6, 7, 8, 9, 10], isCorrect: true }, // Kuralı bozan bu! (4 ve 5 yer değiştirmiş)
+        { id: 3, numbers: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10], isCorrect: false },
+        { id: 4, numbers: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10], isCorrect: false },
+        { id: 5, numbers: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10], isCorrect: false }
     ];
 
     selectedId: number | null = null;
@@ -55,7 +56,7 @@ export class LiquidSelectionComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        const saved = this.gs.getData<LiquidSelectionState>(ID);
+        const saved = this.gs.getData<SequenceState>(ID);
         if (saved) {
             this.selectedId = saved.selectedId;
             this.feedbackState = saved.feedbackState;
@@ -65,13 +66,20 @@ export class LiquidSelectionComponent implements OnInit {
     private persist(): void {
         this.gs.save(ID, {
             selectedId: this.selectedId,
-            feedbackState: this.feedbackState,
+            feedbackState: this.feedbackState
         });
     }
 
-    selectOption(id: number): void {
-        if (this.feedbackState === 'correct') return;
-        this.selectedId = id;
+    selectColumn(id: number): void {
+        if (this.feedbackState === 'correct' || this.gs.isCompleted(ID)) return;
+
+        // Sadece 1 seçim yapılabilsin (Radio Buton)
+        if (this.selectedId === id) {
+            this.selectedId = null;
+        } else {
+            this.selectedId = id;
+        }
+
         this.feedbackState = null;
         this.persist();
     }
@@ -79,7 +87,9 @@ export class LiquidSelectionComponent implements OnInit {
     clearSelection(): void {
         this.selectedId = null;
         this.feedbackState = null;
-        this.options.forEach((o) => (o.isShaking = false));
+        this.columns.forEach(c => {
+            c.isShaking = false;
+        });
         this.gs.clear(ID);
         this.hintService.resetErrors(ID);
     }
@@ -87,31 +97,33 @@ export class LiquidSelectionComponent implements OnInit {
     checkAnswer(): void {
         if (this.selectedId === null) return;
 
-        const selected = this.options.find((o) => o.id === this.selectedId)!;
+        const selected = this.columns.find(c => c.id === this.selectedId)!;
 
+        // "isCorrect" true olan, dizilimi HATA barındıran sütundur ve beklenen cevap da budur.
         if (selected.isCorrect) {
             this.feedbackState = 'correct';
             this.gs.markCompleted(ID);
             this.hintService.resetErrors(ID);
-            this.fb.showFeedback('success', 'Tebrikler! Doğru maddeyi buldun!');
+            this.fb.showFeedback('success', 'Harika yetenek! Kuralı bozanı hemen fark ettin.');
         } else {
             this.feedbackState = 'wrong';
             this.hintService.registerError(ID);
-            this.selectedId = null; // Yanlış seçimi anında sil
+
+            this.selectedId = null; // Yanlışı anında sıfırla
             selected.isShaking = true;
-            this.fb.showFeedback('error', 'Tekrar Denemelisin');
             setTimeout(() => (selected.isShaking = false), 500);
+
+            this.fb.showFeedback('error', 'Sıralamayı tekrar kontrol etmelisin. 4\'ten sonra ne geliyordu?');
         }
         this.persist();
     }
 
     goPrev(): void {
-        this.router.navigate(['/shape-coloring']);
+        this.router.navigate(['/shape-to-color-match']);
     }
 
     goNext(): void {
         if (!this.isNextUnlocked) return;
-        this.router.navigate(['/letter-matching']);
-        this.router.navigate(['/longest-rope']);
+        this.fb.showFeedback('success', 'Tüm görevleri tamamladınız!');
     }
 }

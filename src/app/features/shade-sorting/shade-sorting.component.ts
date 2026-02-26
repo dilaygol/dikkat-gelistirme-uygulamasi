@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { GameStateService } from '../../core/services/game-state.service';
 import { FeedbackService } from '../../core/services/feedback.service';
+import { HintService } from '../../core/services/hint.service';
 import { ActionButtonsComponent } from '../../shared/action-buttons/action-buttons.component';
 
 interface TriangleItem {
@@ -19,7 +20,6 @@ interface TriangleItem {
 interface ShadeSortState {
     triangles: TriangleItem[];
     currentStep: number;
-    stepErrorCount: number;
 }
 
 const ID = 'shade-sorting';
@@ -35,12 +35,16 @@ export class ShadeSortingComponent implements OnInit {
     constructor(
         private router: Router,
         private gs: GameStateService,
-        private fb: FeedbackService
+        private fb: FeedbackService,
+        private hintService: HintService
     ) { }
 
     triangles: TriangleItem[] = [];
     currentStep = 1;
-    stepErrorCount = 0;
+
+    get showHint(): boolean {
+        return this.hintService.shouldShowHint(ID);
+    }
 
     get isComplete(): boolean { return this.currentStep > 16; }
     get isNextUnlocked(): boolean { return this.isComplete || this.gs.isCompleted(ID); }
@@ -51,7 +55,6 @@ export class ShadeSortingComponent implements OnInit {
             // Kaydedilmiş durum var → geri yükle
             this.triangles = saved.triangles;
             this.currentStep = saved.currentStep;
-            this.stepErrorCount = saved.stepErrorCount || 0;
         } else {
             this.initGame();
         }
@@ -59,7 +62,7 @@ export class ShadeSortingComponent implements OnInit {
 
     initGame(): void {
         this.currentStep = 1;
-        this.stepErrorCount = 0;
+        this.hintService.resetErrors(ID);
         this.triangles = this.buildAndScatter();
     }
 
@@ -105,7 +108,7 @@ export class ShadeSortingComponent implements OnInit {
             tri.found = true;
             tri.foundStep = this.currentStep;
             this.currentStep++;
-            this.stepErrorCount = 0; // Doğru bulununca o adımın hatası sıfırlanır
+            this.hintService.resetErrors(ID); // Doğru bulununca o adımın hatası sıfırlanır
             this.persist();
             if (this.isComplete) {
                 this.gs.markCompleted(ID);
@@ -113,7 +116,7 @@ export class ShadeSortingComponent implements OnInit {
             }
         } else {
             tri.isShaking = true;
-            this.stepErrorCount++;
+            this.hintService.registerError(ID);
             setTimeout(() => (tri.isShaking = false), 500);
             this.persist();
         }
@@ -122,15 +125,14 @@ export class ShadeSortingComponent implements OnInit {
     private persist(): void {
         this.gs.save(ID, {
             triangles: this.triangles,
-            currentStep: this.currentStep,
-            stepErrorCount: this.stepErrorCount
+            currentStep: this.currentStep
         });
     }
 
     /** Tüm ilerlemeyi sıfırlar; positions ve sıra sabitlenir */
     restartGame(): void {
         this.gs.clear(ID);
-        this.stepErrorCount = 0;
+        this.hintService.resetErrors(ID);
         this.initGame();
     }
 

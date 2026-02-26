@@ -8,27 +8,27 @@ import { ActionButtonsComponent } from '../../shared/action-buttons/action-butto
 
 interface OptionItem {
     id: number;
-    name: string;
-    emoji: string;
+    text: string;
     isCorrect: boolean;
     isShaking?: boolean;
 }
 
-interface LiquidSelectionState {
+interface LetterMatchingState {
     selectedId: number | null;
     feedbackState: 'correct' | 'wrong' | null;
 }
 
-const ID = 'liquid-selection';
+const ID = 'letter-matching';
 
 @Component({
-    selector: 'app-liquid-selection',
+    selector: 'app-letter-matching',
     standalone: true,
     imports: [CommonModule, ActionButtonsComponent],
-    templateUrl: './liquid-selection.component.html',
-    styleUrl: './liquid-selection.component.scss',
+    templateUrl: './letter-matching.component.html',
+    styleUrl: './letter-matching.component.scss'
 })
-export class LiquidSelectionComponent implements OnInit {
+export class LetterMatchingComponent implements OnInit {
+
     constructor(
         private router: Router,
         private gs: GameStateService,
@@ -36,11 +36,13 @@ export class LiquidSelectionComponent implements OnInit {
         private hintService: HintService
     ) { }
 
+    readonly targetWord = 'PRRPD';
+
     options: OptionItem[] = [
-        { id: 1, name: 'Zeytin', emoji: '🫒', isCorrect: false },
-        { id: 2, name: 'Süt', emoji: '🥛', isCorrect: true }, // The target: Süt (Milk)
-        { id: 3, name: 'Elma', emoji: '🍎', isCorrect: false },
-        { id: 4, name: 'Peynir', emoji: '🧀', isCorrect: false },
+        { id: 1, text: 'PRRRP', isCorrect: false },
+        { id: 2, text: 'PPRRD', isCorrect: false },
+        { id: 3, text: 'RRPPD', isCorrect: false },
+        { id: 4, text: 'PRRPD', isCorrect: true },
     ];
 
     selectedId: number | null = null;
@@ -55,7 +57,7 @@ export class LiquidSelectionComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        const saved = this.gs.getData<LiquidSelectionState>(ID);
+        const saved = this.gs.getData<LetterMatchingState>(ID);
         if (saved) {
             this.selectedId = saved.selectedId;
             this.feedbackState = saved.feedbackState;
@@ -65,13 +67,20 @@ export class LiquidSelectionComponent implements OnInit {
     private persist(): void {
         this.gs.save(ID, {
             selectedId: this.selectedId,
-            feedbackState: this.feedbackState,
+            feedbackState: this.feedbackState
         });
     }
 
     selectOption(id: number): void {
-        if (this.feedbackState === 'correct') return;
-        this.selectedId = id;
+        if (this.feedbackState === 'correct' || this.gs.isCompleted(ID)) return;
+
+        // Radio button logic: only one item can be selected, changes selection if another clicked
+        if (this.selectedId === id) {
+            this.selectedId = null; // Toggle off if clicked again
+        } else {
+            this.selectedId = id;
+        }
+
         this.feedbackState = null;
         this.persist();
     }
@@ -79,7 +88,9 @@ export class LiquidSelectionComponent implements OnInit {
     clearSelection(): void {
         this.selectedId = null;
         this.feedbackState = null;
-        this.options.forEach((o) => (o.isShaking = false));
+        this.options.forEach(o => {
+            o.isShaking = false;
+        });
         this.gs.clear(ID);
         this.hintService.resetErrors(ID);
     }
@@ -93,25 +104,27 @@ export class LiquidSelectionComponent implements OnInit {
             this.feedbackState = 'correct';
             this.gs.markCompleted(ID);
             this.hintService.resetErrors(ID);
-            this.fb.showFeedback('success', 'Tebrikler! Doğru maddeyi buldun!');
+            this.fb.showFeedback('success', 'Tebrikler! Doğru harf dizisini buldun!');
         } else {
             this.feedbackState = 'wrong';
             this.hintService.registerError(ID);
-            this.selectedId = null; // Yanlış seçimi anında sil
+
+            // Unselect and shake the wrongly selected option
+            this.selectedId = null;
             selected.isShaking = true;
-            this.fb.showFeedback('error', 'Tekrar Denemelisin');
             setTimeout(() => (selected.isShaking = false), 500);
+
+            this.fb.showFeedback('error', 'Tekrar Denemelisin');
         }
         this.persist();
     }
 
     goPrev(): void {
-        this.router.navigate(['/shape-coloring']);
+        this.router.navigate(['/liquid-selection']);
     }
 
     goNext(): void {
         if (!this.isNextUnlocked) return;
-        this.router.navigate(['/letter-matching']);
-        this.router.navigate(['/longest-rope']);
+        this.router.navigate(['/shape-pattern']);
     }
 }

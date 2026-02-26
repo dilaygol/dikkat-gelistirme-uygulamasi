@@ -27,7 +27,7 @@
                     <h2 class="row-instruction">İlk dört daireyi boyayın.</h2>
                     <div class="shape-container">
                         @for (circle of circles; track $index) {
-                        <button class="shape-btn circle" [class.filled]="circle"
+                        <button class="shape-btn hover circle" [class.filled]="circle"
                             [class.hint-add]="isHintAdd('circle', $index)"
                             [class.hint-remove]="isHintRemove('circle', $index)" (click)="toggleCircle($index)"
                             [attr.aria-label]="'Daire ' + ($index + 1)">
@@ -44,7 +44,7 @@
                     <h2 class="row-instruction">Sondan üç üçgeni boyayın.</h2>
                     <div class="shape-container">
                         @for (triangle of triangles; track $index) {
-                        <button class="shape-btn triangle" [class.filled]="triangle"
+                        <button class="shape-btn hover triangle" [class.filled]="triangle"
                             [class.hint-add]="isHintAdd('triangle', $index)"
                             [class.hint-remove]="isHintRemove('triangle', $index)" (click)="toggleTriangle($index)"
                             [attr.aria-label]="'Üçgen ' + ($index + 1)">
@@ -61,7 +61,7 @@
                     <h2 class="row-instruction">En ortadaki kalbi boyayın.</h2>
                     <div class="shape-container">
                         @for (heart of hearts; track $index) {
-                        <button class="shape-btn heart" [class.filled]="heart"
+                        <button class="shape-btn hover heart" [class.filled]="heart"
                             [class.hint-add]="isHintAdd('heart', $index)"
                             [class.hint-remove]="isHintRemove('heart', $index)" (click)="toggleHeart($index)"
                             [attr.aria-label]="'Kalp ' + ($index + 1)">

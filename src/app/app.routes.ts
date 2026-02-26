@@ -10,6 +10,11 @@ import { PatternMatchingTwoComponent } from './features/pattern-matching-two/pat
 import { ShapeColoringComponent } from './features/shape-coloring/shape-coloring.component';
 import { LiquidSelectionComponent } from './features/liquid-selection/liquid-selection.component';
 import { LongestRopeComponent } from './features/longest-rope/longest-rope.component';
+import { LetterMatchingComponent } from './features/letter-matching/letter-matching.component';
+import { ShapePatternComponent } from './features/shape-pattern/shape-pattern.component';
+import { BoardLetterMatchingComponent } from './features/board-letter-matching/board-letter-matching.component';
+import { ShapeToColorMatchComponent } from './features/shape-to-color-match/shape-to-color-match.component';
+import { SequenceRuleBreakerComponent } from './features/sequence-rule-breaker/sequence-rule-breaker.component';
 
 export const routes: Routes = [
     { path: '', redirectTo: 'pattern', pathMatch: 'full' },
@@ -23,6 +28,5 @@ export const routes: Routes = [
     { path: 'pattern-2', component: PatternMatchingTwoComponent },
     { path: 'shape-coloring', component: ShapeColoringComponent },
     { path: 'liquid-selection', component: LiquidSelectionComponent },
-    { path: 'longest-rope', component: LongestRopeComponent },
     { path: '**', redirectTo: 'pattern' },
 ];

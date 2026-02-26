@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { GameStateService } from '../../core/services/game-state.service';
 import { FeedbackService } from '../../core/services/feedback.service';
+import { HintService } from '../../core/services/hint.service';
 import { ActionButtonsComponent } from '../../shared/action-buttons/action-buttons.component';
 
 // ─────────────────────────────────────────────────────────
@@ -21,7 +22,6 @@ const PUZZLE_PAGES: boolean[][][] = [
 interface PatternTwoState {
     userGrid: boolean[][];
     feedbackState: 'correct' | 'wrong' | null;
-    errorCount: number;
 }
 
 const ID = 'pattern-2';
@@ -37,7 +37,8 @@ export class PatternMatchingTwoComponent implements OnInit {
     constructor(
         private router: Router,
         private gs: GameStateService,
-        private fb: FeedbackService
+        private fb: FeedbackService,
+        private hintService: HintService
     ) { }
 
     readonly currentPage = signal(0);
@@ -46,8 +47,10 @@ export class PatternMatchingTwoComponent implements OnInit {
 
     userGrid: boolean[][] = this.createEmptyGrid();
     feedbackState: 'correct' | 'wrong' | null = null;
-    errorCount = 0;
-    showHints = false;
+
+    get showHints(): boolean {
+        return this.hintService.shouldShowHint(ID);
+    }
 
     get isNextUnlocked(): boolean {
         return this.feedbackState === 'correct' || this.gs.isCompleted(ID);
@@ -59,7 +62,6 @@ export class PatternMatchingTwoComponent implements OnInit {
         if (saved) {
             this.userGrid = saved.userGrid.map(row => [...row]);
             this.feedbackState = saved.feedbackState;
-            this.errorCount = saved.errorCount || 0;
         }
     }
 
@@ -71,8 +73,7 @@ export class PatternMatchingTwoComponent implements OnInit {
     private persist(): void {
         this.gs.save(ID, {
             userGrid: this.userGrid,
-            feedbackState: this.feedbackState,
-            errorCount: this.errorCount
+            feedbackState: this.feedbackState
         });
     }
 
@@ -81,16 +82,14 @@ export class PatternMatchingTwoComponent implements OnInit {
         if (this.gs.isCompleted(ID) && this.feedbackState === 'correct') return; // locked if finished
         this.userGrid[row][col] = !this.userGrid[row][col];
         this.feedbackState = null;
-        this.showHints = false;
         this.persist();
     }
 
     clearGrid(): void {
         this.userGrid = this.createEmptyGrid();
         this.feedbackState = null;
-        this.errorCount = 0;
-        this.showHints = false;
         this.gs.clear(ID);
+        this.hintService.resetErrors(ID);
     }
 
     checkPattern(): void {
@@ -101,12 +100,10 @@ export class PatternMatchingTwoComponent implements OnInit {
         this.feedbackState = isCorrect ? 'correct' : 'wrong';
         if (isCorrect) {
             this.gs.markCompleted(ID);
+            this.hintService.resetErrors(ID);
             this.fb.showFeedback('success', 'Tebrikler! Deseni mükemmel kopyaladın!');
         } else {
-            this.errorCount++;
-            if (this.errorCount >= 2) {
-                this.showHints = true; // Still use 2 hints here to match Pattern Matching 1 logic (the 3 errors is only for Question 6 animal position as requested)
-            }
+            this.hintService.registerError(ID);
             this.fb.showFeedback('error', 'Tekrar Denemelisin');
         }
         this.persist();

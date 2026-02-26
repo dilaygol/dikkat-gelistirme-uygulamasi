@@ -1,29 +1,6 @@
 @use 'styles/design-tokens' as *;
 
 // ── Animasyonlar ───────────────────────────────────────────
-@keyframes shake {
-
-    0%,
-    100% {
-        transform: translateX(0);
-    }
-
-    20% {
-        transform: translateX(-6px);
-    }
-
-    40% {
-        transform: translateX(6px);
-    }
-
-    60% {
-        transform: translateX(-4px);
-    }
-
-    80% {
-        transform: translateX(4px);
-    }
-}
 
 @keyframes scaleUp {
     0% {
@@ -87,15 +64,8 @@ $color-card-bg: #f5f6f8;
     transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
     border: 3px solid transparent;
 
-    &:hover {
-        transform: translateY(-4px);
-        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
-    }
-
+    /* Hover and Selected are global, keeping checkbox details */
     &.selected {
-        border-color: #8db5e6;
-        background: #e9f2fb;
-
         .checkbox {
             background: #50b875;
             border-color: #50b875;
@@ -135,29 +105,7 @@ $color-card-bg: #f5f6f8;
         }
     }
 
-    &.hint-glow {
-        border-color: #ffd700;
-        box-shadow: 0 0 15px rgba(255, 215, 0, 0.6);
-        animation: pulse-yellow 2s infinite;
-    }
-
-    &.shaking {
-        animation: shake 0.45s ease;
-    }
-}
-
-@keyframes pulse-yellow {
-    0% {
-        box-shadow: 0 0 10px rgba(255, 215, 0, 0.4);
-    }
-
-    50% {
-        box-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
-    }
-
-    100% {
-        box-shadow: 0 0 10px rgba(255, 215, 0, 0.4);
-    }
+    // Hint ve Shaking global
 }
 
 .emoji-container {

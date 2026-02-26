@@ -1,29 +1,6 @@
 @use 'styles/design-tokens' as *;
 
 // ── Animasyonlar ───────────────────────────────────────────
-@keyframes shake {
-
-    0%,
-    100% {
-        transform: translateX(0);
-    }
-
-    20% {
-        transform: translateX(-6px);
-    }
-
-    40% {
-        transform: translateX(6px);
-    }
-
-    60% {
-        transform: translateX(-4px);
-    }
-
-    80% {
-        transform: translateX(4px);
-    }
-}
 
 @keyframes scaleUp {
     0% {
@@ -88,29 +65,11 @@ $color-card-bg: #f5f6f8;
     transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
     border: 3px solid transparent;
 
-    &:hover {
-        transform: translateY(-4px);
-        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
-    }
+    /* Hover and selected global */
 
     &.selected {
-        border-color: #8db5e6;
-        background: #e9f2fb;
 
-        .checkbox {
-            background: #50b875;
-            border-color: #50b875;
-        }
-
-        .check-icon {
-            display: block;
-        }
-    }
-
-    &.correct {
-        border-color: #8db5e6;
-        background: #e9f2fb;
-
+        /* This handles the selection tick *whether* it's right, wrong, or neutral */
         .checkbox {
             background: #50b875;
             border-color: #50b875;
@@ -121,6 +80,12 @@ $color-card-bg: #f5f6f8;
         }
     }
 
+    &.correct {
+        border-color: #8db5e6;
+        background: #e9f2fb;
+        /* The checkbox styles are already handled by .selected */
+    }
+
     &.error {
         border-color: $color-error-tx;
         background: $color-error-bg;
@@ -129,6 +94,11 @@ $color-card-bg: #f5f6f8;
             background: $color-error-tx;
             border-color: $color-error-tx;
 
+            /* Hide the check icon if it was shown by .selected */
+            .check-icon {
+                display: none !important;
+            }
+
             .error-icon {
                 display: block;
                 color: #fff;
@@ -136,66 +106,44 @@ $color-card-bg: #f5f6f8;
         }
     }
 
-    &.hint-glow {
-        border-color: #ffd700;
-        box-shadow: 0 0 15px rgba(255, 215, 0, 0.6);
-        animation: pulse-yellow 2s infinite;
+    // hint, shake global
+
+    .emoji-container {
+        width: 120px;
+        height: 100px;
+        background: $color-card-bg;
+        border-radius: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        .emoji {
+            font-size: 4rem;
+            line-height: 1;
+        }
     }
 
-    &.shaking {
-        animation: shake 0.45s ease;
-    }
-}
-
-@keyframes pulse-yellow {
-    0% {
-        box-shadow: 0 0 10px rgba(255, 215, 0, 0.4);
+    .animal-name {
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: #444;
     }
 
-    50% {
-        box-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
-    }
+    .checkbox {
+        width: 24px;
+        height: 24px;
+        border-radius: 6px;
+        border: 2px solid #dde2e8;
+        background: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.2s;
 
-    100% {
-        box-shadow: 0 0 10px rgba(255, 215, 0, 0.4);
-    }
-}
-
-.emoji-container {
-    width: 120px;
-    height: 100px;
-    background: $color-card-bg;
-    border-radius: 16px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    .emoji {
-        font-size: 4rem;
-        line-height: 1;
-    }
-}
-
-.animal-name {
-    font-size: 1.1rem;
-    font-weight: 700;
-    color: #444;
-}
-
-.checkbox {
-    width: 24px;
-    height: 24px;
-    border-radius: 6px;
-    border: 2px solid #dde2e8;
-    background: #fff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.2s;
-
-    .material-icons {
-        font-size: 18px;
-        color: #fff;
-        display: none;
+        .material-icons {
+            font-size: 18px;
+            color: #fff;
+            display: none;
+        }
     }
 }

@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { ActionButtonsComponent } from '../../shared/action-buttons/action-buttons.component';
 import { GameStateService } from '../../core/services/game-state.service';
 import { FeedbackService } from '../../core/services/feedback.service';
+import { HintService } from '../../core/services/hint.service';
 
 interface Option {
     id: number;
@@ -13,7 +14,6 @@ interface Option {
     isSelected: boolean;
     isCorrect: boolean;
     isShaking?: boolean;
-    isHintGlowing?: boolean;
 }
 
 @Component({
@@ -27,10 +27,14 @@ export class MultiConditionSelectionComponent implements OnInit {
     private router = inject(Router);
     private gameState = inject(GameStateService);
     private feedback = inject(FeedbackService);
+    private hintService = inject(HintService);
 
     readonly PAGE_ID = 'multi-condition-selection';
     isCompleted = false;
-    errorCount = 0;
+
+    get showHint(): boolean {
+        return this.hintService.shouldShowHint(this.PAGE_ID);
+    }
 
     get isNextUnlocked(): boolean {
         return this.isCompleted;
@@ -63,21 +67,17 @@ export class MultiConditionSelectionComponent implements OnInit {
 
     private loadState() {
         this.isCompleted = this.gameState.isCompleted(this.PAGE_ID);
-        const savedData = this.gameState.getData<{ selectedIds: number[], errorCount: number }>(this.PAGE_ID);
+        const savedData = this.gameState.getData<{ selectedIds: number[] }>(this.PAGE_ID);
 
         if (savedData) {
-            this.errorCount = savedData.errorCount || 0;
             const selectedIds = new Set(savedData.selectedIds || []);
             this.options.forEach(opt => opt.isSelected = selectedIds.has(opt.id));
-            if (this.errorCount >= 2 && !this.isCompleted) {
-                this.applyHintGlow();
-            }
         }
     }
 
     private saveState() {
         const selectedIds = this.options.filter(o => o.isSelected).map(o => o.id);
-        this.gameState.save(this.PAGE_ID, { selectedIds, errorCount: this.errorCount }, this.isCompleted);
+        this.gameState.save(this.PAGE_ID, { selectedIds }, this.isCompleted);
     }
 
     toggleSelection(option: Option) {
@@ -95,11 +95,6 @@ export class MultiConditionSelectionComponent implements OnInit {
 
         option.isSelected = !option.isSelected;
 
-        // If they select something that was glowing, stop its glow
-        if (option.isSelected && option.isHintGlowing) {
-            option.isHintGlowing = false;
-        }
-
         this.saveState();
     }
 
@@ -115,13 +110,13 @@ export class MultiConditionSelectionComponent implements OnInit {
         if (allCorrectSelected && noIncorrectSelected && correctOptions.length === selectedOptions.length) {
             // Success
             this.isCompleted = true;
-            this.clearAllHints();
             this.gameState.markCompleted(this.PAGE_ID);
+            this.hintService.resetErrors(this.PAGE_ID);
             this.saveState();
             this.feedback.showFeedback('success', 'Tebrikler! Doğru nesneleri buldun.');
         } else {
             // Error
-            this.errorCount++;
+            this.hintService.registerError(this.PAGE_ID);
             this.saveState();
 
             // Shake incorrect selections and unselect them
@@ -133,10 +128,8 @@ export class MultiConditionSelectionComponent implements OnInit {
                 }
             });
 
-            // If 2 or more errors, show smart hint
-            if (this.errorCount >= 2) {
-                this.applyHintGlow();
-            }
+            // If hint is active, the HTML will handle the glow automatically due to showHint getter
+            // we don't return early;
         }
     }
 
@@ -144,26 +137,11 @@ export class MultiConditionSelectionComponent implements OnInit {
         this.options.forEach(opt => {
             opt.isSelected = false;
             opt.isShaking = false;
-            opt.isHintGlowing = false;
         });
-        this.errorCount = 0;
         this.isCompleted = false;
         this.gameState.clear(this.PAGE_ID);
+        this.hintService.resetErrors(this.PAGE_ID);
         this.feedback.hideFeedback();
-    }
-
-    private applyHintGlow() {
-        this.options.forEach(opt => {
-            if (opt.isCorrect && !opt.isSelected) {
-                opt.isHintGlowing = true;
-            } else {
-                opt.isHintGlowing = false;
-            }
-        });
-    }
-
-    private clearAllHints() {
-        this.options.forEach(opt => opt.isHintGlowing = false);
     }
 
     goPrev(): void {

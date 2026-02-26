@@ -23,10 +23,10 @@
                 <div class="question-group">
 
                     <div class="card input-card" [class.error]="q.prevError"
-                        [class.show-hint]="checkErrorCount >= 2 && !q.prevInput">
+                        [class.show-hint]="showHint && !q.prevInput">
                         <input type="text" inputmode="numeric" maxlength="2"
-                            [placeholder]="(checkErrorCount >= 2 && !q.prevInput) ? q.expectedPrev : '?'"
-                            [(ngModel)]="q.prevInput" (ngModelChange)="feedbackState = null"
+                            [placeholder]="(showHint && !q.prevInput) ? q.expectedPrev : '?'" [(ngModel)]="q.prevInput"
+                            (ngModelChange)="feedbackState = null"
                             [attr.aria-label]="q.centerTarget + ' sayısından önceki'" class="number-input" />
                     </div>
 
@@ -35,11 +35,11 @@
                     </div>
 
                     <div class="card input-card" [class.error]="q.nextError"
-                        [class.show-hint]="checkErrorCount >= 2 && !q.nextInput">
+                        [class.show-hint]="showHint && !q.nextInput">
                         <input type="text" inputmode="numeric" maxlength="2"
-                            [placeholder]="(checkErrorCount >= 2 && !q.nextInput) ? q.expectedNext : '?'"
-                            [(ngModel)]="q.nextInput" (ngModelChange)="onInputChange()"
-                            [attr.aria-label]="q.centerTarget + ' sayısından sonraki'" class="number-input" />
+                            [placeholder]="(showHint && !q.nextInput) ? q.expectedNext : '?'" [(ngModel)]="q.nextInput"
+                            (ngModelChange)="onInputChange()" [attr.aria-label]="q.centerTarget + ' sayısından sonraki'"
+                            class="number-input" />
                     </div>
 
                 </div>

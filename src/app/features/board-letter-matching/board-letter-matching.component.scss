@@ -1,0 +1,125 @@
+@use '../../../styles/design-tokens' as *;
+
+:host {
+    display: flex;
+    width: 100%;
+    height: 100vh;
+    align-items: center;
+    justify-content: center;
+    background: $color-bg;
+    overflow: hidden;
+}
+
+.game-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    width: 100%;
+    padding: 16px;
+}
+
+.chalkboard-container {
+    background: #4F7942;
+    /* Classic dark chalkboard green */
+    border: 15px solid #8B4513;
+    /* Thick wooden frame */
+    border-radius: 10px;
+    padding: 32px 48px;
+    box-shadow:
+        inset 0 0 40px rgba(0, 0, 0, 0.3),
+        /* inner shadow to make it look like a board */
+        0 12px 24px rgba(0, 0, 0, 0.4);
+    /* robust drop shadow */
+    max-width: 600px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.chalkboard-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 32px 48px;
+    /* High vertical and horizontal gaps */
+    width: 100%;
+}
+
+.letter-cell {
+    background: transparent;
+    border: 4px solid transparent; // for selection overlay
+    border-radius: 8px;
+    width: 80px;
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    position: relative;
+    transition: transform 0.2s ease, opacity 0.3s ease;
+    outline: none;
+
+    &:hover:not(.matched):not(.selected) {
+        transform: scale(1.1);
+    }
+
+    &:focus-visible {
+        outline: 2px dashed rgba(255, 255, 255, 0.8);
+        outline-offset: 4px;
+    }
+
+    .chalk-text {
+        font-family: 'Comic Sans MS', 'Chalkboard SE', sans-serif;
+        /* Chalk-like fonts */
+        font-size: 4rem;
+        font-weight: bold;
+        color: #FFFFFF;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    /* GLOBAL ANIMATIONS FROM _animations.scss */
+    &.selected {
+        --selected-bg: rgba(255, 255, 255, 0.1);
+        /* slight highlight */
+        --selected-transform: scale(1.05);
+    }
+
+    &.hint {
+        /* standard yellow hint glow */
+        z-index: 5;
+    }
+
+    /* MATCHED STATE */
+    &.matched {
+        cursor: default;
+        transform: none;
+        pointer-events: none;
+
+        .chalk-text {
+            opacity: 0.3;
+            /* Fade the text back to make checkmark pop */
+        }
+
+        .match-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            .check-icon {
+                font-size: 5rem;
+                /* Slightly larger checkmark */
+                color: #A8E6CF;
+                /* Soft green success */
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+                transform: rotate(-10deg) scale(1.2);
+                /* playful striking angle */
+                opacity: 0.9;
+            }
+        }
+    }
+}

@@ -1,0 +1,154 @@
+@use '../../../styles/design-tokens' as *;
+
+:host {
+    display: flex;
+    width: 100%;
+    height: 100vh;
+    align-items: center;
+    justify-content: center;
+    background: $color-bg;
+    overflow: hidden;
+}
+
+.game-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    width: 100%;
+    max-width: 1000px;
+    gap: 32px;
+    padding: 16px;
+}
+
+/* ================= Target Board Area ================= */
+.target-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.board-card {
+    background: white;
+    /* Changed from green to white */
+    border: 4px solid $color-success;
+    /* Thinner border, kept green */
+    border-radius: 12px;
+    padding: 24px 48px;
+    @include card-shadow();
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.shape-sequence {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: nowrap;
+}
+
+/* ================= Options Grid Area ================= */
+.options-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.options-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: repeat(3, 1fr);
+    gap: 24px;
+    width: 100%;
+}
+
+.option-card {
+    background: white;
+    @include card-shadow();
+    border-radius: 12px;
+    padding: 20px 24px;
+    border: 4px solid transparent;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    will-change: transform, box-shadow;
+    outline: none;
+
+    &:hover:not(.selected) {
+        transform: translateY(-4px) scale(1.02);
+        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
+    }
+
+    &:focus-visible {
+        outline: 3px solid #3498db;
+        outline-offset: 4px;
+    }
+
+    &.selected {
+        --selected-bg: #f1f9ff;
+        /* Slight blue tint when selected */
+        --selected-transform: scale(1.05);
+    }
+
+    /* Target smaller child shapes inside options */
+    .shape-sequence {
+        gap: 12px;
+    }
+}
+
+/* ================= Pure CSS Shapes ================= */
+.shape-block {
+    display: inline-block;
+    position: relative;
+    width: 60px;
+    /* Base larger sizing for Teacher Board */
+    height: 60px;
+    flex-shrink: 0;
+
+    &.small {
+        /* Smaller sizing for option cards */
+        width: 36px;
+        height: 36px;
+    }
+
+    &.square-green {
+        background-color: $color-success;
+        /* Matching "Kontrol Et" green */
+        border-radius: 4px;
+    }
+
+    &.circle-blue {
+        background-color: #5D9CEC;
+        /* Soft blue (matching the letter grid blue) */
+        border-radius: 50%;
+    }
+
+    &.plus-black {
+        background-color: #5C5C5C;
+        /* Darker grey instead of harsh black */
+        clip-path: polygon(35% 0, 65% 0, 65% 35%, 100% 35%, 100% 65%, 65% 65%, 65% 100%, 35% 100%, 35% 65%, 0% 65%, 0% 35%, 35% 35%);
+    }
+
+    &.triangle-yellow {
+        background-color: #FF9800;
+        /* Bright, punchy orange */
+        clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+    }
+
+    &.heart-pink {
+        background-color: #FF9DBB;
+        /* Soft pink matching the letter game options */
+        mask-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>');
+        mask-size: contain;
+        mask-repeat: no-repeat;
+        mask-position: center;
+        -webkit-mask-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>');
+        -webkit-mask-size: contain;
+        -webkit-mask-repeat: no-repeat;
+        -webkit-mask-position: center;
+    }
+}
