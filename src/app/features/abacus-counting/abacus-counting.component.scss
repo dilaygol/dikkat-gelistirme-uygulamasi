@@ -1,0 +1,199 @@
+@use 'styles/design-tokens' as *;
+
+// ── Animasyonlar ───────────────────────────────────────────
+@keyframes shakeAnim {
+
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+
+    25% {
+        transform: translateX(-6px);
+    }
+
+    75% {
+        transform: translateX(6px);
+    }
+}
+
+// ── Yerel Renkler ─────────────────────────────────────────
+$color-error-bg: #fff3f0;
+$color-error-tx: #e55039;
+$chalkboard-border: #8b5a2b; // Brown wood-like border
+$chalkboard-bg: #f8fafc; // Clean off-white background inside the frame
+$wire-color: #3b82f6; // Blue wires like pic 1
+$bead-green: #22c55e;
+$bead-red: #ef4444;
+
+// ── Host ──────────────────────────────────────────────────
+:host {
+    display: flex;
+    width: 100%;
+    height: 100vh;
+    align-items: center;
+    justify-content: center;
+    background: $color-bg;
+    overflow: hidden;
+}
+
+// ── Oyun Alanı Düzeni ─────────────────────────────────────
+.game-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    width: 100%;
+    max-width: 1000px;
+    padding: 16px;
+}
+
+// ── Soru Izgarası ─────────────────────────────────────────
+.abacus-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, auto);
+    gap: 30px 60px; // Row gap 30px, Col gap 60px
+    justify-content: center; // added
+    justify-items: center;
+    align-items: center;
+}
+
+// ── Bireysel Soru ─────────────────────────────────────────
+.abacus-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+// ── Abaküs Çerçevesi (Pic 2 style) ─────────────────────────
+.abacus-frame {
+    width: 160px;
+    height: 140px;
+    border-radius: 24px;
+    background: $chalkboard-border;
+    padding: 12px; // Thickness of the wooden border
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+.abacus-inner-board {
+    width: 100%;
+    height: 100%;
+    background: $chalkboard-bg;
+    border-radius: 14px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; // Center wires vertically
+    gap: 24px; // Distance between the two wires
+    padding: 0 10px;
+    position: relative;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+// ── Teller ve Boncuklar ───────────────────────────────────
+.wire {
+    position: relative;
+    width: 100%;
+    height: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.wire-line {
+    position: absolute;
+    width: 100%;
+    height: 4px;
+    background: $wire-color;
+    border-radius: 2px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1;
+}
+
+.beads {
+    display: flex;
+    justify-content: center;
+    gap: 2px;
+    width: 100%;
+    z-index: 2; // Above the wire
+}
+
+.bead {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    box-shadow: inset -2px -2px 4px rgba(0, 0, 0, 0.2), 0 2px 4px rgba(0, 0, 0, 0.2);
+
+    &.green {
+        background: $bead-green;
+    }
+
+    &.red {
+        background: $bead-red;
+    }
+}
+
+// ── Girdi Kartı (Question 4 stili) ─────────────────────────
+.card {
+    @include flex-center;
+    width: 60px;
+    height: 60px;
+    background: #fff;
+    border-radius: 12px;
+    @include card-shadow($color-nav, .13);
+    position: relative;
+}
+
+.input-card {
+    transition: background .2s;
+
+    &.show-hint {
+        .number-input::placeholder {
+            color: rgba($color-nav, 0.6);
+            font-weight: 900;
+            opacity: 1;
+        }
+    }
+
+    &.error {
+        background: $color-error-bg;
+        animation: shakeAnim .45s ease;
+
+        .number-input {
+            color: $color-error-tx;
+        }
+    }
+}
+
+.number-input {
+    width: 100%;
+    height: 100%;
+    border: none;
+    outline: none;
+    background: transparent;
+    text-align: center;
+    font-family: 'Nunito', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 900;
+    color: $color-text;
+    padding: 0;
+    border-radius: 12px;
+    cursor: text;
+    transition: color .2s;
+
+    &::placeholder {
+        color: #ccc;
+        font-weight: 700;
+    }
+
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+    }
+
+    &[type=number] {
+        appearance: textfield;
+    }
+}
