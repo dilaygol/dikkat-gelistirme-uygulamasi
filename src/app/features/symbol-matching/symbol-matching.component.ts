@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { GameStateService } from '../../core/services/game-state.service';
 import { FeedbackService } from '../../core/services/feedback.service';
+import { HintService } from '../../core/services/hint.service';
 import { ActionButtonsComponent } from '../../shared/action-buttons/action-buttons.component';
 
 interface OptionItem {
@@ -13,7 +14,6 @@ interface OptionItem {
 interface SymbolMatchState {
     selectedId: number | null;
     feedbackState: 'correct' | 'wrong' | null;
-    checkErrorCount: number;
 }
 
 const CENTER = { symbol: 'T', bgColor: '#4caf8a' };
@@ -50,14 +50,18 @@ export class SymbolMatchingComponent implements OnInit {
     constructor(
         private router: Router,
         private gs: GameStateService,
-        private fb: FeedbackService
+        private fb: FeedbackService,
+        private hintService: HintService
     ) { }
 
     readonly center = CENTER;
     options: OptionItem[] = [];
     selectedId: number | null = null;
     feedbackState: 'correct' | 'wrong' | null = null;
-    checkErrorCount = 0;
+
+    get showHint(): boolean {
+        return this.hintService.shouldShowHint(ID);
+    }
 
     get isNextUnlocked(): boolean {
         return this.feedbackState === 'correct' || this.gs.isCompleted(ID);
@@ -73,24 +77,21 @@ export class SymbolMatchingComponent implements OnInit {
         if (saved) {
             this.selectedId = saved.selectedId;
             this.feedbackState = saved.feedbackState;
-            this.checkErrorCount = saved.checkErrorCount || 0;
         }
     }
 
     private persist(): void {
         this.gs.save(ID, {
             selectedId: this.selectedId,
-            feedbackState: this.feedbackState,
-            checkErrorCount: this.checkErrorCount
+            feedbackState: this.feedbackState
         });
     }
 
-    /** Seçilen seçeneği işaretler; checkErrorCount sıfırlanmaz (hint için) */
+    /** Seçilen seçeneği işaretler */
     selectOption(id: number): void {
         if (this.feedbackState === 'correct') return;
         this.selectedId = id;
         this.feedbackState = null;
-        // checkErrorCount sıfırlanmıyor – 2 yanlıştan sonra ipucu gösterilsin
         this.persist();
     }
 
@@ -98,23 +99,24 @@ export class SymbolMatchingComponent implements OnInit {
     clearSelection(): void {
         this.selectedId = null;
         this.feedbackState = null;
-        this.checkErrorCount = 0;
         this.options.forEach(o => (o.isShaking = false));
         this.gs.clear(ID);
+        this.hintService.resetErrors(ID);
     }
 
-    /** Seçilen seçeneği doğrular; 2 hatadan sonra hint-glow devreye girer */
+    /** Seçilen seçeneği doğrular */
     checkAnswer(): void {
         if (this.selectedId === null) return;
         const selected = this.options.find(o => o.id === this.selectedId)!;
         if (selected.isCorrect) {
             this.feedbackState = 'correct';
-            this.checkErrorCount = 0;
             this.gs.markCompleted(ID);
+            this.hintService.resetErrors(ID);
             this.fb.showFeedback('success', 'Tebrikler! Doğru sembolü buldun!');
         } else {
             this.feedbackState = 'wrong';
-            this.checkErrorCount++;
+            this.hintService.registerError(ID);
+            this.selectedId = null; // Yanlış seçimi anında sil
             selected.isShaking = true;
             this.fb.showFeedback('error', 'Tekrar Denemelisin');
             setTimeout(() => (selected.isShaking = false), 500);

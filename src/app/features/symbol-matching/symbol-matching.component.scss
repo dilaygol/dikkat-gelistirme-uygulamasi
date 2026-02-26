@@ -6,29 +6,6 @@
 @use 'styles/design-tokens' as *;
 
 // ── Animasyonlar ───────────────────────────────────────────
-@keyframes shake {
-
-    0%,
-    100% {
-        transform: translateX(0);
-    }
-
-    20% {
-        transform: translateX(-8px);
-    }
-
-    40% {
-        transform: translateX(8px);
-    }
-
-    60% {
-        transform: translateX(-5px);
-    }
-
-    80% {
-        transform: translateX(5px);
-    }
-}
 
 @keyframes popIn {
     0% {
@@ -58,33 +35,7 @@
     }
 }
 
-@keyframes hintPulseGlow {
-
-    0%,
-    100% {
-        box-shadow:
-            0 0 0 4px rgba(241, 196, 15, 0.3),
-            0 0 0 8px rgba(241, 196, 15, 0.15),
-            0 8px 24px rgba(0, 0, 0, .18);
-        border-color: #fff;
-        outline: 4px solid rgba(241, 196, 15, 0.4);
-        outline-offset: 2px;
-        transform: scale(1);
-    }
-
-    50% {
-        box-shadow:
-            0 0 0 6px rgba(241, 196, 15, 0.9),
-            0 0 24px 10px rgba(241, 196, 15, 0.55),
-            0 8px 24px rgba(0, 0, 0, .18);
-        border-color: #fff;
-        outline: 4px solid rgba(241, 196, 15, 0.9);
-        outline-offset: 4px;
-        transform: scale(1.08);
-    }
-}
-
-// ── Host ──────────────────────────────────────────────────
+// Host ──────────────────────────────────────────────────
 :host {
     display: flex;
     width: 100%;
@@ -153,32 +104,6 @@
 
     .symbol {
         font-size: 3.4rem;
-    }
-
-    &:hover:not(.selected) {
-        transform: scale(1.08);
-        box-shadow: 0 12px 28px rgba(0, 0, 0, .22);
-    }
-
-    // Seçili durum: büyür + parlayan dış çerçeve + pulse
-    &.selected {
-        transform: scale(1.12);
-        box-shadow:
-            0 0 0 5px rgba(255, 255, 255, .9),
-            0 0 0 10px rgba($color-nav, .45),
-            0 12px 32px rgba(0, 0, 0, .22);
-        animation: selectedPulse 1.4s ease-in-out infinite;
-    }
-
-    // Yanlış seçimde sallama
-    &.shake {
-        animation: shake .45s ease;
-    }
-
-    // İpucu ışıması (2 hatadan sonra doğru hedef)
-    &.hint-glow {
-        animation: hintPulseGlow 1.2s ease-in-out infinite !important;
-        z-index: 10 !important;
     }
 
     &:focus-visible {

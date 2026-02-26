@@ -6,29 +6,32 @@ import { FeedbackService } from '../../core/services/feedback.service';
 import { HintService } from '../../core/services/hint.service';
 import { ActionButtonsComponent } from '../../shared/action-buttons/action-buttons.component';
 
+export type ShapeOutline = 'square' | 'triangle';
+export type CircleColor = 'red' | 'yellow';
+
 interface OptionItem {
     id: number;
-    name: string;
-    emoji: string;
+    colors: CircleColor[];
     isCorrect: boolean;
     isShaking?: boolean;
 }
 
-interface LiquidSelectionState {
+interface ShapeColorState {
     selectedId: number | null;
     feedbackState: 'correct' | 'wrong' | null;
 }
 
-const ID = 'liquid-selection';
+const ID = 'shape-to-color-match';
 
 @Component({
-    selector: 'app-liquid-selection',
+    selector: 'app-shape-to-color-match',
     standalone: true,
     imports: [CommonModule, ActionButtonsComponent],
-    templateUrl: './liquid-selection.component.html',
-    styleUrl: './liquid-selection.component.scss',
+    templateUrl: './shape-to-color-match.component.html',
+    styleUrl: './shape-to-color-match.component.scss'
 })
-export class LiquidSelectionComponent implements OnInit {
+export class ShapeToColorMatchComponent implements OnInit {
+
     constructor(
         private router: Router,
         private gs: GameStateService,
@@ -36,11 +39,31 @@ export class LiquidSelectionComponent implements OnInit {
         private hintService: HintService
     ) { }
 
+    readonly referenceGrid: ShapeOutline[] = [
+        'square', 'triangle', 'square',
+        'triangle', 'square', 'triangle',
+        'square', 'triangle', 'square'
+    ];
+
     options: OptionItem[] = [
-        { id: 1, name: 'Zeytin', emoji: '🫒', isCorrect: false },
-        { id: 2, name: 'Süt', emoji: '🥛', isCorrect: true }, // The target: Süt (Milk)
-        { id: 3, name: 'Elma', emoji: '🍎', isCorrect: false },
-        { id: 4, name: 'Peynir', emoji: '🧀', isCorrect: false },
+        // 1: Doğru (Kare=Kırmızı, Üçgen=Sarı)
+        {
+            id: 1,
+            colors: ['red', 'yellow', 'red', 'yellow', 'red', 'yellow', 'red', 'yellow', 'red'],
+            isCorrect: true
+        },
+        // 2: Çeldirici (Sıralar bozuk)
+        {
+            id: 2,
+            colors: ['red', 'red', 'yellow', 'red', 'yellow', 'red', 'yellow', 'red', 'yellow'],
+            isCorrect: false
+        },
+        // 3: Çeldirici 
+        {
+            id: 3,
+            colors: ['yellow', 'red', 'red', 'red', 'yellow', 'yellow', 'yellow', 'yellow', 'red'],
+            isCorrect: false
+        }
     ];
 
     selectedId: number | null = null;
@@ -55,7 +78,7 @@ export class LiquidSelectionComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        const saved = this.gs.getData<LiquidSelectionState>(ID);
+        const saved = this.gs.getData<ShapeColorState>(ID);
         if (saved) {
             this.selectedId = saved.selectedId;
             this.feedbackState = saved.feedbackState;
@@ -65,13 +88,20 @@ export class LiquidSelectionComponent implements OnInit {
     private persist(): void {
         this.gs.save(ID, {
             selectedId: this.selectedId,
-            feedbackState: this.feedbackState,
+            feedbackState: this.feedbackState
         });
     }
 
     selectOption(id: number): void {
-        if (this.feedbackState === 'correct') return;
-        this.selectedId = id;
+        if (this.feedbackState === 'correct' || this.gs.isCompleted(ID)) return;
+
+        // Radio button mantığı
+        if (this.selectedId === id) {
+            this.selectedId = null;
+        } else {
+            this.selectedId = id;
+        }
+
         this.feedbackState = null;
         this.persist();
     }
@@ -79,7 +109,9 @@ export class LiquidSelectionComponent implements OnInit {
     clearSelection(): void {
         this.selectedId = null;
         this.feedbackState = null;
-        this.options.forEach((o) => (o.isShaking = false));
+        this.options.forEach(o => {
+            o.isShaking = false;
+        });
         this.gs.clear(ID);
         this.hintService.resetErrors(ID);
     }
@@ -87,30 +119,32 @@ export class LiquidSelectionComponent implements OnInit {
     checkAnswer(): void {
         if (this.selectedId === null) return;
 
-        const selected = this.options.find((o) => o.id === this.selectedId)!;
+        const selected = this.options.find(o => o.id === this.selectedId)!;
 
         if (selected.isCorrect) {
             this.feedbackState = 'correct';
             this.gs.markCompleted(ID);
             this.hintService.resetErrors(ID);
-            this.fb.showFeedback('success', 'Tebrikler! Doğru maddeyi buldun!');
+            this.fb.showFeedback('success', 'Tebrikler! Doğru renk dizilimini buldun.');
         } else {
             this.feedbackState = 'wrong';
             this.hintService.registerError(ID);
+
             this.selectedId = null; // Yanlış seçimi anında sil
             selected.isShaking = true;
-            this.fb.showFeedback('error', 'Tekrar Denemelisin');
             setTimeout(() => (selected.isShaking = false), 500);
+
+            this.fb.showFeedback('error', 'Yanlış seçim, referans tabloya dikkatli bak.');
         }
         this.persist();
     }
 
     goPrev(): void {
-        this.router.navigate(['/shape-coloring']);
+        this.router.navigate(['/board-letter-matching']);
     }
 
     goNext(): void {
         if (!this.isNextUnlocked) return;
-        this.router.navigate(['/letter-matching']);
+        this.router.navigate(['/sequence-rule-breaker']);
     }
 }

@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { GameStateService } from '../../core/services/game-state.service';
 import { FeedbackService } from '../../core/services/feedback.service';
+import { HintService } from '../../core/services/hint.service';
 import { ActionButtonsComponent } from '../../shared/action-buttons/action-buttons.component';
 
 interface NumberQuestion {
@@ -21,7 +22,6 @@ interface NumberSeqState {
     prevInputs: (string | null)[];
     nextInputs: (string | null)[];
     feedbackState: 'correct' | 'wrong' | null;
-    checkErrorCount: number;
 }
 
 const ID = 'number-sequence';
@@ -46,12 +46,16 @@ export class NumberSequenceComponent implements OnInit {
     constructor(
         private router: Router,
         private gs: GameStateService,
-        private fb: FeedbackService
+        private fb: FeedbackService,
+        private hintService: HintService
     ) { }
 
     questions: NumberQuestion[] = this.createFreshQuestions();
     feedbackState: 'correct' | 'wrong' | null = null;
-    checkErrorCount = 0;
+
+    get showHint(): boolean {
+        return this.hintService.shouldShowHint(ID);
+    }
 
     get isNextUnlocked(): boolean {
         return this.feedbackState === 'correct' || this.gs.isCompleted(ID);
@@ -66,7 +70,6 @@ export class NumberSequenceComponent implements OnInit {
             this.feedbackState = saved.feedbackState;
             saved.prevInputs.forEach((v, i) => (this.questions[i].prevInput = v));
             saved.nextInputs.forEach((v, i) => (this.questions[i].nextInput = v));
-            this.checkErrorCount = saved.checkErrorCount || 0;
         }
     }
 
@@ -80,8 +83,7 @@ export class NumberSequenceComponent implements OnInit {
         this.gs.save(ID, {
             prevInputs: this.questions.map(q => q.prevInput),
             nextInputs: this.questions.map(q => q.nextInput),
-            feedbackState: this.feedbackState,
-            checkErrorCount: this.checkErrorCount
+            feedbackState: this.feedbackState
         });
     }
 
@@ -95,11 +97,11 @@ export class NumberSequenceComponent implements OnInit {
     clearAll(): void {
         this.questions = this.createFreshQuestions();
         this.feedbackState = null;
-        this.checkErrorCount = 0;
         this.gs.clear(ID);
+        this.hintService.resetErrors(ID);
     }
 
-    /** Tüm soru yanıtlarını doğrular; 2 hatadan sonra ipucu gösterir */
+    /** Tüm soru yanıtlarını doğrular */
     checkAnswers(): void {
         let allCorrect = true;
         this.questions.forEach(q => {
@@ -112,11 +114,11 @@ export class NumberSequenceComponent implements OnInit {
 
         if (allCorrect) {
             this.feedbackState = 'correct';
-            this.checkErrorCount = 0;
             this.gs.markCompleted(ID);
+            this.hintService.resetErrors(ID);
             this.fb.showFeedback('success', 'Tebrikler! Sayıları doğru yazdın!');
         } else {
-            this.checkErrorCount++;
+            this.hintService.registerError(ID);
             this.feedbackState = 'wrong';
 
             this.questions.forEach(q => {
@@ -125,7 +127,7 @@ export class NumberSequenceComponent implements OnInit {
                 }
             });
 
-            if (this.checkErrorCount >= 2) {
+            if (this.showHint) {
                 // Silik ipuçları çıksın diye hatalı olanları temizle
                 this.questions.forEach(q => {
                     if (q.prevError) q.prevInput = null;

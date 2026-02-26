@@ -1,5 +1,6 @@
 @use 'sass:color';
 @use './styles/design-tokens' as *;
+@use './styles/global-states';
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&family=Baloo+2:wght@700;800;900&display=swap');
 
 *,

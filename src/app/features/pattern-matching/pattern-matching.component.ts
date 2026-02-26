@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { GameStateService } from '../../core/services/game-state.service';
 import { FeedbackService } from '../../core/services/feedback.service';
+import { HintService } from '../../core/services/hint.service';
 import { ActionButtonsComponent } from '../../shared/action-buttons/action-buttons.component';
 
 // ─────────────────────────────────────────────────────────
@@ -20,7 +21,6 @@ const PUZZLE_PAGES: boolean[][][] = [
 interface PatternState {
   userGrid: boolean[][];
   feedbackState: 'correct' | 'wrong' | null;
-  errorCount: number;
 }
 
 const ID = 'pattern';
@@ -36,7 +36,8 @@ export class PatternMatchingComponent implements OnInit {
   constructor(
     private router: Router,
     private gs: GameStateService,
-    private fb: FeedbackService
+    private fb: FeedbackService,
+    private hintService: HintService
   ) { }
 
   readonly currentPage = signal(0);
@@ -45,8 +46,10 @@ export class PatternMatchingComponent implements OnInit {
 
   userGrid: boolean[][] = this.createEmptyGrid();
   feedbackState: 'correct' | 'wrong' | null = null;
-  errorCount = 0;
-  showHints = false;
+
+  get showHints(): boolean {
+    return this.hintService.shouldShowHint(ID);
+  }
 
   get isNextUnlocked(): boolean {
     return this.feedbackState === 'correct' || this.gs.isCompleted(ID);
@@ -60,7 +63,6 @@ export class PatternMatchingComponent implements OnInit {
     if (saved) {
       this.userGrid = saved.userGrid.map(row => [...row]);
       this.feedbackState = saved.feedbackState;
-      this.errorCount = saved.errorCount || 0;
     }
   }
 
@@ -72,8 +74,7 @@ export class PatternMatchingComponent implements OnInit {
   private persist(): void {
     this.gs.save(ID, {
       userGrid: this.userGrid,
-      feedbackState: this.feedbackState,
-      errorCount: this.errorCount
+      feedbackState: this.feedbackState
     });
   }
 
@@ -83,7 +84,6 @@ export class PatternMatchingComponent implements OnInit {
     if (this.gs.isCompleted(ID) && this.feedbackState === 'correct') return; // kilitli
     this.userGrid[row][col] = !this.userGrid[row][col];
     this.feedbackState = null;
-    this.showHints = false; // Kullanıcı hamle yaptığında ipuçları gizlenir
     this.persist();
   }
 
@@ -91,9 +91,8 @@ export class PatternMatchingComponent implements OnInit {
   clearGrid(): void {
     this.userGrid = this.createEmptyGrid();
     this.feedbackState = null;
-    this.errorCount = 0;
-    this.showHints = false;
     this.gs.clear(ID);       // servisten de sil
+    this.hintService.resetErrors(ID);
   }
 
   /** Deseni hedefle karşılaştırır; 2 hatadan sonra ipucu gösterir */
@@ -105,12 +104,10 @@ export class PatternMatchingComponent implements OnInit {
     this.feedbackState = isCorrect ? 'correct' : 'wrong';
     if (isCorrect) {
       this.gs.markCompleted(ID);
+      this.hintService.resetErrors(ID);
       this.fb.showFeedback('success', 'Tebrikler! Deseni mükemmel kopyaladın!');
     } else {
-      this.errorCount++;
-      if (this.errorCount >= 2) {
-        this.showHints = true;
-      }
+      this.hintService.registerError(ID);
       this.fb.showFeedback('error', 'Tekrar Denemelisin');
     }
     this.persist();
@@ -143,8 +140,7 @@ export class PatternMatchingComponent implements OnInit {
   private resetSession(): void {
     this.userGrid = this.createEmptyGrid();
     this.feedbackState = null;
-    this.errorCount = 0;
-    this.showHints = false;
+    this.hintService.resetErrors(ID);
   }
 
   readonly rowIndices = [0, 1, 2, 3, 4, 5] as const;

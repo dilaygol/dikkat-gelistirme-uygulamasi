@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { GameStateService } from '../../core/services/game-state.service';
 import { FeedbackService } from '../../core/services/feedback.service';
+import { HintService } from '../../core/services/hint.service';
 import { ActionButtonsComponent } from '../../shared/action-buttons/action-buttons.component';
 
 interface OptionItem {
@@ -16,7 +17,6 @@ interface OptionItem {
 interface AnimalPositionState {
     selectedId: number | null;
     feedbackState: 'correct' | 'wrong' | null;
-    checkErrorCount: number;
 }
 
 const ID = 'animal-position';
@@ -32,7 +32,8 @@ export class AnimalPositionComponent implements OnInit {
     constructor(
         private router: Router,
         private gs: GameStateService,
-        private fb: FeedbackService
+        private fb: FeedbackService,
+        private hintService: HintService
     ) { }
 
     options: OptionItem[] = [
@@ -48,7 +49,10 @@ export class AnimalPositionComponent implements OnInit {
 
     selectedId: number | null = null;
     feedbackState: 'correct' | 'wrong' | null = null;
-    checkErrorCount = 0;
+
+    get showHint(): boolean {
+        return this.hintService.shouldShowHint(ID);
+    }
 
     get isNextUnlocked(): boolean {
         return this.feedbackState === 'correct' || this.gs.isCompleted(ID);
@@ -59,7 +63,6 @@ export class AnimalPositionComponent implements OnInit {
         if (saved) {
             this.selectedId = saved.selectedId;
             this.feedbackState = saved.feedbackState;
-            this.checkErrorCount = saved.checkErrorCount || 0;
         }
     }
 
@@ -67,7 +70,6 @@ export class AnimalPositionComponent implements OnInit {
         this.gs.save(ID, {
             selectedId: this.selectedId,
             feedbackState: this.feedbackState,
-            checkErrorCount: this.checkErrorCount,
         });
     }
 
@@ -81,9 +83,9 @@ export class AnimalPositionComponent implements OnInit {
     clearSelection(): void {
         this.selectedId = null;
         this.feedbackState = null;
-        this.checkErrorCount = 0;
         this.options.forEach((o) => (o.isShaking = false));
         this.gs.clear(ID);
+        this.hintService.resetErrors(ID);
     }
 
     checkAnswer(): void {
@@ -93,12 +95,13 @@ export class AnimalPositionComponent implements OnInit {
 
         if (selected.isCorrect) {
             this.feedbackState = 'correct';
-            this.checkErrorCount = 0;
             this.gs.markCompleted(ID);
+            this.hintService.resetErrors(ID);
             this.fb.showFeedback('success', 'Tebrikler! Doğru hayvanı buldun!');
         } else {
             this.feedbackState = 'wrong';
-            this.checkErrorCount++;
+            this.hintService.registerError(ID);
+            this.selectedId = null; // Yanlış seçimi anında sil
             selected.isShaking = true;
             this.fb.showFeedback('error', 'Tekrar Denemelisin');
             setTimeout(() => (selected.isShaking = false), 500);

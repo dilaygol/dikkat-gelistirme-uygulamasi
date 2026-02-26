@@ -3,9 +3,10 @@ import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { GameStateService } from '../../core/services/game-state.service';
 import { FeedbackService } from '../../core/services/feedback.service';
+import { HintService } from '../../core/services/hint.service';
 import { ActionButtonsComponent } from '../../shared/action-buttons/action-buttons.component';
 
-interface CatItem { id: number; isFlipped: boolean; }
+interface CatItem { id: number; isFlipped: boolean; isShaking?: boolean; }
 
 const GAME: CatItem[] = [
     { id: 0, isFlipped: false },
@@ -18,7 +19,6 @@ const GAME: CatItem[] = [
 interface OddDirState {
     selectedId: number;
     feedbackState: 'correct' | 'wrong' | null;
-    errorCount: number;
 }
 
 const ID = 'odd-direction';
@@ -34,14 +34,17 @@ export class OddDirectionComponent implements OnInit {
     constructor(
         private router: Router,
         private gs: GameStateService,
-        private fb: FeedbackService
+        private fb: FeedbackService,
+        private hintService: HintService
     ) { }
 
     readonly cats = GAME;
     selectedId: number = -1;
     feedbackState: 'correct' | 'wrong' | null = null;
-    errorCount = 0;
-    showHint = false;
+
+    get showHint(): boolean {
+        return this.hintService.shouldShowHint(ID);
+    }
 
     get isNextUnlocked(): boolean { return this.feedbackState === 'correct' || this.gs.isCompleted(ID); }
     get isLocked(): boolean { return this.feedbackState === 'correct'; }
@@ -52,15 +55,13 @@ export class OddDirectionComponent implements OnInit {
         if (saved) {
             this.selectedId = saved.selectedId;
             this.feedbackState = saved.feedbackState;
-            this.errorCount = saved.errorCount || 0;
         }
     }
 
     private persist(): void {
         this.gs.save(ID, {
             selectedId: this.selectedId,
-            feedbackState: this.feedbackState,
-            errorCount: this.errorCount
+            feedbackState: this.feedbackState
         });
     }
 
@@ -70,7 +71,7 @@ export class OddDirectionComponent implements OnInit {
         if (this.isLocked) return;
         this.selectedId = id;
         this.feedbackState = null;
-        this.showHint = false;
+        this.cats.forEach(c => c.isShaking = false);
         this.persist();
     }
 
@@ -82,16 +83,27 @@ export class OddDirectionComponent implements OnInit {
             this.persist();
             return;
         }
+
         const correct = GAME.find(c => c.isFlipped);
-        this.feedbackState = correct?.id === this.selectedId ? 'correct' : 'wrong';
-        if (this.feedbackState === 'correct') {
+        const isCorrect = correct?.id === this.selectedId;
+        this.feedbackState = isCorrect ? 'correct' : 'wrong';
+
+        if (isCorrect) {
             this.gs.markCompleted(ID);
+            this.hintService.resetErrors(ID);
             this.fb.showFeedback('success', 'Tebrikler! Doğru kediyi buldun!');
         } else {
-            this.errorCount++;
-            if (this.errorCount >= 2) {
-                this.showHint = true;
+            this.hintService.registerError(ID);
+
+            const selectedCat = this.cats.find(c => c.id === this.selectedId);
+            if (selectedCat) {
+                selectedCat.isShaking = true;
+                setTimeout(() => {
+                    selectedCat.isShaking = false;
+                }, 500);
             }
+
+            this.selectedId = -1;
             this.fb.showFeedback('error', 'Tekrar Denemelisin');
         }
         this.persist();
@@ -101,9 +113,9 @@ export class OddDirectionComponent implements OnInit {
     restartActivity(): void {
         this.selectedId = -1;
         this.feedbackState = null;
-        this.errorCount = 0;
-        this.showHint = false;
+        this.cats.forEach(c => c.isShaking = false);
         this.gs.clear(ID);
+        this.hintService.resetErrors(ID);
     }
 
     // ── Navigasyon ────────────────────────────────────────
