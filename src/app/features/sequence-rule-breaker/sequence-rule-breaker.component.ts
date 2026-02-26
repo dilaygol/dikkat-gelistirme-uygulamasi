@@ -124,6 +124,6 @@ export class SequenceRuleBreakerComponent implements OnInit {
 
     goNext(): void {
         if (!this.isNextUnlocked) return;
-        this.fb.showFeedback('success', 'Tüm görevleri tamamladınız!');
+        this.router.navigate(['/traffic-sign-matching']);
     }
 }
