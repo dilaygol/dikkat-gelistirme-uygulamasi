@@ -9,6 +9,7 @@ import { AnimalPositionComponent } from './features/animal-position/animal-posit
 import { PatternMatchingTwoComponent } from './features/pattern-matching-two/pattern-matching-two.component';
 import { ShapeColoringComponent } from './features/shape-coloring/shape-coloring.component';
 import { LiquidSelectionComponent } from './features/liquid-selection/liquid-selection.component';
+import { LongestRopeComponent } from './features/longest-rope/longest-rope.component';
 
 export const routes: Routes = [
     { path: '', redirectTo: 'pattern', pathMatch: 'full' },
@@ -22,5 +23,6 @@ export const routes: Routes = [
     { path: 'pattern-2', component: PatternMatchingTwoComponent },
     { path: 'shape-coloring', component: ShapeColoringComponent },
     { path: 'liquid-selection', component: LiquidSelectionComponent },
+    { path: 'longest-rope', component: LongestRopeComponent },
     { path: '**', redirectTo: 'pattern' },
 ];
