@@ -13,8 +13,6 @@ interface TriangleItem {
     found: boolean;
     foundStep?: number;
     isShaking: boolean;
-    top: string;
-    left: string;
 }
 
 interface ShadeSortState {
@@ -78,27 +76,11 @@ export class ShadeSortingComponent implements OnInit {
         const items: TriangleItem[] = Array.from({ length: 16 }, (_, i) => ({
             id: i, order: i + 1,
             shade: `hsl(${Math.round(hStart - i * hStep)}, ${Math.round(sStart - i * sStep)}%, ${Math.round(lStart - i * lStep)}%)`,
-            found: false, foundStep: undefined, isShaking: false,
-            top: '0%', left: '0%',
+            found: false, foundStep: undefined, isShaking: false
         }));
         // Sabit karışık sıra – her oyunda aynı görünüm
         const fixedOrder = [12, 3, 7, 15, 0, 10, 5, 13, 8, 1, 14, 6, 11, 4, 9, 2];
-        const positions = this.generatePositions();
-        return fixedOrder.map((origIdx, posIdx) => ({
-            ...items[origIdx],
-            top: positions[posIdx].top,
-            left: positions[posIdx].left,
-        }));
-    }
-
-    private generatePositions(): { top: string; left: string }[] {
-        // Sabit 4×4 ızgara – canvas içinde ortalanmış
-        return [
-            { top: '4%', left: '8%' }, { top: '4%', left: '31%' }, { top: '4%', left: '54%' }, { top: '4%', left: '77%' },
-            { top: '27%', left: '10%' }, { top: '27%', left: '33%' }, { top: '27%', left: '56%' }, { top: '27%', left: '75%' },
-            { top: '50%', left: '8%' }, { top: '50%', left: '31%' }, { top: '50%', left: '54%' }, { top: '50%', left: '77%' },
-            { top: '73%', left: '10%' }, { top: '73%', left: '33%' }, { top: '73%', left: '56%' }, { top: '73%', left: '75%' },
-        ];
+        return fixedOrder.map((origIdx) => items[origIdx]);
     }
 
     /** Ülüğü bulunan üçgene tıklandığında doğrulama yapar */
@@ -129,7 +111,7 @@ export class ShadeSortingComponent implements OnInit {
         });
     }
 
-    /** Tüm ilerlemeyi sıfırlar; positions ve sıra sabitlenir */
+    /** Tüm ilerlemeyi sıfırlar; sıra sabitlenir */
     restartGame(): void {
         this.gs.clear(ID);
         this.hintService.resetErrors(ID);

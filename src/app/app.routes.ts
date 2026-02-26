@@ -28,5 +28,11 @@ export const routes: Routes = [
     { path: 'pattern-2', component: PatternMatchingTwoComponent },
     { path: 'shape-coloring', component: ShapeColoringComponent },
     { path: 'liquid-selection', component: LiquidSelectionComponent },
+    { path: 'longest-rope', component: LongestRopeComponent },
+    { path: 'letter-matching', component: LetterMatchingComponent },
+    { path: 'shape-pattern', component: ShapePatternComponent },
+    { path: 'board-letter-matching', component: BoardLetterMatchingComponent },
+    { path: 'shape-to-color-match', component: ShapeToColorMatchComponent },
+    { path: 'sequence-rule-breaker', component: SequenceRuleBreakerComponent },
     { path: '**', redirectTo: 'pattern' },
 ];

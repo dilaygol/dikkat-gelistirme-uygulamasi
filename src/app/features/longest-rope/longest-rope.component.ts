@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { GameStateService } from '../../core/services/game-state.service';
 import { FeedbackService } from '../../core/services/feedback.service';
+import { HintService } from '../../core/services/hint.service';
 import { ActionButtonsComponent } from '../../shared/action-buttons/action-buttons.component';
 
 interface RopeOption {
@@ -15,7 +16,6 @@ interface RopeOption {
 interface LongestRopeState {
     selectedId: number | null;
     feedbackState: 'correct' | 'wrong' | null;
-    checkErrorCount: number;
 }
 
 const ID = 'longest-rope';
@@ -31,7 +31,8 @@ export class LongestRopeComponent implements OnInit {
     constructor(
         private router: Router,
         private gs: GameStateService,
-        private fb: FeedbackService
+        private fb: FeedbackService,
+        private hintService: HintService
     ) { }
 
     // 9x4 grid, distance between dots is 20px. 
@@ -63,7 +64,10 @@ export class LongestRopeComponent implements OnInit {
 
     selectedId: number | null = null;
     feedbackState: 'correct' | 'wrong' | null = null;
-    checkErrorCount = 0;
+
+    get showHint(): boolean {
+        return this.hintService.shouldShowHint(ID);
+    }
 
     // Create dot coordinates array for template
     dotCols = [10, 30, 50, 70, 90, 110, 130, 150, 170];
@@ -78,15 +82,13 @@ export class LongestRopeComponent implements OnInit {
         if (saved) {
             this.selectedId = saved.selectedId;
             this.feedbackState = saved.feedbackState;
-            this.checkErrorCount = saved.checkErrorCount || 0;
         }
     }
 
     private persist(): void {
         this.gs.save(ID, {
             selectedId: this.selectedId,
-            feedbackState: this.feedbackState,
-            checkErrorCount: this.checkErrorCount,
+            feedbackState: this.feedbackState
         });
     }
 
@@ -100,9 +102,9 @@ export class LongestRopeComponent implements OnInit {
     clearSelection(): void {
         this.selectedId = null;
         this.feedbackState = null;
-        this.checkErrorCount = 0;
         this.options.forEach((o) => (o.isShaking = false));
         this.gs.clear(ID);
+        this.hintService.resetErrors(ID);
     }
 
     checkAnswer(): void {
@@ -112,12 +114,12 @@ export class LongestRopeComponent implements OnInit {
 
         if (selected.isCorrect) {
             this.feedbackState = 'correct';
-            this.checkErrorCount = 0;
             this.gs.markCompleted(ID);
+            this.hintService.resetErrors(ID);
             this.fb.showFeedback('success', 'Tebrikler! En uzun ipi buldun!');
         } else {
             this.feedbackState = 'wrong';
-            this.checkErrorCount++;
+            this.hintService.registerError(ID);
             selected.isShaking = true;
             this.fb.showFeedback('error', 'Tekrar Denemelisin');
             setTimeout(() => (selected.isShaking = false), 500);
@@ -131,6 +133,6 @@ export class LongestRopeComponent implements OnInit {
 
     goNext(): void {
         if (!this.isNextUnlocked) return;
-        this.fb.showFeedback('success', 'Tüm soruları tamamladınız!');
+        this.router.navigate(['/letter-matching']);
     }
 }

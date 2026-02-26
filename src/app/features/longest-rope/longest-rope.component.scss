@@ -1,56 +1,5 @@
 @use 'styles/design-tokens' as *;
 
-// ── Animasyonlar ───────────────────────────────────────────
-@keyframes shake {
-
-    0%,
-    100% {
-        transform: translateX(0);
-    }
-
-    20% {
-        transform: translateX(-6px);
-    }
-
-    40% {
-        transform: translateX(6px);
-    }
-
-    60% {
-        transform: translateX(-4px);
-    }
-
-    80% {
-        transform: translateX(4px);
-    }
-}
-
-@keyframes scaleUp {
-    0% {
-        transform: scale(0.9);
-        opacity: 0;
-    }
-
-    100% {
-        transform: scale(1);
-        opacity: 1;
-    }
-}
-
-@keyframes pulse-yellow {
-    0% {
-        box-shadow: 0 0 10px rgba(255, 215, 0, 0.4);
-    }
-
-    50% {
-        box-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
-    }
-
-    100% {
-        box-shadow: 0 0 10px rgba(255, 215, 0, 0.4);
-    }
-}
-
 // ── Yerel Renkler (Mavi Tema) ───────────────────────────
 $color-error-bg: #fff3f0;
 $color-error-tx: #e55039;
@@ -164,11 +113,6 @@ $color-dot: #b8cde0; // Light grayish blue for dots
     transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
     border: 3px solid transparent;
 
-    &:hover {
-        transform: translateY(-4px);
-        box-shadow: 0 10px 20px rgba(100, 149, 237, 0.15);
-    }
-
     &.selected {
         border-color: $color-blue-border;
         background: #f4f9ff;
@@ -212,15 +156,7 @@ $color-dot: #b8cde0; // Light grayish blue for dots
         }
     }
 
-    &.hint-glow {
-        border-color: #ffd700;
-        box-shadow: 0 0 15px rgba(255, 215, 0, 0.6);
-        animation: pulse-yellow 2s infinite;
-    }
-
-    &.shaking {
-        animation: shake 0.45s ease;
-    }
+    // removed hint-glow and shaking classes as they are now global
 }
 
 // ── SVG ve Çizgiler ──────────────────────────────────────
