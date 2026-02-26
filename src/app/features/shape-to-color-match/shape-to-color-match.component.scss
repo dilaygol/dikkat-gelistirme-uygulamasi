@@ -118,11 +118,6 @@
     will-change: transform, box-shadow;
     outline: none;
 
-    &:hover:not(.selected) {
-        transform: translateY(-4px) scale(1.02);
-        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
-    }
-
     &.selected {
         --selected-bg: #f1f9ff;
         --selected-transform: scale(1.05);

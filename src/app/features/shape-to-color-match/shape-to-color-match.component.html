@@ -36,7 +36,7 @@
             <!-- Alt - Seçenekler Alanı -->
             <div class="options-container">
                 @for (opt of options; track opt.id) {
-                <button class="option-card" [class.selected]="selectedId === opt.id" [class.shake]="opt.isShaking"
+                <button class="option-card hover" [class.selected]="selectedId === opt.id" [class.shake]="opt.isShaking"
                     [class.hint]="showHint && opt.isCorrect && selectedId === null" (click)="selectOption(opt.id)"
                     [attr.aria-label]="'Renk dizilimi seçeneği ' + opt.id" [attr.aria-pressed]="selectedId === opt.id">
 

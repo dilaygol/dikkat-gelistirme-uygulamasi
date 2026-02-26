@@ -51,15 +51,19 @@
 
 // ── Kanvas ────────────────────────────────────────────────
 .canvas-area {
-    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 16px; // Space between triangles
+    padding: 24px;
+    width: 100%;
     border-radius: 18px;
     background: transparent;
-    overflow: hidden;
 }
 
 // ── Üçgen Sarmalayıcı ─────────────────────────────────────
 .triangle-wrap {
-    position: absolute;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -106,6 +110,8 @@
 // ── Adım Etiketi ──────────────────────────────────────────
 .step-label {
     @include flex-center;
+    position: absolute;
+    bottom: -15px; // Push label below the triangle
     margin-top: 4px;
     font-family: 'Nunito', sans-serif;
     font-size: .8rem;

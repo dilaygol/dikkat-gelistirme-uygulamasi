@@ -27,9 +27,10 @@
             <div class="options-container">
                 <div class="options-grid">
                     @for (opt of options; track opt.id) {
-                    <button class="option-card" [class.selected]="selectedId === opt.id" [class.shake]="opt.isShaking"
-                        [class.hint]="showHint && opt.isCorrect && selectedId === null" (click)="selectOption(opt.id)"
-                        [attr.aria-label]="opt.text + ' seçeneği'" [attr.aria-pressed]="selectedId === opt.id">
+                    <button class="option-card hover" [class.selected]="selectedId === opt.id"
+                        [class.shake]="opt.isShaking" [class.hint]="showHint && opt.isCorrect && selectedId === null"
+                        (click)="selectOption(opt.id)" [attr.aria-label]="opt.text + ' seçeneği'"
+                        [attr.aria-pressed]="selectedId === opt.id">
                         <span class="word-text">{{ opt.text }}</span>
                     </button>
                     }

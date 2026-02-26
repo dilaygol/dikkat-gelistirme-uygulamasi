@@ -104,7 +104,7 @@ export class SequenceRuleBreakerComponent implements OnInit {
             this.feedbackState = 'correct';
             this.gs.markCompleted(ID);
             this.hintService.resetErrors(ID);
-            this.fb.showFeedback('success', 'Harika yetenek! Kuralı bozanı hemen fark ettin.');
+            this.fb.showFeedback('success', 'Tebrikler! Kuralı bozanı fark ettin.');
         } else {
             this.feedbackState = 'wrong';
             this.hintService.registerError(ID);
@@ -113,7 +113,7 @@ export class SequenceRuleBreakerComponent implements OnInit {
             selected.isShaking = true;
             setTimeout(() => (selected.isShaking = false), 500);
 
-            this.fb.showFeedback('error', 'Sıralamayı tekrar kontrol etmelisin. 4\'ten sonra ne geliyordu?');
+            this.fb.showFeedback('error', 'Sıralamayı tekrar kontrol etmelisin.');
         }
         this.persist();
     }

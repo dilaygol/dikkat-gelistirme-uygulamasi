@@ -20,7 +20,7 @@
             <div class="chalkboard-container" aria-label="Harflerle dolu kara tahta">
                 <div class="chalkboard-grid">
                     @for (item of letters; track item.id) {
-                    <button class="letter-cell" [class.selected]="item.isSelected" [class.shake]="item.isShaking"
+                    <button class="letter-cell hover" [class.selected]="item.isSelected" [class.shake]="item.isShaking"
                         [class.hint]="showHint && !item.isMatched && firstSelection === null && item.letter !== 'T'"
                         [class.matched]="item.isMatched" (click)="selectLetter(item.id)"
                         [attr.aria-label]="item.letter + ' harfi'" [attr.aria-pressed]="item.isSelected"
