@@ -15,6 +15,7 @@ import { ShapePatternComponent } from './features/shape-pattern/shape-pattern.co
 import { BoardLetterMatchingComponent } from './features/board-letter-matching/board-letter-matching.component';
 import { ShapeToColorMatchComponent } from './features/shape-to-color-match/shape-to-color-match.component';
 import { SequenceRuleBreakerComponent } from './features/sequence-rule-breaker/sequence-rule-breaker.component';
+import { LivingThingsComponent } from './features/living-things/living-things';
 
 export const routes: Routes = [
     { path: '', redirectTo: 'pattern', pathMatch: 'full' },
@@ -34,5 +35,6 @@ export const routes: Routes = [
     { path: 'board-letter-matching', component: BoardLetterMatchingComponent },
     { path: 'shape-to-color-match', component: ShapeToColorMatchComponent },
     { path: 'sequence-rule-breaker', component: SequenceRuleBreakerComponent },
+    { path: 'living-things', component: LivingThingsComponent },
     { path: '**', redirectTo: 'pattern' },
 ];

@@ -23,8 +23,8 @@
 
 
             @for (tri of triangles; track tri.id) {
-            <div class="triangle-item" [class.hover]="!tri.found" [class.found]="tri.found"
-                [class.shake]="tri.isShaking" [class.hint]="showHint && tri.order === currentStep"
+            <div class="triangle-wrap" [class.hover]="!tri.found" [class.found]="tri.found"
+                [class.shake]="tri.isShaking" [class.hint]="showHint && !tri.found && tri.order === currentStep"
                 (click)="onTriangleClick(tri)" role="button" tabindex="0" (keydown.enter)="onTriangleClick(tri)">
                 <div class="triangle" [style.background]="tri.shade"></div>
                 @if (tri.found) { <span class="step-label">{{ tri.foundStep }}</span> }
