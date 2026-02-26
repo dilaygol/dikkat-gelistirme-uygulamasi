@@ -21,7 +21,7 @@
                 <div class="chalkboard-grid">
                     @for (item of letters; track item.id) {
                     <button class="letter-cell hover" [class.selected]="item.isSelected" [class.shake]="item.isShaking"
-                        [class.hint]="showHint && !item.isMatched && firstSelection === null && item.letter !== 'T'"
+                        [class.hint]="showHint && !item.isMatched && item.letter === activeHintLetter && item.id !== firstSelection"
                         [class.matched]="item.isMatched" (click)="selectLetter(item.id)"
                         [attr.aria-label]="item.letter + ' harfi'" [attr.aria-pressed]="item.isSelected"
                         [disabled]="item.isMatched">

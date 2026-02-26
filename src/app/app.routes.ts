@@ -15,6 +15,7 @@ import { ShapePatternComponent } from './features/shape-pattern/shape-pattern.co
 import { BoardLetterMatchingComponent } from './features/board-letter-matching/board-letter-matching.component';
 import { ShapeToColorMatchComponent } from './features/shape-to-color-match/shape-to-color-match.component';
 import { SequenceRuleBreakerComponent } from './features/sequence-rule-breaker/sequence-rule-breaker.component';
+import { LivingThingsComponent } from './features/living-things/living-things';
 import { TrafficSignMatchingComponent } from './features/traffic-sign-matching/traffic-sign-matching.component';
 import { AbacusCountingComponent } from './features/abacus-counting/abacus-counting.component';
 import { DotPatternDrawingComponent } from './features/dot-pattern-drawing/dot-pattern-drawing.component';
@@ -37,6 +38,7 @@ export const routes: Routes = [
     { path: 'board-letter-matching', component: BoardLetterMatchingComponent },
     { path: 'shape-to-color-match', component: ShapeToColorMatchComponent },
     { path: 'sequence-rule-breaker', component: SequenceRuleBreakerComponent },
+    { path: 'living-things', component: LivingThingsComponent },
     { path: 'traffic-sign-matching', component: TrafficSignMatchingComponent },
     { path: 'abacus-counting', component: AbacusCountingComponent },
     { path: 'dot-pattern-drawing', component: DotPatternDrawingComponent },

@@ -57,6 +57,29 @@ export class BoardLetterMatchingComponent implements OnInit {
         return this.hintService.shouldShowHint(ID);
     }
 
+    get activeHintLetter(): string | null {
+        // Eğer ilk seçim yapılmışsa, aranacak olan eş harf odur
+        if (this.firstSelection !== null) {
+            const first = this.letters.find(l => l.id === this.firstSelection);
+            if (first) return first.letter;
+        }
+
+        // Eğer henüz seçim yapılmamışsa, eşleşmemiş olan ilk harf çiftini bul
+        // Çeldiricileri eliyoruz ('T' harfi tek başına çeldirici olarak bırakılmıştı, ama daha dinamik
+        // olması için eşi olan ilk harfi arayalım).
+        const unmatchedLetters = this.letters.filter(l => !l.isMatched);
+
+        for (const l1 of unmatchedLetters) {
+            // Eşi var mı diye bak
+            const pairCount = unmatchedLetters.filter(l2 => l2.letter === l1.letter).length;
+            if (pairCount > 1) {
+                return l1.letter; // Eşi olan ilk harfi hedef yap
+            }
+        }
+
+        return null;
+    }
+
     get isNextUnlocked(): boolean {
         return this.matchedPairs >= 4 || this.gs.isCompleted(ID);
     }

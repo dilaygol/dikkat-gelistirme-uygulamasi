@@ -51,22 +51,26 @@
 
 // ── Kanvas ────────────────────────────────────────────────
 .canvas-area {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(4, auto);
     justify-content: center;
     align-items: center;
-    gap: 16px; // Space between triangles
+    gap: 32px 48px;
     padding: 24px;
     width: 100%;
-    border-radius: 18px;
     background: transparent;
 }
 
 // ── Üçgen Sarmalayıcı ─────────────────────────────────────
 .triangle-wrap {
+    position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: flex-start;
+    width: 80px;
+    height: 90px;
+    border: 3px solid transparent; // Prevents 6px shrink when .hover class is removed
     cursor: pointer;
     user-select: none;
     transition: transform .15s;
@@ -80,11 +84,7 @@
         }
     }
 
-    &.hint {
-        .triangle {
-            filter: brightness(1.1);
-        }
-    }
+
 
     &.hover {
         border-color: transparent !important;
@@ -111,7 +111,7 @@
 .step-label {
     @include flex-center;
     position: absolute;
-    bottom: -15px; // Push label below the triangle
+    bottom: -4px; // Position exactly at the bottom of the 80px wrapper
     margin-top: 4px;
     font-family: 'Nunito', sans-serif;
     font-size: .8rem;
@@ -119,9 +119,10 @@
     color: $color-text;
     background: rgba(255, 255, 255, .9);
     border-radius: 50%;
-    width: 22px;
-    height: 22px;
+    width: 24px;
+    height: 24px;
     box-shadow: 0 2px 6px rgba(0, 0, 0, .12);
+    box-sizing: border-box;
 }
 
 // ── Üçgen için Özel İpucu Parlaması (Dikdörtgen yerine şekli sarması için) ──
@@ -141,7 +142,7 @@
     }
 }
 
-.triangle-wrap.hint {
+.triangle-wrap.hint:not(.selected) {
     animation: triangleHintPulse 1.5s ease-in-out infinite !important;
     border-color: transparent !important; // Üçgenin etrafında kare sınır olmasını engelle
     box-shadow: none !important;
