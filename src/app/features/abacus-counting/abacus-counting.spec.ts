@@ -1,18 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { AbacusCountingComponent } from './abacus-counting.component';
 
-import { AbacusCounting } from './abacus-counting';
-
-describe('AbacusCounting', () => {
-  let component: AbacusCounting;
-  let fixture: ComponentFixture<AbacusCounting>;
+describe('AbacusCountingComponent', () => {
+  let component: AbacusCountingComponent;
+  let fixture: ComponentFixture<AbacusCountingComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AbacusCounting]
+      imports: [AbacusCountingComponent]
     })
-    .compileComponents();
+      .compileComponents();
 
-    fixture = TestBed.createComponent(AbacusCounting);
+    fixture = TestBed.createComponent(AbacusCountingComponent);
     component = fixture.componentInstance;
     await fixture.whenStable();
   });
