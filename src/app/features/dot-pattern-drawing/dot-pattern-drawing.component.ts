@@ -302,6 +302,6 @@ export class DotPatternDrawingComponent implements OnInit {
 
     goNext(): void {
         if (!this.isNextUnlocked) return;
-        this.fb.showFeedback('success', 'Tüm görevleri tamamladınız!');
+        this.router.navigate(['/box-coloring']);
     }
 }

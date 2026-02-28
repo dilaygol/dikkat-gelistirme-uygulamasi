@@ -146,10 +146,11 @@ export class LivingThingsComponent implements OnInit {
   }
 
   goPrev(): void {
-    // User requested not to touch router functionality, skipping navigation logic. Leave it to them.
+    this.router.navigate(['/sequence-rule-breaker']);
   }
 
   goNext(): void {
-    // User requested not to touch router functionality, skipping navigation logic. Leave it to them.
+    if (!this.isNextUnlocked) return;
+    this.router.navigate(['/traffic-sign-matching']);
   }
 }

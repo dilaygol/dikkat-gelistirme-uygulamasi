@@ -120,7 +120,7 @@ export class LetterMatchingComponent implements OnInit {
     }
 
     goPrev(): void {
-        this.router.navigate(['/liquid-selection']);
+        this.router.navigate(['/longest-rope']);
     }
 
     goNext(): void {

@@ -212,7 +212,7 @@ export class TrafficSignMatchingComponent implements OnInit {
     }
 
     goPrev(): void {
-        this.router.navigate(['/sequence-rule-breaker']);
+        this.router.navigate(['/living-things']);
     }
 
     goNext(): void {
