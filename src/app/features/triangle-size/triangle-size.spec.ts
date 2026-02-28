@@ -1,17 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { AbacusCountingComponent } from './abacus-counting.component';
+import { TriangleSizeComponent } from './triangle-size.component';
 
-describe('AbacusCountingComponent', () => {
-  let component: AbacusCountingComponent;
-  let fixture: ComponentFixture<AbacusCountingComponent>;
+describe('TriangleSizeComponent', () => {
+  let component: TriangleSizeComponent;
+  let fixture: ComponentFixture<TriangleSizeComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AbacusCountingComponent]
+      imports: [TriangleSizeComponent]
     })
       .compileComponents();
 
-    fixture = TestBed.createComponent(AbacusCountingComponent);
+    fixture = TestBed.createComponent(TriangleSizeComponent);
     component = fixture.componentInstance;
     await fixture.whenStable();
   });

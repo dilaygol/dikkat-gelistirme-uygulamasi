@@ -1,0 +1,189 @@
+@use 'sass:color';
+@use 'styles/design-tokens' as *;
+
+// ── Animasyonlar ───────────────────────────────────────────
+@keyframes boxFill {
+    0% {
+        transform: scale(0.95);
+        background-color: transparent;
+    }
+
+    50% {
+        transform: scale(1.05);
+        background-color: color.adjust(#e55039, $lightness: 10%); // Lighter red
+    }
+
+    100% {
+        transform: scale(1);
+        background-color: #e55039; // Red color from target
+    }
+}
+
+@keyframes boxHintPulse {
+
+    0%,
+    100% {
+        background-color: rgba(241, 196, 15, 0.1);
+        border-color: rgba(241, 196, 15, 0.4);
+    }
+
+    50% {
+        background-color: rgba(241, 196, 15, 0.35);
+        border-color: rgba(241, 196, 15, 1);
+    }
+}
+
+@keyframes hintShake {
+
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+
+    20%,
+    60% {
+        transform: translateX(-3px);
+    }
+
+    40%,
+    80% {
+        transform: translateX(3px);
+    }
+}
+
+// ── Yerel Renkler ─────────────────────────────────────────
+$color-container-bg: #ffffff;
+$color-box-empty: #ffffff;
+$color-box-border: transparent;
+$color-box-fill: #e55039; // Red from number-sequence
+
+// ── Host ──────────────────────────────────────────────────
+:host {
+    display: flex;
+    width: 100%;
+    height: 100vh;
+    align-items: center;
+    justify-content: center;
+    background: $color-bg;
+    overflow: hidden;
+}
+
+// ── Oyun İçeriği ──────────────────────────────────────────
+.interaction-card {
+    background: $color-container-bg;
+    border-radius: 50px;
+    padding: 40px 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center; // Changed from stretch to center
+    min-width: 700px;
+    max-width: 850px;
+    margin-top: 40px; // Gap from instruction bar
+    @include card-shadow($color-nav, .12);
+    overflow: hidden;
+}
+
+.groups-container {
+    display: flex;
+    flex-direction: row;
+    gap: 40px;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.box-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    transition: transform 0.3s ease;
+
+    &.error {
+        animation: hintShake 0.4s ease-in-out;
+
+        .group-label {
+            color: #e74c3c;
+        }
+    }
+}
+
+.columns-container {
+    display: flex;
+    flex-direction: row;
+    gap: 6px;
+}
+
+.box-column {
+    display: flex;
+    flex-direction: column-reverse; // Build from bottom to top
+    gap: 6px;
+}
+
+// ── Kutular ───────────────────────────────────────────────
+.paint-box {
+    width: 36px;
+    height: 36px;
+    background-color: $color-box-empty;
+    border: none;
+    border-radius: 10px;
+    @include card-shadow($color-nav, .12);
+    box-sizing: border-box;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+
+    // Non-interactive states
+    &.filled {
+        background-color: $color-box-fill;
+    }
+
+    // Interactive button styles
+    &.interactive {
+        cursor: pointer;
+        padding: 0;
+        outline: none;
+
+        &:focus-visible {
+            outline: 2px solid #b0c4d8;
+            outline-offset: 2px;
+            z-index: 2;
+        }
+
+        &:hover:not(.filled) {
+            background-color: rgba($color-box-fill, 0.1);
+        }
+
+        &.filled {
+            animation: boxFill 0.25s ease forwards;
+        }
+
+        // Hint Animasyonları
+        &.hint-remove {
+            animation: hintShake 0.4s ease-in-out infinite;
+            background-color: rgba($color-box-fill, 0.6) !important;
+        }
+
+        &.hint-add {
+            animation: boxHintPulse 1.2s ease-in-out infinite;
+        }
+    }
+}
+
+// Ex border CSS removed
+
+// Example group distinct styling (optional, matches the first column from image)
+.box-group.example {
+    opacity: 0.9;
+
+    .paint-box.filled {
+        background-color: color.adjust($color-box-fill, $lightness: -5%);
+    }
+}
+
+// ── Etiket ────────────────────────────────────────────────
+.group-label {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2rem;
+    font-weight: 600;
+    color: #333;
+    margin-top: 10px;
+    transition: color 0.3s ease;
+}
