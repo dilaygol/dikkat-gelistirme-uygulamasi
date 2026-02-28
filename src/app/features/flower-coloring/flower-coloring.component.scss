@@ -1,0 +1,185 @@
+@use 'styles/design-tokens' as *;
+
+// ── Animasyonlar ───────────────────────────────────────────
+@keyframes paintPop {
+    0% {
+        transform: scale(0.98);
+    }
+
+    50% {
+        transform: scale(1.02);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+@keyframes hintPulse {
+
+    0%,
+    100% {
+        filter: drop-shadow(0 0 5px rgba(241, 196, 15, 0.4));
+        opacity: 1;
+    }
+
+    50% {
+        filter: drop-shadow(0 0 15px rgba(241, 196, 15, 1));
+        opacity: 0.8;
+    }
+}
+
+@keyframes shake {
+
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+
+    25% {
+        transform: translateX(-5px);
+    }
+
+    75% {
+        transform: translateX(5px);
+    }
+}
+
+:host {
+    display: flex;
+    width: 100%;
+    height: 100vh;
+    align-items: center;
+    justify-content: center;
+    background: $color-bg;
+    overflow: hidden;
+}
+
+// ── Oyun İçeriği ──────────────────────────────────────────
+.interaction-card {
+    background: #ffffff;
+    border-radius: 50px;
+    padding: 20px 40px; // Slightly reduced padding
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 900px;
+    max-width: 1100px;
+    height: 100%; // Fill the game-content area
+    @include card-shadow($color-nav, .12);
+}
+
+.coloring-grid {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start; // Align sections by their top labels
+    justify-content: space-evenly;
+    gap: 20px;
+    width: 100%;
+    padding-top: 40px; // Add top padding to keep it vertically centered in the card
+}
+
+.divider {
+    width: 2px;
+    height: 340px;
+    background: linear-gradient(to bottom, transparent, #e2e8f0, transparent);
+}
+
+.house-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    flex: 1;
+
+    &.error {
+        animation: shake 0.4s ease-in-out;
+    }
+}
+
+.section-label {
+    font-family: 'Baloo 2', cursive;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #64748b;
+    padding: 3px 14px;
+    background: #f1f5f9;
+    border-radius: 20px;
+    margin-bottom: 10px;
+}
+
+.house-svg-wrapper {
+    width: 360px; // Standardized size to fit better vertically
+    height: 360px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.flower-svg {
+    filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.05));
+
+    circle {
+        transition: fill 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+        &.interactive {
+            cursor: pointer;
+
+            &:hover {
+                filter: brightness(0.95);
+                stroke-width: 4;
+            }
+
+            &:active {
+                transform-origin: center;
+                animation: paintPop 0.2s ease;
+            }
+        }
+
+        &.hint {
+            animation: hintPulse 1.5s ease-in-out infinite;
+        }
+    }
+}
+
+// ── Renk Paleti ──────────────────────────────────────────
+.color-palette {
+    display: flex;
+    gap: 18px;
+    padding: 12px;
+    background: #f8fafc;
+    border-radius: 30px;
+    border: 2px solid #f1f5f9;
+    margin-top: -15px; // Pulled up to give more room at bottom
+}
+
+.palette-btn {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    border: 4px solid #ffffff;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+
+    .material-icons {
+        color: #ffffff;
+        font-size: 24px;
+        font-weight: 900;
+        text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    }
+
+    &.active {
+        transform: scale(1.15) translateY(-4px);
+        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+        border-color: $color-nav;
+    }
+
+    &:hover:not(.active) {
+        transform: scale(1.08);
+    }
+}

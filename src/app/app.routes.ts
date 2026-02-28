@@ -19,6 +19,12 @@ import { LivingThingsComponent } from './features/living-things/living-things';
 import { TrafficSignMatchingComponent } from './features/traffic-sign-matching/traffic-sign-matching.component';
 import { AbacusCountingComponent } from './features/abacus-counting/abacus-counting.component';
 import { DotPatternDrawingComponent } from './features/dot-pattern-drawing/dot-pattern-drawing.component';
+import { BoxColoringComponent } from './features/box-coloring/box-coloring.component';
+import { TriangleSizeComponent } from './features/triangle-size/triangle-size.component';
+import { FlowerColoringComponent } from './features/flower-coloring/flower-coloring.component';
+import { NotInWordComponent } from './features/not-in-word/not-in-word.component';
+import { FindingGreenLinesComponent } from './features/finding-green-lines/finding-green-lines.component';
+import { IncorrectNumbersComponent } from './features/incorrect-numbers/incorrect-numbers.component';
 
 export const routes: Routes = [
     { path: '', redirectTo: 'pattern', pathMatch: 'full' },
@@ -42,5 +48,11 @@ export const routes: Routes = [
     { path: 'traffic-sign-matching', component: TrafficSignMatchingComponent },
     { path: 'abacus-counting', component: AbacusCountingComponent },
     { path: 'dot-pattern-drawing', component: DotPatternDrawingComponent },
+    { path: 'box-coloring', component: BoxColoringComponent },
+    { path: 'triangle-size', component: TriangleSizeComponent },
+    { path: 'flower-coloring', component: FlowerColoringComponent },
+    { path: 'not-in-word', component: NotInWordComponent },
+    { path: 'finding-green-lines', component: FindingGreenLinesComponent },
+    { path: 'incorrect-numbers', component: IncorrectNumbersComponent },
     { path: '**', redirectTo: 'pattern' },
 ];
