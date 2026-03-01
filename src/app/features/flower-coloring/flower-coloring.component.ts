@@ -118,7 +118,7 @@ export class FlowerColoringComponent implements OnInit {
     }
 
     checkAnswers(): void {
-        if (!!Object.values(this.flowerColors).some(c => c !== '#ffffff')) {
+        if (!Object.values(this.flowerColors).some(c => c !== '#ffffff')) {
             this.fb.showFeedback('error', 'Lütfen kontrol etmeden önce bir seçim yapın!');
             return;
         }

@@ -106,7 +106,8 @@ export class ShapeColoringComponent implements OnInit {
     }
 
     checkPattern(): void {
-        if (!this.circles.some(c => c) || this.triangles.some(t => t) || this.hearts.some(h => h)) {
+        const anySelected = this.circles.some(c => c) || this.triangles.some(t => t) || this.hearts.some(h => h);
+        if (!anySelected) {
             this.fb.showFeedback('error', 'Lütfen kontrol etmeden önce bir seçim yapın!');
             return;
         }
