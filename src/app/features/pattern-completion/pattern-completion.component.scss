@@ -1,0 +1,161 @@
+@use '../../../styles/design-tokens' as *;
+
+:host {
+    display: flex;
+    width: 100%;
+    height: 100vh;
+    align-items: center;
+    justify-content: center;
+    background: $color-bg;
+    overflow: hidden;
+}
+
+.game-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    width: 100%;
+    max-width: 1000px;
+    gap: 32px;
+    padding: 16px;
+}
+
+/* ================= Target Board Area ================= */
+.target-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.board-card {
+    background: white;
+    border: 4px solid $color-success;
+    border-radius: 12px;
+    padding: 24px 48px;
+    @include card-shadow();
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.shape-sequence {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: nowrap;
+}
+
+/* ================= Options Grid Area ================= */
+.options-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.options-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: repeat(2, 1fr);
+    gap: 24px;
+    width: 100%;
+}
+
+.option-card {
+    background: white;
+    @include card-shadow();
+    border-radius: 12px;
+    padding: 20px 24px;
+    border: 4px solid transparent;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    will-change: transform, box-shadow;
+    outline: none;
+
+    &:focus-visible {
+        outline: 3px solid #3498db;
+        outline-offset: 4px;
+    }
+
+    &.selected {
+        --selected-bg: #f1f9ff;
+        --selected-transform: scale(1.05);
+    }
+
+    .shape-sequence {
+        gap: 12px;
+    }
+}
+
+/* ================= Pure CSS Shapes ================= */
+.shape-block {
+    display: inline-block;
+    position: relative;
+    width: 60px;
+    height: 60px;
+    flex-shrink: 0;
+
+    &.small {
+        width: 36px;
+        height: 36px;
+    }
+
+    // Koyu yeşil üçgen — görüntüdeki koyu yeşil/siyah üçgen
+    &.triangle {
+        background-color: #2E7D32;
+        clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+    }
+
+    // Açık yeşil-turkuaz kare — görüntüdeki açık yeşil kare
+    &.square {
+        background-color: #80CBC4;
+        border-radius: 4px;
+    }
+
+    // Sarı-yeşil daire — görüntüdeki limon yeşili daire
+    &.circle {
+        background-color: #C0CA33;
+        border-radius: 50%;
+    }
+
+    // Placeholder for missing shapes
+    &.placeholder {
+        background: #f0f4fa;
+        border: 3px dashed #b0bec5;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        .q-mark {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: #90a4ae;
+        }
+    }
+
+    // Filled-in correct answer shapes
+    &.filled {
+        animation: popIn 0.3s ease-out;
+    }
+}
+
+@keyframes popIn {
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+
+    60% {
+        transform: scale(1.15);
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
