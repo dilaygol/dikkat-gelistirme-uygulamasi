@@ -111,7 +111,6 @@ export class LiquidSelectionComponent implements OnInit {
 
     goNext(): void {
         if (!this.isNextUnlocked) return;
-        this.router.navigate(['/letter-matching']);
         this.router.navigate(['/longest-rope']);
     }
 }

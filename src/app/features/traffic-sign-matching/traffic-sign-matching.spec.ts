@@ -1,18 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { TrafficSignMatchingComponent } from './traffic-sign-matching.component';
 
-import { TrafficSignMatching } from './traffic-sign-matching';
-
-describe('TrafficSignMatching', () => {
-  let component: TrafficSignMatching;
-  let fixture: ComponentFixture<TrafficSignMatching>;
+describe('TrafficSignMatchingComponent', () => {
+  let component: TrafficSignMatchingComponent;
+  let fixture: ComponentFixture<TrafficSignMatchingComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [TrafficSignMatching]
+      imports: [TrafficSignMatchingComponent]
     })
-    .compileComponents();
+      .compileComponents();
 
-    fixture = TestBed.createComponent(TrafficSignMatching);
+    fixture = TestBed.createComponent(TrafficSignMatchingComponent);
     component = fixture.componentInstance;
     await fixture.whenStable();
   });
