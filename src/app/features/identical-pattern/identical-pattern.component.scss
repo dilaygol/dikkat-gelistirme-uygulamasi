@@ -1,0 +1,131 @@
+@use 'styles/design-tokens' as *;
+
+.game-content {
+    display: flex;
+    flex-direction: row;
+    /* Target on left, options on right if space allows */
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    /* Reduced gap between target, arrow, and options */
+    width: 100%;
+    max-width: 1000px;
+    /* Needs slightly more room since left/right split */
+    padding: 0 20px;
+
+    /* Responsive flip: wrap if screen is small */
+    flex-wrap: wrap;
+}
+
+/* Target Area */
+.target-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.target-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #fff;
+    border: 3px solid #4caf50;
+    /* Yellowish target border */
+    border-radius: 8px;
+    padding: 16px 24px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Arrow Section */
+.arrow-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .arrow-icon {
+        font-size: 40px;
+        color: rgba(0, 0, 0, 0.4);
+    }
+}
+
+/* Options Area */
+.options-area {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    /* Reduced gap to bring options closer */
+    justify-content: center;
+    /* Take up remaining space */
+    flex: 1;
+    min-width: 300px;
+}
+
+.option-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    width: calc(33.333% - 16px);
+    /* 3 items per row on desktop */
+}
+
+.option-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #fff;
+    border: 3px solid transparent;
+    border-radius: 8px;
+    padding: 16px 24px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    cursor: pointer;
+    user-select: none;
+    box-sizing: border-box;
+
+    &:focus-visible {
+        outline: 3px solid $color-primary;
+    }
+}
+
+/* Inside the boxes */
+.pattern-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    text-align: center;
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #333;
+    font-family: 'Baloo 2', sans-serif;
+    padding: 12px 0;
+}
+
+.pattern-char {
+    display: inline-block;
+    transition: transform 0.2s;
+    line-height: 1;
+
+    &.mirrored {
+        transform: scaleX(-1);
+    }
+}
+
+/* Decorative borders (simulating the little hearts/symbols in the image) */
+.decorative-border {
+    width: 100%;
+    height: 4px;
+    border-radius: 2px;
+    background: repeating-linear-gradient(90deg,
+            #e91e63,
+            #e91e63 10px,
+            transparent 10px,
+            transparent 15px,
+            #4caf50 15px,
+            #4caf50 25px,
+            transparent 25px,
+            transparent 30px);
+    /* Pseudo decorative pattern */
+}

@@ -12,7 +12,7 @@ export interface LivingThingItem {
   emoji: string;
   isLiving: boolean;
   isSelected: boolean;
-  isWrongShaking: boolean;
+  isShaking: boolean;
 }
 
 export interface LivingThingsState {
@@ -38,12 +38,12 @@ export class LivingThingsComponent implements OnInit {
   ) { }
 
   items: LivingThingItem[] = [
-    { id: 1, name: 'Kedi', emoji: '🐱', isLiving: true, isSelected: false, isWrongShaking: false },
-    { id: 2, name: 'Masa', emoji: '🪑', isLiving: false, isSelected: false, isWrongShaking: false },
-    { id: 3, name: 'Ampul', emoji: '💡', isLiving: false, isSelected: false, isWrongShaking: false },
-    { id: 4, name: 'Ev', emoji: '🏠', isLiving: false, isSelected: false, isWrongShaking: false },
-    { id: 5, name: 'Balık', emoji: '🐠', isLiving: true, isSelected: false, isWrongShaking: false },
-    { id: 6, name: 'İnek', emoji: '🐮', isLiving: true, isSelected: false, isWrongShaking: false },
+    { id: 1, name: 'Kedi', emoji: '🐱', isLiving: true, isSelected: false, isShaking: false },
+    { id: 2, name: 'Masa', emoji: '🪑', isLiving: false, isSelected: false, isShaking: false },
+    { id: 3, name: 'Ampul', emoji: '💡', isLiving: false, isSelected: false, isShaking: false },
+    { id: 4, name: 'Ev', emoji: '🏠', isLiving: false, isSelected: false, isShaking: false },
+    { id: 5, name: 'Balık', emoji: '🐠', isLiving: true, isSelected: false, isShaking: false },
+    { id: 6, name: 'İnek', emoji: '🐮', isLiving: true, isSelected: false, isShaking: false },
   ];
 
   selectedIds: number[] = [];
@@ -120,8 +120,8 @@ export class LivingThingsComponent implements OnInit {
           this.selectedIds = this.selectedIds.filter(id => id !== item.id);
 
           // Yanlış seçilenlere titreme efekti ver
-          item.isWrongShaking = true;
-          setTimeout(() => item.isWrongShaking = false, 500);
+          item.isShaking = true;
+          setTimeout(() => item.isShaking = false, 500);
         });
 
         // State'i güncelle
@@ -139,7 +139,7 @@ export class LivingThingsComponent implements OnInit {
     this.selectedIds = [];
     this.items.forEach(item => {
       item.isSelected = false;
-      item.isWrongShaking = false;
+      item.isShaking = false;
     });
     this.gs.clear(ID);
     this.hintService.resetErrors(ID);

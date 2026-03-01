@@ -1,0 +1,87 @@
+@use 'styles/design-tokens' as *;
+
+.game-content {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    align-items: center;
+    width: 100%;
+}
+
+.math-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.object-box {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: space-evenly; // İçeriği kutuya eşit şekilde yayar
+    align-items: center;
+    width: 200px; // Genişliği artırdık
+    min-height: 100px;
+    padding: 12px 20px; // Yanlardan biraz daha boşluk
+    border: 3px solid #cdd9e8;
+    border-radius: 16px;
+    background: #ffffff;
+    font-size: 2rem;
+}
+
+.math-sign {
+    font-size: 3rem;
+    font-weight: 900;
+    color: #5b9bd5;
+}
+
+.answer-input {
+    width: 100px;
+    height: 100px;
+    font-size: 3.5rem;
+    text-align: center;
+    border: 3px solid #cdd9e8;
+    border-radius: 16px;
+    background: #ffffff;
+    color: #3a3a5c;
+    font-family: 'Baloo 2', 'Nunito', sans-serif;
+    font-weight: 900;
+    outline: none;
+    transition: background 0.2s, color 0.2s, border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+
+    // Hide number spin buttons
+    -moz-appearance: textfield;
+    appearance: textfield;
+
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        appearance: none;
+        margin: 0;
+    }
+
+    // Migrated from number-sequence: The wrapper/input gets show-hint 
+    &.show-hint {
+        &::placeholder {
+            color: rgba($color-nav, 0.6);
+            font-weight: 900;
+            opacity: 1;
+            /* Firefox automatically reduces opacity */
+        }
+    }
+
+    &.error {
+        color: #e55039; // $color-error-tx equivalent
+    }
+
+    &:focus {
+        border-color: $color-nav;
+    }
+
+    &:disabled {
+        background: #f8f9fa;
+        color: #2ecc71; // Success color when completed
+        border-color: #2ecc71;
+        cursor: not-allowed;
+    }
+}

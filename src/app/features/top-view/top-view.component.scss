@@ -1,0 +1,104 @@
+@use 'styles/design-tokens' as *;
+
+.game-content {
+    display: flex;
+    flex-direction: column;
+    gap: 35px;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+// ── Ortak Blok Stili ─────────────────────────────────────────────
+.block {
+    width: 50px; // Default
+    height: 50px;
+    border: 2px solid #2c3e50;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative; // İç şekiller için referans
+
+    &.is-transparent {
+        border-color: transparent; // Boşluk olan yerleri gizler
+    }
+}
+
+// İç Şekiller
+.inner-circle {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 1.5px solid #2c3e50;
+}
+
+// Orijinal CSS üçgen tekniği
+.inner-triangle {
+    width: 0;
+    height: 0;
+    border-left: 17px solid transparent;
+    border-right: 17px solid transparent;
+    border-bottom: 28px solid; // Rengi TS injection'ından alacak
+    position: relative;
+    top: -2px;
+
+    filter: drop-shadow(0 -1.5px 0 #2c3e50) drop-shadow(1.5px 1.5px 0 #2c3e50) drop-shadow(-1.5px 1.5px 0 #2c3e50);
+}
+
+
+// ── Sol Alan: Seçenekler ──────────────────────────────────────────
+.options-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px 32px;
+    transform: scale(0.95); // Alanı daraltmak için ufak bir küçültme
+    transform-origin: top center;
+}
+
+.option-card {
+    padding: 8px;
+    border-radius: 12px;
+    background: transparent;
+    border: 3px solid transparent; // .selected ve .hover için zemin
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    // 5 Bloklu Sütun
+    .option-blocks {
+        display: flex;
+        flex-direction: row;
+
+        // Görsellerdeki gibi yapışık bloklar
+        .block {
+            margin-left: -2px; // Üst üste binip borderların kalınlaşmasını engeller
+
+            &:first-child {
+                margin-left: 0;
+            }
+        }
+    }
+}
+
+
+// ── Sağ Alan: Ana Grid ──────────────────────────────────────────
+.master-shape-container {
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.4);
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    margin-bottom: -10px;
+    transform: scale(1);
+    transform-origin: bottom center;
+
+    .master-grid {
+        display: grid;
+        grid-template-columns: repeat(5, 50px);
+
+        .block {
+            margin: -1px; // Grid hücrelerinin border overlap'i engellemesi için
+            // Geniş blokların border'larının hizalanması için
+            box-sizing: border-box;
+        }
+    }
+}

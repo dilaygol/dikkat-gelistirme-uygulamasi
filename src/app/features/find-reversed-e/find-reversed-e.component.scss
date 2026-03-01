@@ -1,0 +1,54 @@
+@use 'styles/design-tokens' as *;
+
+.game-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin: 0 auto;
+    flex-grow: 1;
+}
+
+.letter-grid {
+    display: grid;
+    grid-template-columns: repeat(10, minmax(0, 1fr));
+    gap: 4px 10px; // Reduce vertical gap to squeeze rows
+    max-width: 900px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 10px; // Provide some breathing room from the edges
+    row-gap: 15px;
+}
+
+.letter-cell {
+    padding: 0; // Remove vertical padding
+    font-size: clamp(2.5rem, 5vw, 3.5rem); // Good font size
+    line-height: 1; // Prevent invisible vertical height expansion
+    font-family: 'Baloo 2', 'Nunito', sans-serif;
+    font-weight: 900;
+    text-align: center;
+    border-radius: 12px;
+    background: transparent;
+    border: 3px solid transparent;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+
+    // Support proper centering and click target size
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    // Set a moderate aspect ratio or tight sizing so the border isn't overly stretched
+    aspect-ratio: 1.2 / 1; // Slightly wide but caps the height
+    min-width: 35px;
+
+    // The inner span conditionally reverses
+    .reversed {
+        display: inline-block;
+        transform: scaleX(-1);
+    }
+
+    // Focus accessibility for keyboard navigation
+    &:focus-visible {
+        outline: 3px solid #3498db; // Generic fallback focus blue
+    }
+}

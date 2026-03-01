@@ -1,0 +1,70 @@
+@use 'styles/design-tokens' as *;
+
+.game-board {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    gap: 80px;
+    padding: 20px;
+    height: 100%;
+    align-items: center;
+}
+
+.fruits-column {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 30px;
+    flex: 1;
+}
+
+.fruit-group {
+    display: flex;
+    align-items: center;
+    gap: -15px; // overlap icons slightly if too many? No, better use normal gap
+    padding: 15px 20px;
+    min-height: 80px;
+    border-radius: 20px;
+    background: transparent;
+    cursor: pointer;
+    border: 3px solid transparent;
+    transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s, background 0.2s;
+    user-select: none;
+
+    &.matched {
+        opacity: 0.5;
+        cursor: default;
+        pointer-events: none;
+        filter: grayscale(0.5);
+    }
+}
+
+.left-column .fruit-group {
+    justify-content: flex-start;
+}
+
+.right-column .fruit-group {
+    justify-content: flex-end;
+}
+
+.fruit-icon {
+    font-size: 3.5rem;
+    line-height: 1;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.15));
+    // overlap items slightly
+    margin-right: -10px;
+}
+
+.right-column .fruit-icon {
+    margin-right: 0;
+    margin-left: -10px;
+}
+
+// remove overlap for last item
+.left-column .fruit-icon:last-child {
+    margin-right: 0;
+}
+
+.right-column .fruit-icon:first-child {
+    margin-left: 0;
+}
