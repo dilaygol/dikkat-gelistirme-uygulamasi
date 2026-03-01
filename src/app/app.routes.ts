@@ -19,6 +19,19 @@ import { LivingThingsComponent } from './features/living-things/living-things';
 import { TrafficSignMatchingComponent } from './features/traffic-sign-matching/traffic-sign-matching.component';
 import { AbacusCountingComponent } from './features/abacus-counting/abacus-counting.component';
 import { DotPatternDrawingComponent } from './features/dot-pattern-drawing/dot-pattern-drawing.component';
+import { FruitCountMatchingComponent } from './features/fruit-count-matching/fruit-count-matching.component';
+import { FindMostBallsComponent } from './features/find-most-balls/find-most-balls.component';
+import { ShadowMatchingComponent } from './features/shadow-matching/shadow-matching.component';
+import { LetterSequenceComponent } from './features/letter-sequence/letter-sequence.component';
+import { IdenticalPatternComponent } from './features/identical-pattern/identical-pattern.component';
+import { MatchSizeComponent } from './features/match-size/match-size.component';
+import { GridColoringComponent } from './features/grid-coloring/grid-coloring.component';
+import { FindSameSymbolsComponent } from './features/find-same-symbols/find-same-symbols.component';
+import { FindNumbersComponent } from './features/find-numbers/find-numbers.component';
+import { FindReversedEComponent } from './features/find-reversed-e/find-reversed-e.component';
+import { CountAndAddComponent } from './features/count-and-add/count-and-add.component';
+import { RhythmicCountingComponent } from './features/rhythmic-counting/rhythmic-counting.component';
+import { TopViewComponent } from './features/top-view/top-view.component';
 
 export const routes: Routes = [
     { path: '', redirectTo: 'pattern', pathMatch: 'full' },
@@ -42,5 +55,18 @@ export const routes: Routes = [
     { path: 'traffic-sign-matching', component: TrafficSignMatchingComponent },
     { path: 'abacus-counting', component: AbacusCountingComponent },
     { path: 'dot-pattern-drawing', component: DotPatternDrawingComponent },
+    { path: 'fruit-count-matching', component: FruitCountMatchingComponent },
+    { path: 'find-most-balls', component: FindMostBallsComponent },
+    { path: 'shadow-matching', component: ShadowMatchingComponent },
+    { path: 'letter-sequence', component: LetterSequenceComponent },
+    { path: 'identical-pattern', component: IdenticalPatternComponent },
+    { path: 'match-size', component: MatchSizeComponent },
+    { path: 'grid-coloring', component: GridColoringComponent },
+    { path: 'find-same-symbols', component: FindSameSymbolsComponent },
+    { path: 'find-numbers', component: FindNumbersComponent },
+    { path: 'find-reversed-e', component: FindReversedEComponent },
+    { path: 'count-and-add', component: CountAndAddComponent },
+    { path: 'rhythmic-counting', component: RhythmicCountingComponent },
+    { path: 'top-view', component: TopViewComponent },
     { path: '**', redirectTo: 'pattern' },
 ];

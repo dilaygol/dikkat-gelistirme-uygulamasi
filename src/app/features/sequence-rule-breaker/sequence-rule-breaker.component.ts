@@ -124,6 +124,6 @@ export class SequenceRuleBreakerComponent implements OnInit {
 
     goNext(): void {
         if (!this.isNextUnlocked) return;
-        this.router.navigate(['/traffic-sign-matching']);
+        this.router.navigate(['/living-things']);
     }
 }

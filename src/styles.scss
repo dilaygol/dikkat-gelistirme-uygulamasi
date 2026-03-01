@@ -13,6 +13,29 @@
 
 body {
     font-family: 'Nunito', sans-serif;
+    background: $color-bg;
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+}
+
+app-root {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+// Yönlendirilen sayfanın tam ekran ve esnek olmasını sağlar (overlay ve router tagleri hariç)
+app-root> :not(router-outlet):not(app-shared-feedback) {
+    display: flex !important;
+    width: 100% !important;
+    height: 100% !important;
+    align-items: center !important;
+    justify-content: center !important;
+    background: $color-bg !important;
+    overflow: hidden !important;
 }
 
 // Başlık elementleri font-family'yi body'den miras alsın

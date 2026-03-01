@@ -19,8 +19,8 @@
             <div class="objects-grid">
                 @for (item of items; track item.id) {
                 <button class="object-card hover" [class.selected]="item.isSelected"
-                    [class.wrong-shake]="item.isWrongShaking"
-                    [class.hint]="showHint && item.isLiving && !item.isSelected" [disabled]="isNextUnlocked"
+                    [class.shake]="item.isShaking"
+                    [class.hint]="showHint && item.isLiving && !item.isSelected"
                     (click)="toggleSelection(item)" [attr.aria-label]="item.name + ' seçimi'"
                     [attr.aria-pressed]="item.isSelected">
 

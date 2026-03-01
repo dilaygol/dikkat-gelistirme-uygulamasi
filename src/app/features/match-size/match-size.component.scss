@@ -1,0 +1,107 @@
+@use 'styles/design-tokens' as *;
+
+.game-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+    max-width: 900px;
+    width: 100%;
+
+    /* Fallback wrapper if screen gets too small */
+    flex-wrap: wrap;
+}
+
+/* LEFT SIDE - TARGET AREA */
+.target-area {
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.target-box {
+    display: inline-block;
+    /* Takes exact size of content + padding */
+    border: 2px solid #333;
+    /* Dark thin border as requested */
+    background-color: #fff;
+    padding: 16px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+
+    img {
+        display: block;
+        object-fit: contain;
+    }
+}
+
+/* RIGHT SIDE - OPTIONS AREA */
+.options-area {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: space-around;
+    align-items: center;
+    flex: 1;
+    /* Take up all remaining space */
+    min-width: 300px;
+    /* Force minimum boundary so wrap happens correctly */
+}
+
+/* Option Block */
+.option-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+}
+
+.image-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+    border: 3px solid transparent;
+    /* reserve space for selection outline */
+    border-radius: 12px;
+    padding: 8px;
+    /* Extra padding when selected or hovered */
+    cursor: pointer;
+    user-select: none;
+    box-sizing: border-box;
+
+    img {
+        display: block;
+        object-fit: contain;
+    }
+
+    &:focus-visible {
+        outline: 3px solid $color-primary;
+    }
+}
+
+/* Mini check-box below the option */
+.check-box {
+    width: 24px;
+    height: 24px;
+    border: 2px solid #757575;
+    background-color: #fff;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    cursor: pointer;
+
+    .material-icons {
+        font-size: 18px;
+        color: white;
+        font-weight: bold;
+    }
+
+    &.checked {
+        background-color: #4caf50;
+        border-color: #4caf50;
+    }
+}

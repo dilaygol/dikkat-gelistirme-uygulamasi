@@ -1,0 +1,78 @@
+@use 'styles/design-tokens' as *;
+
+
+
+.game-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin: 0 auto;
+    flex-grow: 1;
+    /* allow it to fill space if available */
+}
+
+.numbers-grid {
+    display: grid;
+    /* Use minmax to ensure columns don't collapse on themselves */
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    gap: 8px 16px; // Reduce vertical gap, keep horizontal gap
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto; // Centers the grid itself within the flex parent
+    padding: 20px;
+}
+
+.number-cell {
+    padding: 0; // Remove padding to tighten vertical space
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-family: 'Baloo 2', 'Nunito', sans-serif;
+    font-weight: 900;
+    color: #2c3e50;
+    text-align: center;
+    border-radius: 12px;
+    background: transparent; // No more white box
+    border: none; // Remove 3px solid transparent border
+    cursor: pointer;
+    box-shadow: none; // Remove elevation
+
+    // Give visual depth similar to the book layout
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    // Removed aspect-ratio: 1; to allow the cells to act as tight rectangles
+    min-width: 40px;
+    /* Provide a minimum width to prevent implosion */
+
+    // specific tweak for the "hollow" look of the text to resemble coloring book text
+    span {
+        // Outline text effect instead of solid fill to match book's "boyayın" aesthetic
+        color: #646970;
+        -webkit-text-stroke: 2px #646970; // Dark outline around uncolored text
+
+        // Ensure span doesn't disrupt flexbox centering
+        display: block;
+        line-height: 1;
+
+        // Softly drop shadow text to give slight 3D extrusion
+        text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.1);
+    }
+
+    // Once selected (colored), fill it in
+    &.selected span {
+        color: $color-primary; // Fill the hollow text when colored
+        -webkit-text-stroke: 1px $color-primary;
+    }
+
+    // Instead of drawing a border on the cell, scale up slightly or glow the text
+    &.selected {
+        background: transparent; // Ensure global .selected doesn't override with a blue bg
+        border-color: transparent; // Ensure global .selected doesn't override with a blue border
+    }
+
+
+
+    &:focus-visible {
+        outline: 3px solid $color-primary;
+    }
+}
