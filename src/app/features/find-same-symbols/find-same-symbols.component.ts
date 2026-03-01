@@ -102,6 +102,11 @@ export class FindSameSymbolsComponent implements OnInit {
   }
 
   checkAnswer(): void {
+    if (this.selectedIds.length === 0) {
+      this.fb.showFeedback('error', 'Lütfen kontrol etmeden önce bir seçim yapın!');
+      return;
+    }
+
     if (this.selectedIds.length < 2) {
       this.fb.showFeedback('error', 'Eksik seçim yaptın, 2 tane B bulmalısın!');
       return;

@@ -89,6 +89,11 @@ export class AnimalPositionComponent implements OnInit {
     }
 
     checkAnswer(): void {
+        if (this.selectedId === null) {
+            this.fb.showFeedback('error', 'Lütfen kontrol etmeden önce bir seçim yapın!');
+            return;
+        }
+
         if (this.selectedId === null) return;
 
         const selected = this.options.find((o) => o.id === this.selectedId)!;

@@ -99,6 +99,11 @@ export class MultiConditionSelectionComponent implements OnInit {
     }
 
     onCheck() {
+        if (!this.options.some(c => c.isSelected)) {
+            this.feedback.showFeedback('error', 'Lütfen kontrol etmeden önce bir seçim yapın!');
+            return;
+        }
+
         if (this.isCompleted) return;
 
         const correctOptions = this.options.filter(o => o.isCorrect);

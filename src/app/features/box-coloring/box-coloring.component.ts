@@ -106,6 +106,11 @@ export class BoxColoringComponent implements OnInit {
     }
 
     checkPattern(): void {
+        if (!this.group2.some(b => b) && !this.group3.some(b => b) && !this.group4.some(b => b)) {
+            this.fb.showFeedback('error', 'Lütfen kontrol etmeden önce bir seçim yapın!');
+            return;
+        }
+
         const g2Correct = this.group2.every((val, i) => val === this.target2Arr[i]);
         const g3Correct = this.group3.every((val, i) => val === this.target3Arr[i]);
         const g4Correct = this.group4.every((val, i) => val === this.target4Arr[i]);
@@ -152,7 +157,7 @@ export class BoxColoringComponent implements OnInit {
     }
 
     goPrev(): void {
-        this.router.navigate(['/dot-pattern-drawing']);
+        this.router.navigate(['/top-view']);
     }
 
     goNext(): void {

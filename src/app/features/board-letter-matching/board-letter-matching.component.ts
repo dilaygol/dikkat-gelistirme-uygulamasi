@@ -174,6 +174,11 @@ export class BoardLetterMatchingComponent implements OnInit {
     }
 
     checkAnswer(): void {
+        if (this.matchedPairs === 0 && this.firstSelection === null) {
+            this.fb.showFeedback('error', 'Lütfen kontrol etmeden önce bir seçim yapın!');
+            return;
+        }
+
         if (this.matchedPairs >= 4) {
             this.gs.markCompleted(ID);
             this.fb.showFeedback('success', 'Harika yetenek! Bütün eşleri buldun.');

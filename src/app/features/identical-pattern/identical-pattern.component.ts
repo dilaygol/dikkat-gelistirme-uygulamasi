@@ -140,7 +140,7 @@ export class IdenticalPatternComponent implements OnInit {
         const selectedOpt = this.options.find(opt => opt.isSelected);
 
         if (!selectedOpt) {
-            this.fb.showFeedback('error', 'Önce bir seçenek işaretle!');
+            this.fb.showFeedback('error', 'Lütfen kontrol etmeden önce bir seçim yapın!');
             return;
         }
 

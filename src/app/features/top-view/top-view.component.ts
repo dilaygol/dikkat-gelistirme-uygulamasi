@@ -173,6 +173,11 @@ export class TopViewComponent implements OnInit {
     }
 
     checkAnswer(): void {
+        if (this.selectedId === null) {
+            this.fb.showFeedback('error', 'Lütfen kontrol etmeden önce bir seçim yapın!');
+            return;
+        }
+
         if (!this.selectedId) {
             this.fb.showFeedback('error', 'Lütfen önce yukarıdaki görünümü eşleşen seçeneğe tıklayın!');
             return;
@@ -223,6 +228,6 @@ export class TopViewComponent implements OnInit {
 
     goNext(): void {
         if (!this.isNextUnlocked) return;
-        this.router.navigate(['/']); // Update when next game is developed
+        this.router.navigate(['/box-coloring']); // Update when next game is developed
     }
 }

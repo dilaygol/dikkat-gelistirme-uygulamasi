@@ -97,6 +97,11 @@ export class NotInWordComponent implements OnInit {
     }
 
     checkPattern(): void {
+        if (!this.letters.some(i => i.isSelected)) {
+            this.fb.showFeedback('error', 'Lütfen kontrol etmeden önce bir seçim yapın!');
+            return;
+        }
+
         const isCorrect = this.letters.every(l => {
             const isCharInWord = this.targetChars.has(l.char.toUpperCase());
             const shouldBeSelected = !isCharInWord;

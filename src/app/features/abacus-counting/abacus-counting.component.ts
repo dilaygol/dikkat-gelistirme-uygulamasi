@@ -113,6 +113,11 @@ export class AbacusCountingComponent implements OnInit {
     }
 
     checkAnswers(): void {
+        if (this.questions.every(q => q.input === null)) {
+            this.fb.showFeedback('error', 'Lütfen kontrol etmeden önce bir seçim yapın!');
+            return;
+        }
+
         let allCorrect = true;
         let anyEmpty = false;
 

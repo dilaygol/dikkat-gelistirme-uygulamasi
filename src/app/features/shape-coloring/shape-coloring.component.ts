@@ -106,6 +106,11 @@ export class ShapeColoringComponent implements OnInit {
     }
 
     checkPattern(): void {
+        if (!this.circles.some(c => c) || this.triangles.some(t => t) || this.hearts.some(h => h)) {
+            this.fb.showFeedback('error', 'Lütfen kontrol etmeden önce bir seçim yapın!');
+            return;
+        }
+
         const circlesCorrect = this.circles.every((val, i) => val === this.targetCircles[i]);
         const trianglesCorrect = this.triangles.every((val, i) => val === this.targetTriangles[i]);
         const heartsCorrect = this.hearts.every((val, i) => val === this.targetHearts[i]);

@@ -127,6 +127,11 @@ export class RhythmicCountingComponent implements OnInit {
   }
 
   checkAnswer(): void {
+    if (this.rows.every(row => row.items.filter(i => i.isMissing).every(i => i.userInput === null))) {
+      this.fb.showFeedback('error', 'Lütfen kontrol etmeden önce bir seçim yapın!');
+      return;
+    }
+
     let hasMissing = false;
     let hasMistake = false;
     const mistakes: SequenceItem[] = [];
