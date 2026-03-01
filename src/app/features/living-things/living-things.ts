@@ -91,6 +91,11 @@ export class LivingThingsComponent implements OnInit {
   }
 
   checkAnswer(): void {
+        if (this.selectedIds.length === 0) {
+            this.fb.showFeedback('error', 'Lütfen kontrol etmeden önce bir seçim yapın!');
+            return;
+        }
+
     if (this.selectedIds.length === 0) {
       this.fb.showFeedback('error', 'Henüz hiçbir canlı varlık seçmedin!');
       return;

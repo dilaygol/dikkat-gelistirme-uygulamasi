@@ -108,6 +108,11 @@ export class FindNumbersComponent implements OnInit {
 
   checkAnswer(): void {
     if (this.selectedIds.length === 0) {
+      this.fb.showFeedback('error', 'Lütfen kontrol etmeden önce bir seçim yapın!');
+      return;
+    }
+
+    if (this.selectedIds.length === 0) {
       this.hintService.registerError(ID);
       this.fb.showFeedback('error', 'Lütfen bulduğunuz 9 rakamlarını seçin.');
       return;

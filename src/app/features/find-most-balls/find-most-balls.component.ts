@@ -101,6 +101,11 @@ export class FindMostBallsComponent implements OnInit {
   }
 
   checkAnswer(): void {
+    if (!this.groups.some(g => g.isSelected)) {
+      this.fb.showFeedback('error', 'Lütfen kontrol etmeden önce bir seçim yapın!');
+      return;
+    }
+
     const selectedGroup = this.groups.find(g => g.isSelected);
 
     if (!selectedGroup) {

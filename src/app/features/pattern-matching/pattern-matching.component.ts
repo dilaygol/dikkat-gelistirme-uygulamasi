@@ -97,6 +97,11 @@ export class PatternMatchingComponent implements OnInit {
 
   /** Deseni hedefle karşılaştırır; 2 hatadan sonra ipucu gösterir */
   checkPattern(): void {
+        if (!this.userGrid.some(row => row.some(cell => cell))) {
+            this.fb.showFeedback('error', 'Lütfen kontrol etmeden önce bir seçim yapın!');
+            return;
+        }
+
     const target = this.targetGrid();
     const isCorrect = target.every((row, r) =>
       row.every((cell, c) => cell === this.userGrid[r][c])

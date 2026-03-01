@@ -169,6 +169,11 @@ export class TrafficSignMatchingComponent implements OnInit {
     }
 
     checkAnswer(): void {
+        if (this.pairs.length === 0) {
+            this.fb.showFeedback('error', 'Lütfen kontrol etmeden önce bir seçim yapın!');
+            return;
+        }
+
         // Only check if all items are paired
         if (this.pairs.length !== this.leftSigns.length) {
             this.fb.showFeedback('error', 'Lütfen tüm trafik işaretlerini eşleştirin.');

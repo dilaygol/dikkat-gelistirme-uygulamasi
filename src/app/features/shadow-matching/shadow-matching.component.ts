@@ -88,6 +88,11 @@ export class ShadowMatchingComponent implements OnInit {
   }
 
   checkAnswer(): void {
+        if (!this.options.some(o => o.isSelected)) {
+            this.fb.showFeedback('error', 'Lütfen kontrol etmeden önce bir seçim yapın!');
+            return;
+        }
+
     const selectedOption = this.options.find(o => o.isSelected);
 
     if (!selectedOption) {

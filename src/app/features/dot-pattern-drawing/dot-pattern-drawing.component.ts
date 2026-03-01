@@ -268,6 +268,11 @@ export class DotPatternDrawingComponent implements OnInit {
 
     checkAnswer(): void {
         if (this.userEdges.length === 0) {
+            this.fb.showFeedback('error', 'Lütfen kontrol etmeden önce bir seçim yapın!');
+            return;
+        }
+
+        if (this.userEdges.length === 0) {
             this.fb.showFeedback('error', 'Lütfen noktaları birleştirerek bir şekil çizin.');
             return;
         }
@@ -302,10 +307,6 @@ export class DotPatternDrawingComponent implements OnInit {
 
     goNext(): void {
         if (!this.isNextUnlocked) return;
-<<<<<<< HEAD
         this.router.navigate(['/fruit-count-matching']);
-=======
-        this.router.navigate(['/box-coloring']);
->>>>>>> 0ca6a62887587c099cccd7a6c3fe5dd3ca10f591
     }
 }

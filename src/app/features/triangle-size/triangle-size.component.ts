@@ -84,6 +84,11 @@ export class TriangleSizeComponent implements OnInit {
     }
 
     checkAnswers(): void {
+        if (!this.triangles.some(t => t.selected)) {
+            this.fb.showFeedback('error', 'Lütfen kontrol etmeden önce bir seçim yapın!');
+            return;
+        }
+
         const selectedIndices = this.triangles
             .map((t, i) => t.selected ? i : -1)
             .filter(i => i !== -1);

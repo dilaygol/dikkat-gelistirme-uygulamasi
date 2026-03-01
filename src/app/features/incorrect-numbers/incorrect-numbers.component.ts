@@ -95,6 +95,11 @@ export class IncorrectNumbersComponent implements OnInit {
     }
 
     checkAnswers(): void {
+        if (!this.numbers.some(n => n.isSelected)) {
+            this.fb.showFeedback('error', 'Lütfen kontrol etmeden önce bir seçim yapın!');
+            return;
+        }
+
         let isCorrect = true;
         this.numbers.forEach(n => {
             if (n.isFlipped !== n.isSelected) {

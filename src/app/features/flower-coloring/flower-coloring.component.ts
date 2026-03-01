@@ -118,6 +118,11 @@ export class FlowerColoringComponent implements OnInit {
     }
 
     checkAnswers(): void {
+        if (!!Object.values(this.flowerColors).some(c => c !== '#ffffff')) {
+            this.fb.showFeedback('error', 'Lütfen kontrol etmeden önce bir seçim yapın!');
+            return;
+        }
+
         const isCorrect = Object.keys(this.targetColors).every(
             key => this.flowerColors[key].toLowerCase() === this.targetColors[key].toLowerCase()
         );

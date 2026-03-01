@@ -103,6 +103,11 @@ export class NumberSequenceComponent implements OnInit {
 
     /** Tüm soru yanıtlarını doğrular */
     checkAnswers(): void {
+        if (this.questions.every(q => q.prevInput === null && q.nextInput === null)) {
+            this.fb.showFeedback('error', 'Lütfen kontrol etmeden önce bir seçim yapın!');
+            return;
+        }
+
         let allCorrect = true;
         this.questions.forEach(q => {
             const prevOk = parseInt(q.prevInput ?? '', 10) === q.expectedPrev;

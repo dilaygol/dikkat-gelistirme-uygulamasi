@@ -78,6 +78,11 @@ export class OddDirectionComponent implements OnInit {
     /** Seçilen kediyi doğrular; 2 hatadan sonra ipucu gösterir */
     checkAnswer(): void {
         if (this.selectedId === -1) {
+            this.fb.showFeedback('error', 'Lütfen kontrol etmeden önce bir seçim yapın!');
+            return;
+        }
+
+        if (this.selectedId === -1) {
             this.feedbackState = 'wrong';
             this.fb.showFeedback('error', 'Önce bir kedi seç!');
             this.persist();

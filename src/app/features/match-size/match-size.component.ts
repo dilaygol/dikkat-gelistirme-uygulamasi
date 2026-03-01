@@ -84,6 +84,11 @@ export class MatchSizeComponent implements OnInit {
   }
 
   checkAnswer(): void {
+        if (!this.options.some(o => o.isSelected)) {
+            this.fb.showFeedback('error', 'Lütfen kontrol etmeden önce bir seçim yapın!');
+            return;
+        }
+
     const selectedOpt = this.options.find(opt => opt.isSelected);
 
     if (!selectedOpt) {

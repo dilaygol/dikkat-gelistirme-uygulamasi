@@ -128,6 +128,11 @@ export class FindingGreenLinesComponent implements OnInit {
     }
 
     checkAnswers(): void {
+        if (!this.shapes.some(s => s.lines.some(l => l.isSelected))) {
+            this.fb.showFeedback('error', 'Lütfen kontrol etmeden önce bir seçim yapın!');
+            return;
+        }
+
         let isCorrect = true;
         this.shapes.forEach(shape => {
             shape.lines.forEach(line => {

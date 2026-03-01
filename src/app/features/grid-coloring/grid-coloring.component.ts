@@ -97,6 +97,11 @@ export class GridColoringComponent implements OnInit {
   }
 
   checkAnswer(): void {
+    if (!this.exercises.some(e => e.userGrid.some(row => row.some(cell => cell)))) {
+      this.fb.showFeedback('error', 'Lütfen kontrol etmeden önce bir seçim yapın!');
+      return;
+    }
+
     let allCorrect = true;
 
     for (const ex of this.exercises) {

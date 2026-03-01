@@ -92,6 +92,11 @@ export class CountAndAddComponent implements OnInit {
   }
 
   checkAnswer(): void {
+    if (Object.values(this.userAnswers).every(ans => ans === null)) {
+      this.fb.showFeedback('error', 'Lütfen kontrol etmeden önce bir seçim yapın!');
+      return;
+    }
+
     const mistakes = this.rows.filter(row =>
       this.userAnswers[row.id] === null ||
       isNaN(this.userAnswers[row.id] as number) ||

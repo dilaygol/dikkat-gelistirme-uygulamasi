@@ -85,7 +85,7 @@ export class LetterSequenceComponent implements OnInit {
     const selectedRow = this.rows.find(r => r.isSelected);
 
     if (!selectedRow) {
-      this.fb.showFeedback('error', 'Önce bir sıralama seç!');
+      this.fb.showFeedback('error', 'Lütfen kontrol etmeden önce bir seçim yapın!');
       return;
     }
 
