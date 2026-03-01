@@ -131,6 +131,6 @@ export class IncorrectNumbersComponent implements OnInit {
 
     goNext(): void {
         if (!this.isNextUnlocked) return;
-        this.fb.showFeedback('success', 'Tebrikler! Bütün etkinlikleri tamamladınız.');
+        this.router.navigate(['/water-capacity']);
     }
 }

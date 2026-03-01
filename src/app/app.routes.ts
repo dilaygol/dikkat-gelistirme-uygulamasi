@@ -25,6 +25,17 @@ import { FlowerColoringComponent } from './features/flower-coloring/flower-color
 import { NotInWordComponent } from './features/not-in-word/not-in-word.component';
 import { FindingGreenLinesComponent } from './features/finding-green-lines/finding-green-lines.component';
 import { IncorrectNumbersComponent } from './features/incorrect-numbers/incorrect-numbers.component';
+import { WaterCapacityComponent } from './features/water-capacity/water-capacity.component';
+import { FruitSizeRankingComponent } from './features/fruit-size-ranking/fruit-size-ranking.component';
+import { ElderlyPeopleComponent } from './features/elderly-people/elderly-people.component';
+import { FindDifferentComponent } from './features/find-different/find-different.component';
+import { CylinderSelectionComponent } from './features/cylinder-selection/cylinder-selection.component';
+import { PatternCompletionComponent } from './features/pattern-completion/pattern-completion.component';
+import { ShapeCountingComponent } from './features/shape-counting/shape-counting.component';
+import { HappyChildrenComponent } from './features/happy-children/happy-children.component';
+import { DifferentMountainComponent } from './features/different-mountain/different-mountain.component';
+import { LetterGridComponent } from './features/letter-grid/letter-grid.component';
+import { IceCreamShapeComponent } from './features/ice-cream-shape/ice-cream-shape.component';
 
 export const routes: Routes = [
     { path: '', redirectTo: 'pattern', pathMatch: 'full' },
@@ -54,5 +65,16 @@ export const routes: Routes = [
     { path: 'not-in-word', component: NotInWordComponent },
     { path: 'finding-green-lines', component: FindingGreenLinesComponent },
     { path: 'incorrect-numbers', component: IncorrectNumbersComponent },
+    { path: 'water-capacity', component: WaterCapacityComponent },
+    { path: 'fruit-size-ranking', component: FruitSizeRankingComponent },
+    { path: 'elderly-people', component: ElderlyPeopleComponent },
+    { path: 'find-different', component: FindDifferentComponent },
+    { path: 'cylinder-selection', component: CylinderSelectionComponent },
+    { path: 'pattern-completion', component: PatternCompletionComponent },
+    { path: 'shape-counting', component: ShapeCountingComponent },
+    { path: 'happy-children', component: HappyChildrenComponent },
+    { path: 'different-mountain', component: DifferentMountainComponent },
+    { path: 'letter-grid', component: LetterGridComponent },
+    { path: 'ice-cream-shape', component: IceCreamShapeComponent },
     { path: '**', redirectTo: 'pattern' },
 ];
