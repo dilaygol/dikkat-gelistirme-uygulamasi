@@ -2,6 +2,7 @@ import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { ActionButtonsComponent } from '../../shared/action-buttons/action-buttons.component';
+import { ActivityHeaderComponent } from '../../shared/activity-header/activity-header.component';
 import { GameStateService } from '../../core/services/game-state.service';
 import { FeedbackService } from '../../core/services/feedback.service';
 import { HintService } from '../../core/services/hint.service';
@@ -19,7 +20,7 @@ interface Option {
 @Component({
     selector: 'app-multi-condition-selection',
     standalone: true,
-    imports: [CommonModule, ActionButtonsComponent],
+    imports: [CommonModule, ActionButtonsComponent, ActivityHeaderComponent],
     templateUrl: './multi-condition-selection.component.html',
     styleUrls: ['./multi-condition-selection.component.scss']
 })

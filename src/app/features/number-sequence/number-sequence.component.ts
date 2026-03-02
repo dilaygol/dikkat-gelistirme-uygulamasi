@@ -6,6 +6,7 @@ import { GameStateService } from '../../core/services/game-state.service';
 import { FeedbackService } from '../../core/services/feedback.service';
 import { HintService } from '../../core/services/hint.service';
 import { ActionButtonsComponent } from '../../shared/action-buttons/action-buttons.component';
+import { ActivityHeaderComponent } from '../../shared/activity-header/activity-header.component';
 
 interface NumberQuestion {
     id: number;
@@ -38,7 +39,7 @@ const QUESTION_TEMPLATES = [
 @Component({
     selector: 'app-number-sequence',
     standalone: true,
-    imports: [CommonModule, FormsModule, ActionButtonsComponent],
+    imports: [CommonModule, FormsModule, ActionButtonsComponent, ActivityHeaderComponent],
     templateUrl: './number-sequence.component.html',
     styleUrl: './number-sequence.component.scss',
 })

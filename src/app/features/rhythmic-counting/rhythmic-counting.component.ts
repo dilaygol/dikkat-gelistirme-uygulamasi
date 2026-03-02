@@ -6,6 +6,7 @@ import { GameStateService } from '../../core/services/game-state.service';
 import { FeedbackService } from '../../core/services/feedback.service';
 import { HintService } from '../../core/services/hint.service';
 import { ActionButtonsComponent } from '../../shared/action-buttons/action-buttons.component';
+import { ActivityHeaderComponent } from '../../shared/activity-header/activity-header.component';
 
 export interface SequenceItem {
   id: number;
@@ -31,7 +32,7 @@ const ID = 'rhythmic-counting';
 @Component({
   selector: 'app-rhythmic-counting',
   standalone: true,
-  imports: [CommonModule, FormsModule, ActionButtonsComponent],
+  imports: [CommonModule, FormsModule, ActionButtonsComponent, ActivityHeaderComponent],
   templateUrl: './rhythmic-counting.component.html',
   styleUrl: './rhythmic-counting.component.scss'
 })

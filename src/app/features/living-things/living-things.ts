@@ -5,6 +5,7 @@ import { GameStateService } from '../../core/services/game-state.service';
 import { FeedbackService } from '../../core/services/feedback.service';
 import { HintService } from '../../core/services/hint.service';
 import { ActionButtonsComponent } from '../../shared/action-buttons/action-buttons.component';
+import { ActivityHeaderComponent } from '../../shared/activity-header/activity-header.component';
 
 export interface LivingThingItem {
   id: number;
@@ -24,7 +25,7 @@ const ID = 'living-things';
 @Component({
   selector: 'app-living-things',
   standalone: true,
-  imports: [CommonModule, ActionButtonsComponent],
+  imports: [CommonModule, ActionButtonsComponent, ActivityHeaderComponent],
   templateUrl: './living-things.html',
   styleUrl: './living-things.scss'
 })

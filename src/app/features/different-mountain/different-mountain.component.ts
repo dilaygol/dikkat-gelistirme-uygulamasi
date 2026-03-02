@@ -5,6 +5,7 @@ import { GameStateService } from '../../core/services/game-state.service';
 import { FeedbackService } from '../../core/services/feedback.service';
 import { HintService } from '../../core/services/hint.service';
 import { ActionButtonsComponent } from '../../shared/action-buttons/action-buttons.component';
+import { ActivityHeaderComponent } from '../../shared/activity-header/activity-header.component';
 
 interface MountainOption {
     id: number;
@@ -22,7 +23,7 @@ const ID = 'different-mountain';
 @Component({
     selector: 'app-different-mountain',
     standalone: true,
-    imports: [CommonModule, ActionButtonsComponent],
+    imports: [CommonModule, ActionButtonsComponent, ActivityHeaderComponent],
     templateUrl: './different-mountain.component.html',
     styleUrl: './different-mountain.component.scss'
 })

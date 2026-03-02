@@ -5,6 +5,7 @@ import { GameStateService } from '../../core/services/game-state.service';
 import { FeedbackService } from '../../core/services/feedback.service';
 import { HintService } from '../../core/services/hint.service';
 import { ActionButtonsComponent } from '../../shared/action-buttons/action-buttons.component';
+import { ActivityHeaderComponent } from '../../shared/activity-header/activity-header.component';
 
 export interface BallGroup {
   id: number;
@@ -27,7 +28,7 @@ const ID = 'find-most-balls';
 @Component({
   selector: 'app-find-most-balls',
   standalone: true,
-  imports: [CommonModule, ActionButtonsComponent],
+  imports: [CommonModule, ActionButtonsComponent, ActivityHeaderComponent],
   templateUrl: './find-most-balls.component.html',
   styleUrl: './find-most-balls.component.scss'
 })

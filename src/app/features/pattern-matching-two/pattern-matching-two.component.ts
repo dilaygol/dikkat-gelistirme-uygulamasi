@@ -5,6 +5,7 @@ import { GameStateService } from '../../core/services/game-state.service';
 import { FeedbackService } from '../../core/services/feedback.service';
 import { HintService } from '../../core/services/hint.service';
 import { ActionButtonsComponent } from '../../shared/action-buttons/action-buttons.component';
+import { ActivityHeaderComponent } from '../../shared/activity-header/activity-header.component';
 
 // ─────────────────────────────────────────────────────────
 // 6x6 pattern, replicating the orange animal face from the image
@@ -29,7 +30,7 @@ const ID = 'pattern-2';
 @Component({
     selector: 'app-pattern-matching-two',
     standalone: true,
-    imports: [CommonModule, ActionButtonsComponent],
+    imports: [CommonModule, ActionButtonsComponent, ActivityHeaderComponent],
     templateUrl: './pattern-matching-two.component.html',
     styleUrl: './pattern-matching-two.component.scss',
 })

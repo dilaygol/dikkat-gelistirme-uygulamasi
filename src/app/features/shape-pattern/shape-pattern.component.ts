@@ -5,6 +5,7 @@ import { GameStateService } from '../../core/services/game-state.service';
 import { FeedbackService } from '../../core/services/feedback.service';
 import { HintService } from '../../core/services/hint.service';
 import { ActionButtonsComponent } from '../../shared/action-buttons/action-buttons.component';
+import { ActivityHeaderComponent } from '../../shared/activity-header/activity-header.component';
 
 export type ShapeType = 'square-green' | 'heart-pink' | 'triangle-yellow' | 'plus-black' | 'circle-blue';
 
@@ -25,7 +26,7 @@ const ID = 'shape-pattern';
 @Component({
     selector: 'app-shape-pattern',
     standalone: true,
-    imports: [CommonModule, ActionButtonsComponent],
+    imports: [CommonModule, ActionButtonsComponent, ActivityHeaderComponent],
     templateUrl: './shape-pattern.component.html',
     styleUrl: './shape-pattern.component.scss'
 })

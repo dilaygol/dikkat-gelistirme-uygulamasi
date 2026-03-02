@@ -2,16 +2,10 @@
 
     <!-- ── Yönerge (sabit 80px) ─────────────────────────── -->
     <div class="frame-top">
-        <div class="instruction-card">
-            <div class="instruction-icons" aria-hidden="true">🧠 💡 🧩</div>
-            <div class="instruction-text">
-                <h1>"{{targetWord}}" kelimesinin içinde olmayan harfleri aşağıda bulup seçin.</h1>
-            </div>
-        </div>
-    </div>
+    <app-activity-header icons="🧠 💡 🧩" instruction="&quot;{{targetWord}}&quot; kelimesinin içinde olmayan harfleri aşağıda bulup seçin."></app-activity-header>
+  </div>
 
-    <!-- ── Oyun Alanı (flex-grow) ─────────────────────────── -->
-    <div class="frame-middle">
+  <div class="frame-middle">
 
         <!-- Sol Ok -->
         <button class="nav-btn" (click)="goPrev()" aria-label="Önceki etkinlik">

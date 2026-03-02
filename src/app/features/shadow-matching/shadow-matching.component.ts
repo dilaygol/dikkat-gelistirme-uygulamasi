@@ -5,6 +5,7 @@ import { GameStateService } from '../../core/services/game-state.service';
 import { FeedbackService } from '../../core/services/feedback.service';
 import { HintService } from '../../core/services/hint.service';
 import { ActionButtonsComponent } from '../../shared/action-buttons/action-buttons.component';
+import { ActivityHeaderComponent } from '../../shared/activity-header/activity-header.component';
 
 export interface ShadowShape {
   type: 'plus-thick' | 'star' | 'cross' | 'plus-thin' | 'diamond';
@@ -28,7 +29,7 @@ const ID = 'shadow-matching';
 @Component({
   selector: 'app-shadow-matching',
   standalone: true,
-  imports: [CommonModule, ActionButtonsComponent],
+  imports: [CommonModule, ActionButtonsComponent, ActivityHeaderComponent],
   templateUrl: './shadow-matching.component.html',
   styleUrl: './shadow-matching.component.scss'
 })

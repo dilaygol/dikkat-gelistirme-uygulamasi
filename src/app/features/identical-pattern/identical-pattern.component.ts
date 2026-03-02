@@ -5,6 +5,7 @@ import { GameStateService } from '../../core/services/game-state.service';
 import { FeedbackService } from '../../core/services/feedback.service';
 import { HintService } from '../../core/services/hint.service';
 import { ActionButtonsComponent } from '../../shared/action-buttons/action-buttons.component';
+import { ActivityHeaderComponent } from '../../shared/activity-header/activity-header.component';
 
 export interface PatternCell {
     isMirrored: boolean;
@@ -28,7 +29,7 @@ const ID = 'identical-pattern';
 @Component({
     selector: 'app-identical-pattern',
     standalone: true,
-    imports: [CommonModule, ActionButtonsComponent],
+    imports: [CommonModule, ActionButtonsComponent, ActivityHeaderComponent],
     templateUrl: './identical-pattern.component.html',
     styleUrl: './identical-pattern.component.scss'
 })

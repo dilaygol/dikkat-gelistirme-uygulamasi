@@ -5,6 +5,7 @@ import { GameStateService } from '../../core/services/game-state.service';
 import { FeedbackService } from '../../core/services/feedback.service';
 import { HintService } from '../../core/services/hint.service';
 import { ActionButtonsComponent } from '../../shared/action-buttons/action-buttons.component';
+import { ActivityHeaderComponent } from '../../shared/activity-header/activity-header.component';
 
 interface Line {
     id: string;
@@ -33,7 +34,7 @@ const ID = 'finding-green-lines';
 @Component({
     selector: 'app-finding-green-lines',
     standalone: true,
-    imports: [CommonModule, ActionButtonsComponent],
+    imports: [CommonModule, ActionButtonsComponent, ActivityHeaderComponent],
     templateUrl: './finding-green-lines.component.html',
     styleUrl: './finding-green-lines.component.scss'
 })

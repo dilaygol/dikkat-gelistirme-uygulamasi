@@ -5,6 +5,7 @@ import { GameStateService } from '../../core/services/game-state.service';
 import { FeedbackService } from '../../core/services/feedback.service';
 import { HintService } from '../../core/services/hint.service';
 import { ActionButtonsComponent } from '../../shared/action-buttons/action-buttons.component';
+import { ActivityHeaderComponent } from '../../shared/activity-header/activity-header.component';
 
 // ─────────────────────────────────────────────────────────
 const PUZZLE_PAGES: boolean[][][] = [
@@ -28,7 +29,7 @@ const ID = 'pattern';
 @Component({
   selector: 'app-pattern-matching',
   standalone: true,
-  imports: [CommonModule, ActionButtonsComponent],
+  imports: [CommonModule, ActionButtonsComponent, ActivityHeaderComponent],
   templateUrl: './pattern-matching.component.html',
   styleUrl: './pattern-matching.component.scss',
 })
@@ -97,10 +98,10 @@ export class PatternMatchingComponent implements OnInit {
 
   /** Deseni hedefle karşılaştırır; 2 hatadan sonra ipucu gösterir */
   checkPattern(): void {
-        if (!this.userGrid.some(row => row.some(cell => cell))) {
-            this.fb.showFeedback('error', 'Lütfen kontrol etmeden önce bir seçim yapın!');
-            return;
-        }
+    if (!this.userGrid.some(row => row.some(cell => cell))) {
+      this.fb.showFeedback('error', 'Lütfen kontrol etmeden önce bir seçim yapın!');
+      return;
+    }
 
     const target = this.targetGrid();
     const isCorrect = target.every((row, r) =>

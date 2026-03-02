@@ -5,6 +5,7 @@ import { GameStateService } from '../../core/services/game-state.service';
 import { FeedbackService } from '../../core/services/feedback.service';
 import { HintService } from '../../core/services/hint.service';
 import { ActionButtonsComponent } from '../../shared/action-buttons/action-buttons.component';
+import { ActivityHeaderComponent } from '../../shared/activity-header/activity-header.component';
 
 export type ShapeOutline = 'square' | 'triangle';
 export type CircleColor = 'red' | 'yellow';
@@ -26,7 +27,7 @@ const ID = 'shape-to-color-match';
 @Component({
     selector: 'app-shape-to-color-match',
     standalone: true,
-    imports: [CommonModule, ActionButtonsComponent],
+    imports: [CommonModule, ActionButtonsComponent, ActivityHeaderComponent],
     templateUrl: './shape-to-color-match.component.html',
     styleUrl: './shape-to-color-match.component.scss'
 })

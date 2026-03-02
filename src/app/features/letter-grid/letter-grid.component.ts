@@ -5,6 +5,7 @@ import { GameStateService } from '../../core/services/game-state.service';
 import { FeedbackService } from '../../core/services/feedback.service';
 import { HintService } from '../../core/services/hint.service';
 import { ActionButtonsComponent } from '../../shared/action-buttons/action-buttons.component';
+import { ActivityHeaderComponent } from '../../shared/activity-header/activity-header.component';
 
 interface ShapeOption {
     id: number;
@@ -36,7 +37,7 @@ export const PATH_CELLS: [number, number][] = [
 @Component({
     selector: 'app-letter-grid',
     standalone: true,
-    imports: [CommonModule, ActionButtonsComponent],
+    imports: [CommonModule, ActionButtonsComponent, ActivityHeaderComponent],
     templateUrl: './letter-grid.component.html',
     styleUrl: './letter-grid.component.scss'
 })

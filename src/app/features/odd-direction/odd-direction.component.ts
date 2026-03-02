@@ -5,6 +5,7 @@ import { GameStateService } from '../../core/services/game-state.service';
 import { FeedbackService } from '../../core/services/feedback.service';
 import { HintService } from '../../core/services/hint.service';
 import { ActionButtonsComponent } from '../../shared/action-buttons/action-buttons.component';
+import { ActivityHeaderComponent } from '../../shared/activity-header/activity-header.component';
 
 interface CatItem { id: number; isFlipped: boolean; isShaking?: boolean; }
 
@@ -26,7 +27,7 @@ const ID = 'odd-direction';
 @Component({
     selector: 'app-odd-direction',
     standalone: true,
-    imports: [CommonModule, ActionButtonsComponent],
+    imports: [CommonModule, ActionButtonsComponent, ActivityHeaderComponent],
     templateUrl: './odd-direction.component.html',
     styleUrl: './odd-direction.component.scss',
 })

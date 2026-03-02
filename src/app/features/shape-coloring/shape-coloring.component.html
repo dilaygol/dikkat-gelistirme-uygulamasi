@@ -2,16 +2,10 @@
 
     <!-- ── Yönerge (sabit 80px) ─────────────────────────── -->
     <div class="frame-top">
-        <div class="instruction-card">
-            <div class="instruction-icons" aria-hidden="true">🧠 💡 🧩</div>
-            <div class="instruction-text">
-                <h1>Aşağıdaki adımları takip ederek şekilleri boya.</h1>
-            </div>
-        </div>
-    </div>
+    <app-activity-header icons="🧠 💡 🧩" instruction="Aşağıdaki adımları takip ederek şekilleri boya."></app-activity-header>
+  </div>
 
-    <!-- ── Oyun Alanı (flex-grow) ─────────────────────────── -->
-    <div class="frame-middle">
+  <div class="frame-middle">
 
         <!-- Sol Ok -->
         <button class="nav-btn" (click)="goPrev()" aria-label="Önceki etkinlik">

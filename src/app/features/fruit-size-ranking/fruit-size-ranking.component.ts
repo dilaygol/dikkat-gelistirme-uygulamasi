@@ -5,6 +5,7 @@ import { GameStateService } from '../../core/services/game-state.service';
 import { FeedbackService } from '../../core/services/feedback.service';
 import { HintService } from '../../core/services/hint.service';
 import { ActionButtonsComponent } from '../../shared/action-buttons/action-buttons.component';
+import { ActivityHeaderComponent } from '../../shared/activity-header/activity-header.component';
 
 interface FruitItem {
     emoji: string;
@@ -29,7 +30,7 @@ const ID = 'fruit-size-ranking';
 @Component({
     selector: 'app-fruit-size-ranking',
     standalone: true,
-    imports: [CommonModule, ActionButtonsComponent],
+    imports: [CommonModule, ActionButtonsComponent, ActivityHeaderComponent],
     templateUrl: './fruit-size-ranking.component.html',
     styleUrl: './fruit-size-ranking.component.scss'
 })

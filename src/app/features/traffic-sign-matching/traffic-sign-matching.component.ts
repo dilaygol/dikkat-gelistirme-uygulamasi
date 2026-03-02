@@ -5,6 +5,7 @@ import { GameStateService } from '../../core/services/game-state.service';
 import { FeedbackService } from '../../core/services/feedback.service';
 import { HintService } from '../../core/services/hint.service';
 import { ActionButtonsComponent } from '../../shared/action-buttons/action-buttons.component';
+import { ActivityHeaderComponent } from '../../shared/activity-header/activity-header.component';
 
 export interface TrafficSign {
     id: number;
@@ -28,7 +29,7 @@ const ID = 'traffic-sign-matching';
 @Component({
     selector: 'app-traffic-sign-matching',
     standalone: true,
-    imports: [CommonModule, ActionButtonsComponent],
+    imports: [CommonModule, ActionButtonsComponent, ActivityHeaderComponent],
     templateUrl: './traffic-sign-matching.component.html',
     styleUrl: './traffic-sign-matching.component.scss'
 })

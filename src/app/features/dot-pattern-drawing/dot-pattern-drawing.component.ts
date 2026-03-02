@@ -5,6 +5,7 @@ import { GameStateService } from '../../core/services/game-state.service';
 import { FeedbackService } from '../../core/services/feedback.service';
 import { HintService } from '../../core/services/hint.service';
 import { ActionButtonsComponent } from '../../shared/action-buttons/action-buttons.component';
+import { ActivityHeaderComponent } from '../../shared/activity-header/activity-header.component';
 
 interface Point {
     x: number;
@@ -23,7 +24,7 @@ const ID = 'dot-pattern-drawing';
 @Component({
     selector: 'app-dot-pattern-drawing',
     standalone: true,
-    imports: [CommonModule, ActionButtonsComponent],
+    imports: [CommonModule, ActionButtonsComponent, ActivityHeaderComponent],
     templateUrl: './dot-pattern-drawing.component.html',
     styleUrl: './dot-pattern-drawing.component.scss'
 })

@@ -5,6 +5,7 @@ import { GameStateService } from '../../core/services/game-state.service';
 import { FeedbackService } from '../../core/services/feedback.service';
 import { HintService } from '../../core/services/hint.service';
 import { ActionButtonsComponent } from '../../shared/action-buttons/action-buttons.component';
+import { ActivityHeaderComponent } from '../../shared/activity-header/activity-header.component';
 
 interface ColumnItem {
     id: number;
@@ -23,7 +24,7 @@ const ID = 'sequence-rule-breaker';
 @Component({
     selector: 'app-sequence-rule-breaker',
     standalone: true,
-    imports: [CommonModule, ActionButtonsComponent],
+    imports: [CommonModule, ActionButtonsComponent, ActivityHeaderComponent],
     templateUrl: './sequence-rule-breaker.component.html',
     styleUrl: './sequence-rule-breaker.component.scss'
 })
