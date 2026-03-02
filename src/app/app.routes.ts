@@ -49,9 +49,11 @@ import { HappyChildrenComponent } from './features/happy-children/happy-children
 import { DifferentMountainComponent } from './features/different-mountain/different-mountain.component';
 import { LetterGridComponent } from './features/letter-grid/letter-grid.component';
 import { IceCreamShapeComponent } from './features/ice-cream-shape/ice-cream-shape.component';
+import { StartPageComponent } from './features/start-page/start-page.component';
+import { EndPageComponent } from './features/end-page/end-page.component';
 
 export const routes: Routes = [
-    { path: '', redirectTo: 'pattern', pathMatch: 'full' },
+    { path: '', component: StartPageComponent, pathMatch: 'full' },
     { path: 'pattern', component: PatternMatchingComponent },
     { path: 'odd-direction', component: OddDirectionComponent },
     { path: 'shade-sorting', component: ShadeSortingComponent },
@@ -102,5 +104,6 @@ export const routes: Routes = [
     { path: 'different-mountain', component: DifferentMountainComponent },
     { path: 'letter-grid', component: LetterGridComponent },
     { path: 'ice-cream-shape', component: IceCreamShapeComponent },
-    { path: '**', redirectTo: 'pattern' },
+    { path: 'end', component: EndPageComponent },
+    { path: '**', redirectTo: '' },
 ];
