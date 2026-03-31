@@ -1,4 +1,5 @@
 @use 'styles/design-tokens' as *;
+@use 'styles/responsive' as *;
 
 // ── Animasyonlar ───────────────────────────────────────────
 @keyframes shakeAnim {
@@ -25,6 +26,14 @@
     justify-content: center;
     background: $color-bg;
     overflow: hidden;
+
+    @include mobile {
+        overflow-x: hidden;
+        overflow-y: auto;
+        height: auto;
+        min-height: 100vh;
+        min-height: 100dvh;
+    }
 }
 
 .game-content {
@@ -34,15 +43,17 @@
     justify-content: center;
     position: relative;
     width: 100%;
-    max-width: 1000px;
-    padding: 16px;
+    max-width: min(1000px, 95vw);
+    margin: 0 auto;
+    padding: clamp(8px, 2vw, 16px);
 }
 
 .drawing-area {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 40px;
+    flex-wrap: wrap;
+    gap: clamp(16px, 4vw, 40px);
     width: 100%;
 }
 
@@ -53,7 +64,11 @@
     color: #94a3b8;
 
     .material-icons {
-        font-size: 2rem;
+        font-size: clamp(1.4rem, 2.5vw, 2rem);
+    }
+
+    @include mobile {
+        display: none;
     }
 }
 
@@ -74,34 +89,33 @@
 }
 
 .board-header {
-    font-size: 0.9rem;
+    font-size: clamp(0.7rem, 1.2vw, 0.9rem);
     font-weight: 800;
     letter-spacing: 1.5px;
-    margin-bottom: 24px;
+    margin-bottom: clamp(12px, 2.5vw, 24px);
     text-align: center;
 
     &.example {
-        color: #64748b; // Grayish blue
+        color: #64748b;
     }
 
     &.user {
-        color: #22c55e; // Green
+        color: #22c55e;
     }
 }
 
 .svg-container {
     background: #ffffff;
-    border-radius: 24px;
+    border-radius: clamp(16px, 3vw, 24px);
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
-    border: 3px solid transparent; // for error state
+    border: 3px solid transparent;
     transition: all 0.3s ease;
-    padding: 24px; // More padding to match the card look around the svg grid
+    padding: clamp(12px, 2.5vw, 24px);
 
     &.interactive {
         background: #fff;
-        border: 2px solid #ef4444; // Match the red outer border from user screenshot for "Senin Sıran" container.
+        border: 2px solid #ef4444;
 
-        // Ensure success state changes border to green
         &.success {
             border-color: #22c55e;
         }
@@ -112,33 +126,34 @@
     }
 }
 
-// SVG internal styling
 svg {
     display: block;
+    max-width: 100%;
+    height: auto;
 }
 
 .target-line {
-    stroke: #334155; // Dark slate / dark gray
+    stroke: #334155;
     stroke-width: 6;
     stroke-linecap: round;
 }
 
 .user-line {
-    stroke: #334155; // Matches left side target line
+    stroke: #334155;
     stroke-width: 6;
     stroke-linecap: round;
     transition: stroke 0.3s;
 
     &.success {
-        stroke: #22c55e; // Green on success
+        stroke: #22c55e;
     }
 }
 
 .preview-line {
-    stroke: #334155; // Matches left side target line
+    stroke: #334155;
     stroke-width: 6;
     stroke-linecap: round;
-    opacity: 0.6; // faint preview
+    opacity: 0.6;
     stroke-dasharray: 8 6;
 }
 
@@ -146,7 +161,7 @@ svg {
     stroke: #94a3b8;
     stroke-width: 6;
     stroke-linecap: round;
-    opacity: 0.25; // Very faint hint line
+    opacity: 0.25;
     stroke-dasharray: 8 8;
 }
 
@@ -154,21 +169,21 @@ svg {
     transition: all 0.2s;
 
     &.static {
-        fill: #cbd5e1; // Same light grayish blue empty points as the right side
+        fill: #cbd5e1;
     }
 
     &.interactive {
-        fill: #cbd5e1; // Light grayish blue empty points
+        fill: #cbd5e1;
         cursor: pointer;
 
         &:hover {
             fill: #94a3b8;
-            r: 10; // Slightly larger hit area representation
+            r: 10;
         }
 
         &.active {
-            fill: #334155; // Match dark line
-            r: 8; // Same size as static points
+            fill: #334155;
+            r: 8;
         }
     }
 }

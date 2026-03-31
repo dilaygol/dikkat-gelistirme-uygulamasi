@@ -3,17 +3,12 @@
 .game-content {
     display: flex;
     flex-direction: row;
-    /* Target on left, options on right if space allows */
     align-items: center;
     justify-content: center;
-    gap: 20px;
-    /* Reduced gap between target, arrow, and options */
+    gap: clamp(8px, 2vw, 20px);
     width: 100%;
-    max-width: 1000px;
-    /* Needs slightly more room since left/right split */
-    padding: 0 20px;
-
-    /* Responsive flip: wrap if screen is small */
+    max-width: min(1000px, 95vw);
+    padding: 0 clamp(8px, 2vw, 20px);
     flex-wrap: wrap;
 }
 
@@ -31,10 +26,9 @@
     align-items: center;
     justify-content: center;
     background-color: #fff;
-    border: 3px solid #4caf50;
-    /* Yellowish target border */
+    border: clamp(2px, 0.5vw, 3px) solid #4caf50;
     border-radius: 8px;
-    padding: 16px 24px;
+    padding: clamp(8px, 1.5vw, 16px) clamp(10px, 2vw, 24px);
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
@@ -45,7 +39,7 @@
     justify-content: center;
 
     .arrow-icon {
-        font-size: 40px;
+        font-size: clamp(32px, 5vw, 40px);
         color: rgba(0, 0, 0, 0.4);
     }
 }
@@ -54,21 +48,22 @@
 .options-area {
     display: flex;
     flex-wrap: wrap;
-    gap: 16px;
-    /* Reduced gap to bring options closer */
+    gap: clamp(8px, 1.5vw, 16px);
     justify-content: center;
-    /* Take up remaining space */
     flex: 1;
-    min-width: 300px;
+    width: 100%;
 }
 
 .option-wrapper {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 12px;
-    width: calc(33.333% - 16px);
-    /* 3 items per row on desktop */
+    gap: clamp(4px, 1vw, 12px);
+    
+    /* 2-2-1 layout on mobile: exactly 2 per row */
+    flex: 0 0 calc(50% - 16px);
+    max-width: fit-content;
+    min-width: 100px;
 }
 
 .option-card {
@@ -77,9 +72,9 @@
     align-items: center;
     justify-content: center;
     background-color: #fff;
-    border: 3px solid transparent;
+    border: clamp(2px, 0.5vw, 3px) solid transparent;
     border-radius: 8px;
-    padding: 16px 24px;
+    padding: clamp(6px, 1.5vw, 16px) clamp(8px, 2vw, 24px);
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
     cursor: pointer;
     user-select: none;
@@ -94,13 +89,13 @@
 .pattern-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 8px;
+    gap: clamp(4px, 1vw, 8px);
     text-align: center;
-    font-size: 2.2rem;
+    font-size: clamp(1.1rem, 4vw, 2.2rem);
     font-weight: 700;
     color: #333;
     font-family: 'Baloo 2', sans-serif;
-    padding: 12px 0;
+    padding: clamp(6px, 1.5vw, 12px) 0;
 }
 
 .pattern-char {

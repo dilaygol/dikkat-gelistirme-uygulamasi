@@ -1,5 +1,6 @@
 @use 'sass:color';
 @use 'styles/design-tokens' as *;
+@use 'styles/responsive' as *;
 
 // ── Animasyonlar ───────────────────────────────────────────
 @keyframes shapePop {
@@ -48,61 +49,6 @@
     }
 }
 
-// ── Yerel Renkler ─────────────────────────────────────────
-$color-container-bg: #ffffff;
-$color-shape-empty: #ecf3fb; // Light blue empty interior
-$color-shape-stroke: #c8d9ea; // Light blue outline
-
-// Correct colors per shape 
-$color-circle: #5b6fa6; // Blue (from Q5)
-$color-triangle: #4caf8a; // Green (from Q5)
-$color-heart: #bf4f6b; // Red (from Q5)
-
-// ── Host ──────────────────────────────────────────────────
-:host {
-    display: flex;
-    width: 100%;
-    height: 100vh;
-    align-items: center;
-    justify-content: center;
-    background: $color-bg;
-    overflow: hidden;
-}
-
-// ── Oyun İçeriği Kartı ────────────────────────────────────
-.interaction-card {
-    background: $color-container-bg;
-    border-radius: 50px;
-    padding: 40px 60px;
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-    min-width: 500px;
-    margin-top: 40px; // Gap from instruction bar
-    @include card-shadow($color-nav, .12);
-}
-
-.shape-row {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-}
-
-.row-instruction {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 1.15rem;
-    font-weight: 800;
-    color: #3d4a5c;
-    margin: 0;
-    padding-left: 8px;
-}
-
-.shape-container {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
 @keyframes svgHintPulseGlow {
 
     0%,
@@ -116,8 +62,76 @@ $color-heart: #bf4f6b; // Red (from Q5)
         filter: drop-shadow(0 0 14px rgba(241, 196, 15, 0.9));
         box-shadow: none !important;
         scale: 1.08;
-        /* slightly larger scale because svgs are smaller */
     }
+}
+
+// ── Yerel Renkler ─────────────────────────────────────────
+$color-container-bg: #ffffff;
+$color-shape-empty: #ecf3fb;
+$color-shape-stroke: #c8d9ea;
+
+$color-circle: #5b6fa6;
+$color-triangle: #4caf8a;
+$color-heart: #bf4f6b;
+
+// ── Host ──────────────────────────────────────────────────
+:host {
+    display: flex;
+    width: 100%;
+    height: 100vh;
+    align-items: center;
+    justify-content: center;
+    background: $color-bg;
+    overflow: hidden;
+
+    @include mobile {
+        overflow-x: hidden;
+        overflow-y: auto;
+        height: auto;
+        min-height: 100vh;
+        min-height: 100dvh;
+    }
+}
+
+// ── Oyun İçeriği Kartı ────────────────────────────────────
+.interaction-card {
+    background: $color-container-bg;
+    border-radius: clamp(24px, 5vw, 50px);
+    padding: clamp(16px, 4vw, 40px) clamp(12px, 5vw, 60px);
+    display: flex;
+    flex-direction: column;
+    gap: clamp(12px, 2.5vw, 24px);
+    width: 95%;
+    max-width: 100%;
+    margin: 0 auto;
+    margin-top: clamp(12px, 3vw, 40px);
+    @include card-shadow($color-nav, .12);
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+.shape-row {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(8px, 1.5vw, 16px);
+}
+
+.row-instruction {
+    font-family: 'Montserrat', sans-serif;
+    font-size: clamp(0.85rem, 2.5vw, 1.15rem);
+    font-weight: 800;
+    color: #3d4a5c;
+    margin: 0;
+    padding-left: 8px;
+}
+
+.shape-container {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(4px, 1vw, 8px);
+    width: 100%;
 }
 
 // ── Buton Şekiller ────────────────────────────────────────
@@ -125,16 +139,20 @@ $color-heart: #bf4f6b; // Red (from Q5)
     background: transparent;
     border: none;
     border-radius: 50%;
-    padding: 4px;
+    padding: clamp(2px, 0.5vw, 4px);
     color: $color-shape-empty;
     cursor: pointer;
     outline: none;
     transition: transform 0.1s ease, filter 0.2s ease;
+    flex-shrink: 1;
+    min-width: 0;
 
     svg {
         display: block;
-        fill: $color-container-bg; // Inner color is white
-        stroke: $color-shape-stroke; // Outline is light blue
+        width: clamp(20px, 6vw, 48px);
+        height: clamp(20px, 6vw, 48px);
+        fill: $color-container-bg;
+        stroke: $color-shape-stroke;
         transition: fill 0.2s ease, stroke 0.2s ease;
     }
 
@@ -151,7 +169,6 @@ $color-heart: #bf4f6b; // Red (from Q5)
             box-shadow: none !important;
 
             svg {
-                // No extra shadow on hover requested by user
                 filter: none;
             }
         }

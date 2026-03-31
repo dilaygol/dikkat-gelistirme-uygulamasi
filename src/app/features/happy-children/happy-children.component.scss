@@ -1,5 +1,6 @@
 @use 'sass:color';
 @use 'styles/design-tokens' as *;
+@use 'styles/responsive' as *;
 
 @keyframes scaleIn {
     0% {
@@ -65,24 +66,34 @@
     justify-content: center;
     background: $color-bg;
     overflow: hidden;
+
+    @include mobile {
+        overflow-x: hidden;
+        overflow-y: auto;
+        height: auto;
+        min-height: 100vh;
+        min-height: 100dvh;
+    }
 }
 
 .interaction-card {
     background: #ffffff;
-    border-radius: 50px;
-    padding: 48px 60px;
+    border-radius: clamp(24px, 5vw, 50px);
+    padding: clamp(20px, 4vw, 48px) clamp(16px, 4vw, 60px);
     display: flex;
     justify-content: center;
     align-items: center;
-    min-width: 700px;
+    width: 95%; margin: 0 auto;
     max-width: 960px;
     @include card-shadow($color-nav, .12);
+    box-sizing: border-box;
 }
 
 .children-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 24px;
+    display: flex;
+    flex-wrap: wrap; // Changed from rigid grid to flexible wrap
+    justify-content: center;
+    gap: clamp(12px, 3vw, 24px);
     width: 100%;
 }
 
@@ -90,14 +101,19 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 12px;
-    padding: 20px 16px;
+    gap: clamp(8px, 2vw, 12px);
+    padding: clamp(12px, 2vw, 20px) clamp(10px, 2vw, 16px);
     border-radius: 24px;
-    border: 3px solid transparent;
+    border: clamp(2px, 0.5vw, 3px) solid transparent;
     background: #f0f4fa;
     cursor: pointer;
     transition: all 0.2s;
     animation: scaleIn 0.4s ease-out backwards;
+    
+    // Flexible sizing
+    flex: 1 1 40%; // Allows two per row on mobile, four on desktop
+    min-width: 100px;
+    max-width: 200px;
 
     @for $i from 1 through 4 {
         &:nth-child(#{$i}) {
@@ -128,8 +144,8 @@
 }
 
 .face-container {
-    width: 100px;
-    height: 100px;
+    width: clamp(60px, 15vw, 100px);
+    height: clamp(60px, 15vw, 100px);
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -150,21 +166,21 @@
 }
 
 .face-emoji {
-    font-size: 3.5rem;
+    font-size: clamp(2rem, 6vw, 3.5rem);
     line-height: 1;
 }
 
 .child-name {
-    font-size: 1.1rem;
+    font-size: clamp(0.9rem, 3vw, 1.1rem);
     font-weight: 700;
     color: #444;
 }
 
 .checkbox {
-    width: 32px;
-    height: 32px;
+    width: clamp(24px, 5vw, 32px);
+    height: clamp(24px, 5vw, 32px);
     border-radius: 8px;
-    border: 3px solid #dde2e8;
+    border: clamp(2px, 0.4vw, 3px) solid #dde2e8;
     background: #fff;
     display: flex;
     align-items: center;
@@ -178,7 +194,7 @@
 }
 
 .check-icon {
-    font-size: 22px !important;
+    font-size: clamp(16px, 4vw, 22px) !important;
     color: #ffffff !important;
     font-weight: 900 !important;
     animation: checkPop 0.2s ease-out;

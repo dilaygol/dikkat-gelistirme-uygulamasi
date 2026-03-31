@@ -1,4 +1,5 @@
 @use 'styles/design-tokens' as *;
+@use 'styles/responsive' as *;
 
 // ── Animasyonlar ───────────────────────────────────────────
 
@@ -41,43 +42,41 @@
     justify-content: center;
     background: $color-bg;
     overflow: hidden;
+
+    @include mobile {
+        overflow-x: hidden;
+        overflow-y: auto;
+        height: auto;
+        min-height: 100vh;
+        min-height: 100dvh;
+    }
 }
 
-// ── Oyun Alanı Düzeni ─────────────────────────────────────
-// Flex layout in frame-middle wraps navigation + game-content + navigation
-.frame-middle {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
-    max-width: 1200px;
-    padding: 0 40px;
-    gap: 40px;
-}
+
 
 // ── Eşleştirme Tahtası ────────────────────────────────────
 .matching-board {
     display: flex;
     justify-content: center;
-    gap: 120px; // Space between the two columns
+    gap: clamp(16px, 4vw, 120px); 
     width: 100%;
-    padding: 20px;
+    padding: clamp(10px, 2.5vw, 20px);
+    flex-wrap: nowrap;
 }
 
 .column {
     display: flex;
     flex-direction: column;
-    gap: 20px; // Space between cards vertically
-    // Enable transitions for when items are sorted logically
+    gap: clamp(8px, 2vw, 20px); 
 }
 
 // ── İşaret Kartları ───────────────────────────────────────
 .sign-card {
-    width: 160px;
-    height: 90px;
+    width: clamp(100px, 25vw, 160px); // Responsive width shrink
+    height: clamp(60px, 15vw, 90px);
     border-radius: 16px;
     background: #f8fafc;
-    border: 3px solid #e2e8f0;
+    border: clamp(2px, 0.5vw, 3px) solid #e2e8f0;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
     cursor: pointer;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -86,11 +85,9 @@
     justify-content: center;
     user-select: none;
     outline: none;
-    // Move elements upwards using CSS layout flow transitions might be jittery if not position absolute, 
-    // but Angular re-ordering in *ngFor provides structural shifting. To make it smooth in simple flow, standard transition covers style changes.
 
     .emoji {
-        font-size: 2.5rem;
+        font-size: clamp(1.8rem, 5vw, 2.5rem);
         transition: transform 0.2s;
     }
 
@@ -108,17 +105,15 @@
 
     // Selection state
     &.selected {
-        border-color: #3b82f6; // Blue highlight
+        border-color: #3b82f6; 
         background: #eff6ff;
         transform: scale(1.05);
         box-shadow: 0 8px 20px rgba(59, 130, 246, 0.2);
         z-index: 10;
     }
 
-    // Paired state (when user has matched left and right)
+    // Paired state
     &.paired {
-        // Optionally style paired items differently before checking.
-        // Making them slightly grayed out or a soft blue to show they are "locked in"
         border-color: #cbd5e1;
         background: #f1f5f9;
     }
@@ -143,45 +138,5 @@
     // Animations
     &.shake {
         animation: shake 0.4s ease-in-out;
-    }
-}
-
-// ── Navigation Buttons ────────────────────────────────────
-.nav-btn {
-    width: 56px;
-    height: 56px;
-    border-radius: 50%;
-    background: white;
-    border: none;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.2s;
-
-    .material-icons {
-        color: #475569;
-        font-size: 24px;
-        transition: color 0.2s;
-    }
-
-    &:hover:not(:disabled) {
-        transform: scale(1.05);
-        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
-
-        .material-icons {
-            color: #1e293b;
-        }
-    }
-
-    &:disabled {
-        cursor: not-allowed;
-        opacity: 0.5;
-        background: #f8fafc;
-    }
-
-    &.locked {
-        opacity: 0.3;
     }
 }

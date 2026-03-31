@@ -45,13 +45,13 @@ import { ActivityService } from '../../core/services/activity.service';
     .header-container {
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      gap: clamp(6px, 1.5vw, 12px);
       width: 100%;
     }
 
     .progress-container {
       width: 100%;
-      height: 8px;
+      height: clamp(5px, 1vw, 8px);
       background: #e0e7ff;
       border-radius: 4px;
       overflow: hidden;
@@ -67,44 +67,46 @@ import { ActivityService } from '../../core/services/activity.service';
 
     .instruction-card {
       background: #ffffff;
-      border-radius: 50px;
+      border-radius: clamp(24px, 5vw, 50px);
       box-shadow: 0 4px 0 #ffe5ce, 0 8px 18px rgba(255, 166, 35, .18);
-      padding: 12px 28px;
+      padding: clamp(8px, 1.5vw, 12px) clamp(14px, 3vw, 28px);
       display: flex;
       align-items: center;
-      gap: 14px;
+      flex-wrap: wrap;
+      gap: clamp(8px, 1.5vw, 14px);
       width: 100%;
       position: relative;
     }
 
     .question-number {
       font-family: 'Baloo 2', 'Nunito', sans-serif;
-      font-size: 2rem;
+      font-size: clamp(1.3rem, 3vw, 2rem);
       font-weight: 900;
       color: #6366f1;
       flex-shrink: 0;
     }
 
     .instruction-icons {
-      font-size: 1.8rem;
+      font-size: clamp(1.2rem, 2.5vw, 1.8rem);
       flex-shrink: 0;
       display: flex;
       gap: 5px;
 
-      @media (max-width: 768px) {
+      @media (max-width: 480px) {
         display: none;
       }
     }
 
     .instruction-text {
       font-family: 'Baloo 2', 'Nunito', sans-serif;
-      font-size: 1.4rem;
+      font-size: clamp(0.95rem, 2vw, 1.4rem);
       font-weight: 800;
       color: #3a3a5c;
       margin: 0;
       line-height: 1.2;
       text-align: center;
       flex: 1;
+      min-width: 0;
 
       h1 {
         font-family: inherit;
@@ -117,13 +119,14 @@ import { ActivityService } from '../../core/services/activity.service';
 
     .progress-counter {
       font-family: 'Baloo 2', 'Nunito', sans-serif;
-      font-size: 1.2rem;
+      font-size: clamp(0.85rem, 1.5vw, 1.2rem);
       font-weight: 800;
       color: #8b8fb9;
       background: #f0f2ff;
-      padding: 6px 16px;
+      padding: clamp(4px, 0.8vw, 6px) clamp(10px, 2vw, 16px);
       border-radius: 20px;
       flex-shrink: 0;
+      white-space: nowrap;
     }
   `]
 })

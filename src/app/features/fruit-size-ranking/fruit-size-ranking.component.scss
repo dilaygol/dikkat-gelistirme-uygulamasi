@@ -1,5 +1,6 @@
 @use 'sass:color';
 @use 'styles/design-tokens' as *;
+@use 'styles/responsive' as *;
 
 // ── Animasyonlar ───────────────────────────────────────────
 @keyframes scaleIn {
@@ -37,25 +38,36 @@
     justify-content: center;
     background: $color-bg;
     overflow: hidden;
+
+    @include mobile {
+        overflow-x: hidden;
+        overflow-y: auto;
+        height: auto;
+        min-height: 100vh;
+        min-height: 100dvh;
+    }
 }
 
 // ── Oyun İçeriği ──────────────────────────────────────────
 .interaction-card {
     background: #ffffff;
-    border-radius: 50px;
-    padding: 48px 80px;
+    border-radius: clamp(24px, 5vw, 50px);
+    padding: clamp(20px, 4vw, 48px) clamp(16px, 4vw, 80px);
     display: flex;
     justify-content: center;
     align-items: center;
-    min-width: 700px;
+    width: 95%; margin: 0 auto;
     max-width: 920px;
     @include card-shadow($color-nav, .12);
+    box-sizing: border-box;
+    overflow: hidden;
 }
 
 .rows-container {
     display: flex;
+    flex-wrap: wrap;
     flex-direction: column;
-    gap: 28px;
+    gap: clamp(12px, 2.5vw, 28px);
     width: 100%;
 }
 
@@ -63,8 +75,9 @@
     display: flex;
     align-items: flex-end;
     justify-content: center;
-    gap: 36px;
-    padding: 16px 0;
+    flex-wrap: wrap;
+    gap: clamp(16px, 3.5vw, 36px);
+    padding: clamp(8px, 2vw, 16px) 0;
     border-bottom: 2px solid #eef3fa;
     animation: scaleIn 0.4s ease-out backwards;
 
@@ -84,14 +97,13 @@
     flex-direction: column;
     align-items: center;
     gap: 10px;
-    min-width: 110px;
 }
 
 .fruit-visual {
     display: flex;
     align-items: flex-end;
     justify-content: center;
-    width: 120px;
+    width: clamp(60px, 15vw, 120px);
 }
 
 .fruit-emoji {
@@ -105,10 +117,10 @@
 
 // ── Rank Input ──────────────────────────────────────────
 .rank-input-wrapper {
-    width: 52px;
-    height: 52px;
+    width: clamp(36px, 8vw, 52px);
+    height: clamp(36px, 8vw, 52px);
     border-radius: 14px;
-    border: 3px solid #dde2e8;
+    border: clamp(2px, 0.4vw, 3px) solid #dde2e8;
     background: #fff;
     display: flex;
     align-items: center;
@@ -132,10 +144,10 @@
     right: -10px;
     background: #f1c40f;
     color: #fff;
-    font-size: 13px;
+    font-size: clamp(10px, 2.5vw, 13px);
     font-weight: 900;
-    width: 24px;
-    height: 24px;
+    width: clamp(18px, 4.5vw, 24px);
+    height: clamp(18px, 4.5vw, 24px);
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -145,12 +157,12 @@
 }
 
 .rank-input {
-    width: 36px;
-    height: 36px;
+    width: clamp(24px, 5.5vw, 36px);
+    height: clamp(24px, 5.5vw, 36px);
     border: none;
     background: transparent;
     text-align: center;
-    font-size: 24px;
+    font-size: clamp(16px, 4vw, 24px);
     font-weight: 900;
     color: $color-text;
     outline: none;

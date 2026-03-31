@@ -107,7 +107,7 @@ export class FindDifferentComponent implements OnInit {
     checkAnswers(): void {
         const allSelected = this.rows.every(r => r.selectedId !== null);
         if (!allSelected) {
-            this.fb.showFeedback('error', 'Lütfen her satırdan farklı olan görseli seçin.');
+            this.fb.showFeedback('error', 'Lütfen her bloktan farklı olan görseli seçin.');
             return;
         }
 

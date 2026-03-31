@@ -1,5 +1,6 @@
 @use 'sass:color';
 @use 'styles/design-tokens' as *;
+@use 'styles/responsive' as *;
 
 @keyframes scaleIn {
     0% {
@@ -65,24 +66,34 @@
     justify-content: center;
     background: $color-bg;
     overflow: hidden;
+
+    @include mobile {
+        overflow-x: hidden;
+        overflow-y: auto;
+        height: auto;
+        min-height: 100vh;
+        min-height: 100dvh;
+    }
 }
 
 .interaction-card {
     background: #ffffff;
-    border-radius: 50px;
-    padding: 48px 60px;
+    border-radius: clamp(24px, 5vw, 50px);
+    padding: clamp(20px, 4vw, 48px) clamp(16px, 4vw, 60px);
     display: flex;
     justify-content: center;
     align-items: center;
-    min-width: 700px;
     max-width: 960px;
+    width: 95%;
+    margin: 0 auto;
     @include card-shadow($color-nav, .12);
 }
 
 .rows-container {
     display: flex;
+    flex-wrap: wrap;
     flex-direction: column;
-    gap: 24px;
+    gap: clamp(12px, 2.5vw, 24px);
     width: 100%;
 }
 
@@ -90,7 +101,18 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 20px;
+    flex-wrap: nowrap;
+    gap: clamp(6px, 1.5vw, 20px);
+    
+    // Kullanıcının isteği üzerine 3'lü seçenekleri ayrı blok içine aldık
+    padding: clamp(10px, 2vw, 24px);
+    background-color: #f7f9fc;
+    border: 3px solid #e1ecf8;
+    border-radius: clamp(16px, 3vw, 24px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+    width: 100%;
+    box-sizing: border-box;
+
     animation: scaleIn 0.4s ease-out backwards;
 
     @for $i from 1 through 2 {
@@ -104,14 +126,15 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 10px;
-    padding: 16px 20px;
+    gap: clamp(6px, 1vw, 10px);
+    padding: clamp(6px, 1vw, 16px) clamp(8px, 1vw, 20px);
     border-radius: 20px;
     border: 3px solid transparent;
     background: #f0f4fa;
     cursor: pointer;
     transition: all 0.2s;
-    min-width: 160px;
+    min-width: 0;
+    flex-shrink: 1;
 
     &:hover {
         background: #e8eef8;
@@ -137,23 +160,24 @@
 
 .scene-emojis {
     display: flex;
-    gap: 4px;
-    padding: 10px;
+    flex-wrap: nowrap;
+    gap: clamp(2px, 1vw, 6px);
+    padding: clamp(4px, 1vw, 10px);
     background: linear-gradient(135deg, #e8f4fd, #f0e8fd);
     border-radius: 14px;
-    min-height: 60px;
+    min-height: clamp(40px, 8vw, 60px);
     align-items: center;
     justify-content: center;
 }
 
 .scene-emoji {
-    font-size: 40px;
+    font-size: clamp(14px, 4.5vw, 40px);
     line-height: 1;
 }
 
 .checkbox {
-    width: 38px;
-    height: 38px;
+    width: clamp(28px, 5vw, 38px);
+    height: clamp(28px, 5vw, 38px);
     border-radius: 10px;
     border: 3px solid #dde2e8;
     background: #fff;
@@ -169,7 +193,7 @@
 }
 
 .check-icon {
-    font-size: 26px !important;
+    font-size: clamp(18px, 4vw, 26px) !important;
     color: #ffffff !important;
     font-weight: 900 !important;
     animation: checkPop 0.2s ease-out;

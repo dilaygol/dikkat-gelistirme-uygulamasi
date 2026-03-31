@@ -3,39 +3,20 @@
 // Layout kuralları: styles.scss | Değişkenler: styles/_design-tokens.scss
 // ============================================================
 @use 'styles/design-tokens' as *;
+@use 'styles/responsive' as *;
 
 // ── Animasyonlar ───────────────────────────────────────────
 
 @keyframes foundPop {
-    0% {
-        transform: scale(.8);
-        opacity: .6;
-    }
-
-    60% {
-        transform: scale(1.15);
-    }
-
-    100% {
-        transform: scale(1);
-        opacity: 1;
-    }
+    0% { transform: scale(.8); opacity: .6; }
+    60% { transform: scale(1.15); }
+    100% { transform: scale(1); opacity: 1; }
 }
 
 @keyframes overlayPop {
-    0% {
-        transform: scale(.7) translate(-50%, -50%);
-        opacity: 0;
-    }
-
-    70% {
-        transform: scale(1.05) translate(-50%, -50%);
-    }
-
-    100% {
-        transform: scale(1) translate(-50%, -50%);
-        opacity: 1;
-    }
+    0% { transform: scale(.7) translate(-50%, -50%); opacity: 0; }
+    70% { transform: scale(1.05) translate(-50%, -50%); }
+    100% { transform: scale(1) translate(-50%, -50%); opacity: 1; }
 }
 
 // Filter and Host ──────────────────────────────────────────────────
@@ -47,6 +28,14 @@
     justify-content: center;
     background: $color-bg;
     overflow: hidden;
+
+    @include mobile {
+        overflow-x: hidden;
+        overflow-y: auto;
+        height: auto;
+        min-height: 100vh;
+        min-height: 100dvh;
+    }
 }
 
 // ── Kanvas ────────────────────────────────────────────────
@@ -55,8 +44,8 @@
     grid-template-columns: repeat(4, auto);
     justify-content: center;
     align-items: center;
-    gap: 32px 48px;
-    padding: 24px;
+    gap: clamp(4px, 1.5vw, 32px) clamp(6px, 2vw, 48px);
+    padding: clamp(8px, 1.5vw, 24px);
     width: 100%;
     background: transparent;
 }
@@ -68,8 +57,8 @@
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    width: 80px;
-    height: 90px;
+    width: clamp(45px, 14vw, 80px);
+    height: clamp(50px, 16vw, 90px);
     border: 3px solid transparent; // Prevents 6px shrink when .hover class is removed
     cursor: pointer;
     user-select: none;
@@ -83,8 +72,6 @@
             filter: drop-shadow(0 0 6px rgba(76, 175, 130, .7));
         }
     }
-
-
 
     &.hover {
         border-color: transparent !important;
@@ -101,8 +88,8 @@
 
 // ── Üçgen ─────────────────────────────────────────────────
 .triangle {
-    width: 72px;
-    height: 65px;
+    width: clamp(40px, 13vw, 72px);
+    height: clamp(35px, 11vw, 65px);
     clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
     transition: transform .15s, filter .15s;
 }
@@ -114,27 +101,24 @@
     bottom: -4px; // Position exactly at the bottom of the 80px wrapper
     margin-top: 4px;
     font-family: 'Nunito', sans-serif;
-    font-size: .8rem;
+    font-size: clamp(0.6rem, 2.5vw, .8rem);
     font-weight: 900;
     color: $color-text;
     background: rgba(255, 255, 255, .9);
     border-radius: 50%;
-    width: 24px;
-    height: 24px;
+    width: clamp(18px, 5vw, 24px);
+    height: clamp(18px, 5vw, 24px);
     box-shadow: 0 2px 6px rgba(0, 0, 0, .12);
     box-sizing: border-box;
 }
 
 // ── Üçgen için Özel İpucu Parlaması (Dikdörtgen yerine şekli sarması için) ──
 @keyframes triangleHintPulse {
-
-    0%,
-    100% {
+    0%, 100% {
         filter: drop-shadow(0 0 4px rgba(241, 196, 15, 0.4));
         box-shadow: none !important;
         transform: scale(1);
     }
-
     50% {
         filter: drop-shadow(0 0 14px rgba(241, 196, 15, 0.9));
         box-shadow: none !important;
@@ -160,7 +144,7 @@
     font-family: 'Nunito', sans-serif;
     font-size: 1.2rem;
     font-weight: 900;
-    padding: 18px 32px;
+    padding: clamp(16px, 3.5vw, 18px) clamp(16px, 4vw, 32px);
     border-radius: 18px;
     box-shadow: 0 8px 28px rgba(39, 103, 73, .18);
     text-align: center;

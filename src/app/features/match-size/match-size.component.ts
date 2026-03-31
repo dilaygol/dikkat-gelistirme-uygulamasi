@@ -32,15 +32,15 @@ const ID = 'match-size';
 export class MatchSizeComponent implements OnInit {
 
   // The correct dimensions matching the image target
-  targetWidth = 150;
+  targetWidth = 100;
 
   options: SizeOption[] = [
-    { id: 1, width: 80, isCorrect: false, isSelected: false, isShaking: false }, // Too small
-    { id: 2, width: 110, isCorrect: false, isSelected: false, isShaking: false }, // Small
-    { id: 3, width: 150, isCorrect: true, isSelected: false, isShaking: false }, // DOĞRU CEVAP
-    { id: 4, width: 190, isCorrect: false, isSelected: false, isShaking: false }, // Too big
-    { id: 5, width: 95, isCorrect: false, isSelected: false, isShaking: false }, // Smallest
-    { id: 6, width: 130, isCorrect: false, isSelected: false, isShaking: false }  // Almost correct
+    { id: 1, width: 55, isCorrect: false, isSelected: false, isShaking: false }, // Too small
+    { id: 2, width: 75, isCorrect: false, isSelected: false, isShaking: false }, // Small
+    { id: 3, width: 100, isCorrect: true, isSelected: false, isShaking: false }, // DOĞRU CEVAP
+    { id: 4, width: 125, isCorrect: false, isSelected: false, isShaking: false }, // Too big
+    { id: 5, width: 65, isCorrect: false, isSelected: false, isShaking: false }, // Smallest
+    { id: 6, width: 85, isCorrect: false, isSelected: false, isShaking: false }  // Almost correct
   ];
 
   isChecking = false;

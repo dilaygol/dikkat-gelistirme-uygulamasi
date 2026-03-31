@@ -1,5 +1,6 @@
 @use 'sass:color';
 @use 'styles/design-tokens' as *;
+@use 'styles/responsive' as *;
 
 // ── Animasyonlar ───────────────────────────────────────────
 @keyframes scaleIn {
@@ -71,26 +72,36 @@ $color-plus: #e55039; // Red color from target for '+'
     justify-content: center;
     background: $color-bg;
     overflow: hidden;
+
+    @include mobile {
+        overflow-x: hidden;
+        overflow-y: auto;
+        height: auto;
+        min-height: 100vh;
+        min-height: 100dvh;
+    }
 }
 
 // ── Oyun İçeriği ──────────────────────────────────────────
 .interaction-card {
     background: #ffffff;
-    border-radius: 50px;
-    padding: 60px 100px;
+    border-radius: clamp(24px, 5vw, 50px);
+    padding: clamp(16px, 4vw, 60px) clamp(16px, 5vw, 100px);
     display: flex;
     justify-content: center;
     align-items: center;
-    min-width: 800px;
+    width: 95%; margin: 0 auto;
     max-width: 920px;
     @include card-shadow($color-nav, .12);
     overflow: hidden;
+    box-sizing: border-box;
 }
 
 .triangles-container {
     display: flex;
+    flex-wrap: wrap; // Enables layout breaking gracefully
     flex-direction: row;
-    gap: 20px;
+    gap: clamp(10px, 2vw, 20px);
     justify-content: center;
     align-items: flex-end;
     width: 100%;
@@ -100,7 +111,7 @@ $color-plus: #e55039; // Red color from target for '+'
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 15px;
+    gap: clamp(8px, 1.5vw, 15px);
     animation: scaleIn 0.4s ease-out backwards;
 
     @for $i from 1 through 5 {
@@ -114,13 +125,14 @@ $color-plus: #e55039; // Red color from target for '+'
     display: flex;
     align-items: flex-end;
     justify-content: center;
-    width: 160px; // Spaced out for 5 items
-    margin-bottom: 20px;
+    margin-bottom: clamp(10px, 2vw, 20px);
 }
 
 .triangle-svg {
     fill: $color-triangle;
     transition: transform 0.3s ease;
+    max-width: 100%;
+    height: auto;
 
     &:hover {
         transform: translateY(-5px);
@@ -133,7 +145,7 @@ $color-plus: #e55039; // Red color from target for '+'
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    padding: 12px;
+    padding: clamp(6px, 1vw, 12px);
     border-radius: 16px;
     border: 3px solid transparent;
     transition: all 0.2s;
@@ -149,10 +161,10 @@ $color-plus: #e55039; // Red color from target for '+'
 }
 
 .checkbox {
-    width: 48px;
-    height: 48px;
+    width: clamp(28px, 6vw, 48px);
+    height: clamp(28px, 6vw, 48px);
     border-radius: 10px;
-    border: 3px solid #dde2e8;
+    border: clamp(2px, 0.4vw, 3px) solid #dde2e8;
     background: #fff;
     display: flex;
     align-items: center;
@@ -177,7 +189,7 @@ $color-plus: #e55039; // Red color from target for '+'
 }
 
 .check-icon {
-    font-size: 32px !important;
+    font-size: clamp(20px, 4vw, 32px) !important;
     color: #ffffff !important;
     font-weight: 900 !important;
     animation: checkPop 0.2s ease-out;

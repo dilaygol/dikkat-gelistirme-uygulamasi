@@ -4,6 +4,7 @@
 // Layout kuralları: styles.scss | Değişkenler: styles/_design-tokens.scss
 // ============================================================
 @use 'styles/design-tokens' as *;
+@use 'styles/responsive' as *;
 
 // ── Animasyonlar ───────────────────────────────────────────
 
@@ -44,14 +45,45 @@
     justify-content: center;
     background: $color-bg;
     overflow: hidden;
+
+    @include mobile {
+        overflow-x: hidden;
+        overflow-y: auto;
+        height: auto;
+        min-height: 100vh;
+        min-height: 100dvh;
+    }
 }
 
 // ── Orbital Kanvas ────────────────────────────────────────
+// Absolute pozisyonlu daireler 540px kanvasta konumlanıyor.
+// Mobilde her şeyi scale() ile küçültüyoruz.
 .orbit-canvas {
     position: relative;
     width: 540px;
     height: 540px;
     flex-shrink: 0;
+
+    // Mobilde kanvası viewport'a sığacak şekilde ölçekle
+    @include mobile {
+        // 375px ekranda nav-btn(32x2) + gap = ~64px → kalan ~311px
+        // scale faktörü: 311/540 ≈ 0.575 → güvenli: 0.55
+        transform: scale(0.55);
+        transform-origin: center center;
+        // Küçültülmüş fiziksel alanı yansıt (orijinal 540 → ~297px)
+        margin: -120px auto;
+    }
+
+    @include tablet {
+        transform: scale(0.75);
+        transform-origin: center center;
+        margin: -65px auto;
+    }
+
+    @include small-mobile {
+        transform: scale(0.48);
+        margin: -140px auto;
+    }
 }
 
 // ── Genel Daire ───────────────────────────────────────────

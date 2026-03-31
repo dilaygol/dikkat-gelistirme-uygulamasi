@@ -1,61 +1,27 @@
 @use 'sass:color';
 @use 'styles/design-tokens' as *;
+@use 'styles/responsive' as *;
 
 // ── Animasyonlar ───────────────────────────────────────────
 @keyframes scaleIn {
-    0% {
-        transform: scale(0.9);
-        opacity: 0;
-    }
-
-    100% {
-        transform: scale(1);
-        opacity: 1;
-    }
+    0% { transform: scale(0.9); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
 }
 
 @keyframes checkPop {
-    0% {
-        transform: scale(0.5);
-        opacity: 0;
-    }
-
-    100% {
-        transform: scale(1);
-        opacity: 1;
-    }
+    0% { transform: scale(0.5); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
 }
 
 @keyframes hintPulse {
-
-    0%,
-    100% {
-        background-color: rgba(241, 196, 15, 0.1);
-        border-color: rgba(241, 196, 15, 0.4);
-    }
-
-    50% {
-        background-color: rgba(241, 196, 15, 0.35);
-        border-color: rgba(241, 196, 15, 1);
-    }
+    0%, 100% { background-color: rgba(241, 196, 15, 0.1); border-color: rgba(241, 196, 15, 0.4); }
+    50% { background-color: rgba(241, 196, 15, 0.35); border-color: rgba(241, 196, 15, 1); }
 }
 
 @keyframes hintShake {
-
-    0%,
-    100% {
-        transform: translateX(0);
-    }
-
-    20%,
-    60% {
-        transform: translateX(-3px);
-    }
-
-    40%,
-    80% {
-        transform: translateX(3px);
-    }
+    0%, 100% { transform: translateX(0); }
+    20%, 60% { transform: translateX(-3px); }
+    40%, 80% { transform: translateX(3px); }
 }
 
 // ── Host ──────────────────────────────────────────────────
@@ -67,17 +33,25 @@
     justify-content: center;
     background: $color-bg;
     overflow: hidden;
+
+    @include mobile {
+        overflow-x: hidden;
+        overflow-y: auto;
+        height: auto;
+        min-height: 100vh;
+        min-height: 100dvh;
+    }
 }
 
 // ── Oyun İçeriği ──────────────────────────────────────────
 .interaction-card {
     background: #ffffff;
-    border-radius: 50px;
-    padding: 48px 80px;
+    border-radius: clamp(24px, 5vw, 50px);
+    padding: clamp(16px, 3vw, 48px) clamp(12px, 2vw, 80px);
     display: flex;
     justify-content: center;
     align-items: center;
-    min-width: 700px;
+    width: 95%; margin: 0 auto;
     max-width: 920px;
     @include card-shadow($color-nav, .12);
 }
@@ -85,7 +59,7 @@
 .pairs-container {
     display: flex;
     flex-direction: column;
-    gap: 28px;
+    gap: clamp(12px, 2.5vw, 28px);
     width: 100%;
 }
 
@@ -93,7 +67,14 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 24px;
+    gap: clamp(8px, 1.5vw, 24px);
+    flex-wrap: nowrap;
+    width: 100%;
+
+    > * {
+        flex-shrink: 1;
+    }
+
     animation: scaleIn 0.4s ease-out backwards;
 
     @for $i from 1 through 2 {
@@ -104,13 +85,13 @@
 }
 
 .vs-badge {
-    font-size: 15px;
+    font-size: clamp(12px, 2.5vw, 15px);
     font-weight: 900;
     color: #8b9dc3;
     background: #eef3fa;
     border-radius: 50%;
-    width: 42px;
-    height: 42px;
+    width: clamp(26px, 6vw, 42px);
+    height: clamp(26px, 6vw, 42px);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -122,13 +103,13 @@
     flex-direction: column;
     align-items: center;
     gap: 8px;
-    padding: 18px 28px;
+    padding: clamp(8px, 1.5vw, 18px) clamp(12px, 2vw, 28px);
     border-radius: 20px;
     border: 3px solid transparent;
     background: #f8fbff;
     cursor: pointer;
     transition: all 0.2s;
-    min-width: 150px;
+    width: 95%; margin: 0 auto;
 
     &:hover {
         background: #f0f7ff;
@@ -153,20 +134,21 @@
 }
 
 .item-emoji {
-    font-size: 60px;
+    font-size: clamp(40px, 8vw, 60px);
     line-height: 1;
 }
 
 .item-label {
-    font-size: 16px;
+    font-size: clamp(12px, 3vw, 16px);
     font-weight: 700;
     color: $color-text;
+    text-align: center;
 }
 
 // ── Checkbox ────────────────────────────────────────────
 .checkbox {
-    width: 42px;
-    height: 42px;
+    width: clamp(30px, 6vw, 42px);
+    height: clamp(30px, 6vw, 42px);
     border-radius: 10px;
     border: 3px solid #dde2e8;
     background: #fff;
@@ -182,7 +164,7 @@
 }
 
 .check-icon {
-    font-size: 28px !important;
+    font-size: clamp(20px, 4vw, 28px) !important;
     color: #ffffff !important;
     font-weight: 900 !important;
     animation: checkPop 0.2s ease-out;

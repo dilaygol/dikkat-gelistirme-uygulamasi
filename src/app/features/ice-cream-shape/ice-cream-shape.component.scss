@@ -1,4 +1,5 @@
 @use 'styles/design-tokens' as *;
+@use 'styles/responsive' as *;
 
 @keyframes scaleUp {
     0% {
@@ -36,6 +37,14 @@ $color-card-bg: #f5f6f8;
     justify-content: center;
     background: #edf4fa;
     overflow: hidden;
+
+    @include mobile {
+        overflow-x: hidden;
+        overflow-y: auto;
+        height: auto;
+        min-height: 100vh;
+        min-height: 100dvh;
+    }
 }
 
 .main-container {
@@ -61,7 +70,7 @@ $color-card-bg: #f5f6f8;
     gap: 10px;
     background: #fff;
     border-radius: 24px;
-    padding: 16px 32px;
+    padding: clamp(16px, 3.5vw, 16px) clamp(16px, 4vw, 32px);
     box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
     border: 3px solid #f4a261;
 }
@@ -79,6 +88,10 @@ $color-card-bg: #f5f6f8;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 14px;
+
+    @include mobile {
+        grid-template-columns: repeat(2, 1fr);
+    }
     width: 100%;
     max-width: 860px;
 }
@@ -86,7 +99,7 @@ $color-card-bg: #f5f6f8;
 .shape-card {
     background: #ffffff;
     border-radius: 20px;
-    padding: 14px 10px;
+    padding: clamp(16px, 3.5vw, 14px) clamp(16px, 4vw, 10px);
     display: flex;
     flex-direction: column;
     align-items: center;

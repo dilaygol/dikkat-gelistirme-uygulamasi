@@ -1,16 +1,14 @@
 @use 'styles/design-tokens' as *;
+@use 'styles/responsive' as *;
 
 .game-content {
     display: flex;
-    gap: 60px;
+    gap: clamp(20px, 5vw, 60px);
     align-items: center;
-    /* Prevent stretching and excess whitespace */
     justify-content: center;
     width: 100%;
     max-width: 900px;
     margin: 0 auto;
-
-    /* Responsive wrap */
     flex-wrap: wrap;
 }
 
@@ -19,69 +17,55 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #dcedc8; // light green-ish background
+    background-color: #dcedc8;
     border: 3px solid #689f38;
     border-radius: 16px;
-    padding: 20px;
+    padding: clamp(12px, 2.5vw, 20px);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     height: fit-content;
-
-    flex-shrink: 0; // Don't shrink the target box
+    flex-shrink: 0;
 }
 
 .target-box {
     display: flex;
     justify-content: center;
     align-items: center;
-    /* Made rectangular or fit content width again but smaller */
-    min-width: 100px;
+    min-width: clamp(60px, 14vw, 100px);
 }
 
 /* ────────── SYMBOL STYLING ────────── */
 .symbol-letter {
     font-family: 'Baloo 2', sans-serif;
     font-weight: 900;
-    font-size: clamp(60px, 8vw, 100px);
+    font-size: clamp(40px, 8vw, 100px);
     line-height: 1;
-    color: #f44336; // Thick Red Color
-
-    // Creating thick black border effect using text-shadow
-    // Standard web-stroke is flaky across browsers, so text-shadow is more robust
+    color: #f44336;
     text-shadow:
         -3px -3px 0 #000,
         3px -3px 0 #000,
         -3px 3px 0 #000,
         3px 3px 0 #000,
-        6px 6px 0 rgba(0, 0, 0, 0.15); // Drop shadow for depth
-
+        6px 6px 0 rgba(0, 0, 0, 0.15);
     display: inline-block;
     transition: transform 0.2s;
-
-    // Transformation classes mapped via TS cssClass property
-    &.normal {
-        transform: rotate(0deg) scale(1, 1);
-    }
-
-    &.rotate-90 {
-        transform: rotate(90deg);
-    }
-
-    &.rotate-180 {
-        transform: rotate(180deg);
-    }
-
-    &.flip-x {
-        transform: scaleX(-1);
-    }
+    &.normal { transform: rotate(0deg) scale(1, 1); }
+    &.rotate-90 { transform: rotate(90deg); }
+    &.rotate-180 { transform: rotate(180deg); }
+    &.flip-x { transform: scaleX(-1); }
 }
 
 /* ────────── OPTIONS CONTAINER ────────── */
 .options-container {
     display: grid;
-    grid-template-columns: repeat(4, 1fr); // 4 columns
-    grid-template-rows: repeat(2, 1fr); // 2 rows
-    gap: 10px;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: clamp(6px, 1.2vw, 10px);
     flex-grow: 1;
+    min-width: 0;
+
+    @include mobile {
+        grid-template-columns: repeat(3, 1fr);
+    }
 }
 
 .option-card {
@@ -89,21 +73,16 @@
     align-items: center;
     justify-content: center;
     background-color: #ffffff;
-    border: 3px solid transparent; // Pre-calculate border space for global classes
+    border: 3px solid transparent;
     border-radius: 12px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
     aspect-ratio: 1;
-    /* Keep options square, but prevent them stretching target */
-    max-height: clamp(80px, 15vw, 150px);
-    /* Restrict max height */
-
-    /* Allow sufficient breathing room for rotated/scaled letters */
-    padding: 10px;
+    max-height: clamp(60px, 14vw, 150px);
+    padding: clamp(6px, 1.2vw, 10px);
     box-sizing: border-box;
 
-    /* Make child font smaller than target */
     .symbol-letter {
-        font-size: clamp(30px, 5vw, 65px);
+        font-size: clamp(24px, 5vw, 65px);
         text-shadow:
             -2px -2px 0 #000,
             2px -2px 0 #000,

@@ -1,4 +1,5 @@
 @use 'styles/design-tokens' as *;
+@use 'styles/responsive' as *;
 
 // ── Animasyonlar ───────────────────────────────────────────
 
@@ -29,6 +30,14 @@ $color-card-bg: #f5f6f8;
     justify-content: center;
     background: #edf4fa; // Light blue background matching the new image
     overflow: hidden;
+
+    @include mobile {
+        overflow-x: hidden;
+        overflow-y: auto;
+        height: auto;
+        min-height: 100vh;
+        min-height: 100dvh;
+    }
 }
 
 // ── Ana İçerik ──────────────────────────────────────────
@@ -36,9 +45,9 @@ $color-card-bg: #f5f6f8;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 30px;
+    gap: clamp(12px, 2.5vw, 30px);
     width: 100%;
-    padding: 20px;
+    padding: clamp(10px, 2.5vw, 20px);
     animation: scaleUp 0.4s ease-out;
 }
 
@@ -47,6 +56,10 @@ $color-card-bg: #f5f6f8;
     display: grid;
     grid-template-columns: repeat(4, 1fr); // 4 columns, 1 row
     gap: 16px;
+
+    @include mobile {
+        grid-template-columns: repeat(2, 1fr);
+    }
     width: 100%;
     max-width: 900px;
 }
@@ -109,8 +122,8 @@ $color-card-bg: #f5f6f8;
 }
 
 .emoji-container {
-    width: 140px;
-    height: 120px;
+    width: clamp(90px, 20vw, 140px);
+    height: clamp(80px, 16vw, 120px);
     background: $color-card-bg;
     border-radius: 16px;
     display: flex;

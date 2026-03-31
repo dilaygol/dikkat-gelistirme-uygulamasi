@@ -1,5 +1,6 @@
 @use 'sass:color';
 @use './styles/design-tokens' as *;
+@use './styles/responsive' as *;
 @use './styles/global-states';
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&family=Baloo+2:wght@700;800;900&display=swap');
 
@@ -19,6 +20,12 @@ body {
     width: 100vw;
     height: 100vh;
     overflow: hidden;
+
+    @include mobile {
+        overflow-y: auto;
+        height: auto;
+        min-height: 100vh;
+    }
 }
 
 app-root {
@@ -36,6 +43,14 @@ app-root> :not(router-outlet):not(app-shared-feedback) {
     justify-content: center !important;
     background: $color-bg !important;
     overflow: hidden !important;
+
+    @include mobile {
+        overflow-x: hidden !important;
+        overflow-y: auto !important;
+        height: auto !important;
+        min-height: 100vh !important;
+        min-height: 100dvh !important;
+    }
 }
 
 // Başlık elementleri font-family'yi body'den miras alsın
@@ -62,19 +77,32 @@ h6 {
     height: min(740px, 100vh);
     display: flex;
     flex-direction: column;
+    overflow-x: hidden; // yatay taşmayı kesin olarak engelle
+
+    @include mobile {
+        width: 100vw;
+        height: auto;
+        min-height: 100vh;
+        min-height: 100dvh;
+    }
+
+    @include tablet {
+        width: 100vw;
+        height: min(740px, 100vh);
+    }
 }
 
-// Üst alan – yönerge metni, kesinlikle sabit 80px
+// Üst alan – yönerge metni
 // padding = dış padding(8px) + nav-btn(50px) + gap(10px) = 68px
 // → instruction-card, game-content ile aynı yatay hizaya gelir
 .frame-top {
-    min-height: 120px;
+    min-height: clamp(80px, 12vh, 120px);
     flex-shrink: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 10px 68px;
+    padding: clamp(6px, 1.5vw, 10px) clamp(12px, 5vw, 68px);
     overflow: visible;
     z-index: 10;
 }
@@ -83,11 +111,20 @@ h6 {
 .frame-middle {
     flex: 1;
     min-height: 0; // flex-shrink'in çalışması için
+    width: 100%;
     display: flex;
     align-items: center;
-    gap: 10px;
-    padding: 0 8px;
+    justify-content: space-between;
+    gap: clamp(4px, 1vw, 10px);
+    padding: 0 clamp(4px, 1vw, 8px);
     overflow: hidden;
+
+    @include mobile {
+        overflow-x: hidden;  // yatay taşma engelle
+        overflow-y: visible; // dikey büyümeye izin ver
+        padding: 0;          // ok butonları için daha fazla alan
+        gap: 0;
+    }
 }
 
 // ══════════════════════════════════════════════════════════
@@ -97,13 +134,13 @@ h6 {
 //   padding = dış(8px) + nav-btn(50px) + gap(10px) = 68px
 // ══════════════════════════════════════════════════════════
 .nav-btn {
-    width: 50px;
-    height: 50px;
+    width: clamp(36px, 6vw, 50px);
+    height: clamp(36px, 6vw, 50px);
     border-radius: 50%;
     border: none;
     background: #5b9bd5;
     color: #fff;
-    font-size: 1.4rem;
+    font-size: clamp(1rem, 2vw, 1.4rem);
     cursor: pointer;
     flex-shrink: 0;
     display: flex;
@@ -129,32 +166,58 @@ h6 {
         opacity: .6;
         box-shadow: none;
     }
+
+    @include mobile {
+        width: 32px;
+        height: 32px;
+        font-size: 0.9rem;
+    }
+
+    @include small-mobile {
+        width: 28px;
+        height: 28px;
+        font-size: 0.8rem;
+    }
 }
 
 
 // Oyun içeriği – orta alanı yatayda doldurur, taşmaz
 .game-content {
     flex: 1;
+    min-width: 0;   // flex çocuğunun küçülmesine izin ver
     height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
     overflow: hidden;
     max-width: 100%;
+
+    @include mobile {
+        overflow-x: hidden;  // sağa taşmayı engelle
+        overflow-y: visible; // dikey büyümeye izin ver
+        height: auto;
+        min-height: 0;
+    }
 }
 
 // Alt alan – butonlar + geri bildirim, kesinlikle sabit 120px
 .frame-bottom {
-    height: 120px;
+    height: clamp(80px, 12vh, 120px);
     max-height: 120px;
     flex-shrink: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 10px;
-    padding: 0 16px;
+    gap: clamp(6px, 1vw, 10px);
+    padding: 0 clamp(8px, 2vw, 16px);
     overflow: hidden;
+
+    @include mobile {
+        height: auto;
+        max-height: none;
+        padding: 0.75rem 0.5rem;
+    }
 }
 
 // ══════════════════════════════════════════════════════════
@@ -164,29 +227,30 @@ h6 {
 
 .instruction-card {
     background: #ffffff;
-    border-radius: 50px; // pill şekli
+    border-radius: clamp(24px, 5vw, 50px); // pill şekli
     // Alt turuncu gölge – cartoon efekti
     box-shadow:
         0 4px 0 #ffe5ce, // kalın turuncu alt çizgi
         0 8px 18px rgba(255, 166, 35, .18); // hafif halo
-    padding: 12px 28px;
+    padding: clamp(8px, 1.5vw, 12px) clamp(14px, 3vw, 28px);
     display: flex;
     align-items: center;
-    gap: 14px;
+    flex-wrap: wrap;
+    gap: clamp(8px, 1.5vw, 14px);
     width: 100%;
 }
 
 // İkon (emoji) – sabit boyut, küçülmez
 .instruction-icon,
 .instruction-icons {
-    font-size: 2rem;
+    font-size: clamp(1.4rem, 3vw, 2rem);
     flex-shrink: 0;
 }
 
 // Metin
 .instruction-text {
     font-family: 'Baloo 2', 'Nunito', sans-serif;
-    font-size: 1.6rem;
+    font-size: clamp(1rem, 2.5vw, 1.6rem);
     font-weight: 900;
     color: #3a3a5c;
     margin: 0;
@@ -194,6 +258,7 @@ h6 {
     letter-spacing: 0.01em;
     text-align: center;
     flex: 1;
+    min-width: 0;
 
     // pattern-matching h1'i doğrudan .instruction-text içine koyuyor
     h1 {
@@ -214,20 +279,22 @@ h6 {
 
 .action-buttons {
     display: flex;
-    gap: 12px;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: clamp(8px, 1.5vw, 12px);
 }
 
 .btn {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 10px;
-    width: 200px;
-    padding: 14px 0;
+    gap: clamp(6px, 1vw, 10px);
+    width: clamp(140px, 22vw, 200px);
+    padding: clamp(10px, 1.5vw, 14px) 0;
     border-radius: 40px;
     border: none;
     font-family: 'Nunito', sans-serif;
-    font-size: 1.15rem;
+    font-size: clamp(0.9rem, 1.5vw, 1.15rem);
     font-weight: 800;
     cursor: pointer;
     transition: transform 0.1s, background 0.15s, box-shadow 0.15s;
@@ -239,7 +306,7 @@ h6 {
 
     // Material Icons ikon boyutu buton içinde
     .material-icons {
-        font-size: 1.4rem;
+        font-size: clamp(1.1rem, 1.8vw, 1.4rem);
         line-height: 1;
     }
 }

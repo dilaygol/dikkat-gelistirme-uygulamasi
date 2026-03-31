@@ -15,7 +15,6 @@
                 <div class="master-grid">
                     @for (block of masterLayout; track $index) {
                     <div class="block" [style.background-color]="block.transparent ? 'transparent' : block.color"
-                        [style.width.px]="block.colSpan ? block.colSpan * 50 : 50"
                         [style.grid-column]="block.colSpan ? 'span ' + block.colSpan : 'auto'"
                         [class.is-transparent]="block.transparent">
 

@@ -1,4 +1,5 @@
 @use 'styles/design-tokens' as *;
+@use 'styles/responsive' as *;
 
 // ── Animasyonlar ───────────────────────────────────────────
 @keyframes shakeAnim {
@@ -20,9 +21,9 @@
 // ── Yerel Renkler ─────────────────────────────────────────
 $color-error-bg: #fff3f0;
 $color-error-tx: #e55039;
-$chalkboard-border: #8b5a2b; // Brown wood-like border
-$chalkboard-bg: #f8fafc; // Clean off-white background inside the frame
-$wire-color: #3b82f6; // Blue wires like pic 1
+$chalkboard-border: #8b5a2b;
+$chalkboard-bg: #f8fafc;
+$wire-color: #3b82f6;
 $bead-green: #22c55e;
 $bead-red: #ef4444;
 
@@ -35,6 +36,14 @@ $bead-red: #ef4444;
     justify-content: center;
     background: $color-bg;
     overflow: hidden;
+
+    @include mobile {
+        overflow-x: hidden;
+        overflow-y: auto;
+        height: auto;
+        min-height: 100vh;
+        min-height: 100dvh;
+    }
 }
 
 // ── Oyun Alanı Düzeni ─────────────────────────────────────
@@ -45,8 +54,9 @@ $bead-red: #ef4444;
     justify-content: center;
     position: relative;
     width: 100%;
-    max-width: 1000px;
-    padding: 16px;
+    max-width: min(1000px, 95vw);
+    margin: 0 auto;
+    padding: clamp(8px, 2vw, 16px);
 }
 
 // ── Soru Izgarası ─────────────────────────────────────────
@@ -54,10 +64,14 @@ $bead-red: #ef4444;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(2, auto);
-    gap: 30px 60px; // Row gap 30px, Col gap 60px
-    justify-content: center; // added
+    gap: clamp(14px, 3vw, 30px) clamp(20px, 5vw, 60px);
+    justify-content: center;
     justify-items: center;
     align-items: center;
+
+    @include mobile {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
 
 // ── Bireysel Soru ─────────────────────────────────────────
@@ -65,16 +79,16 @@ $bead-red: #ef4444;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 15px;
+    gap: clamp(8px, 1.5vw, 15px);
 }
 
-// ── Abaküs Çerçevesi (Pic 2 style) ─────────────────────────
+// ── Abaküs Çerçevesi ─────────────────────────
 .abacus-frame {
-    width: 160px;
-    height: 140px;
-    border-radius: 24px;
+    width: clamp(110px, 22vw, 160px);
+    height: clamp(100px, 18vw, 140px);
+    border-radius: clamp(16px, 3vw, 24px);
     background: $chalkboard-border;
-    padding: 12px; // Thickness of the wooden border
+    padding: clamp(8px, 1.5vw, 12px);
     box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
 }
 
@@ -85,9 +99,9 @@ $bead-red: #ef4444;
     border-radius: 14px;
     display: flex;
     flex-direction: column;
-    justify-content: center; // Center wires vertically
-    gap: 24px; // Distance between the two wires
-    padding: 0 10px;
+    justify-content: center;
+    gap: clamp(14px, 3vw, 24px);
+    padding: 0 clamp(6px, 1.2vw, 10px);
     position: relative;
     box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
 }
@@ -96,7 +110,7 @@ $bead-red: #ef4444;
 .wire {
     position: relative;
     width: 100%;
-    height: 20px;
+    height: clamp(14px, 2.5vw, 20px);
     display: flex;
     align-items: center;
 }
@@ -104,7 +118,7 @@ $bead-red: #ef4444;
 .wire-line {
     position: absolute;
     width: 100%;
-    height: 4px;
+    height: clamp(2px, 0.5vw, 4px);
     background: $wire-color;
     border-radius: 2px;
     top: 50%;
@@ -117,12 +131,12 @@ $bead-red: #ef4444;
     justify-content: center;
     gap: 2px;
     width: 100%;
-    z-index: 2; // Above the wire
+    z-index: 2;
 }
 
 .bead {
-    width: 18px;
-    height: 18px;
+    width: clamp(12px, 2.5vw, 18px);
+    height: clamp(12px, 2.5vw, 18px);
     border-radius: 50%;
     box-shadow: inset -2px -2px 4px rgba(0, 0, 0, 0.2), 0 2px 4px rgba(0, 0, 0, 0.2);
 
@@ -135,11 +149,11 @@ $bead-red: #ef4444;
     }
 }
 
-// ── Girdi Kartı (Question 4 stili) ─────────────────────────
+// ── Girdi Kartı ─────────────────────────
 .card {
     @include flex-center;
-    width: 60px;
-    height: 60px;
+    width: clamp(44px, 9vw, 60px);
+    height: clamp(44px, 9vw, 60px);
     background: #fff;
     border-radius: 12px;
     @include card-shadow($color-nav, .13);
@@ -175,7 +189,7 @@ $bead-red: #ef4444;
     background: transparent;
     text-align: center;
     font-family: 'Nunito', sans-serif;
-    font-size: 1.5rem;
+    font-size: clamp(1.1rem, 2vw, 1.5rem);
     font-weight: 900;
     color: $color-text;
     padding: 0;

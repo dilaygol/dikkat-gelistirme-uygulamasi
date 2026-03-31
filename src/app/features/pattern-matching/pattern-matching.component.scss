@@ -4,6 +4,7 @@
 // ============================================================
 @use 'sass:color';
 @use 'styles/design-tokens' as *;
+@use 'styles/responsive' as *;
 
 // ── Animasyonlar ───────────────────────────────────────────
 @keyframes popIn {
@@ -81,25 +82,39 @@ $color-accent-green: #4caf82; // kullanıcı grid kenarlığı
   justify-content: center;
   background: $color-bg;
   overflow: hidden;
+
+  @include mobile {
+    overflow-x: hidden;
+        overflow-y: auto;
+    height: auto;
+    min-height: 100vh;
+    min-height: 100dvh;
+  }
 }
 
 // ── Grid Satırı ───────────────────────────────────────────
 .grids-row {
   display: flex;
   align-items: center;
-  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: clamp(10px, 2vw, 20px);
+
+  @include mobile {
+    flex-direction: column;
+  }
 }
 
 .grid-wrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px;
+  gap: clamp(4px, 1vw, 8px);
 }
 
 .grid-label {
   font-family: 'Nunito', sans-serif;
-  font-size: 0.7rem;
+  font-size: clamp(0.6rem, 1.2vw, 0.7rem);
   font-weight: 900;
   letter-spacing: 1.5px;
   color: #7a8fa6;
@@ -110,18 +125,23 @@ $color-accent-green: #4caf82; // kullanıcı grid kenarlığı
 }
 
 .arrow-divider {
-  font-size: 1.8rem;
+  font-size: clamp(1.2rem, 2.5vw, 2.5rem);
   color: #b0c4d8;
   flex-shrink: 0;
   user-select: none;
+
+  @include mobile {
+    transform: rotate(90deg);
+    margin: -5px 0;
+  }
 }
 
 // ── Grid ──────────────────────────────────────────────────
 .grid {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
-  gap: 7px;
-  padding: 14px;
+  gap: clamp(3px, 0.8vw, 7px);
+  padding: clamp(8px, 1.5vw, 14px);
   border-radius: 16px;
   background: #ffffff;
   @include card-shadow($color-nav, .12);
@@ -138,9 +158,9 @@ $color-accent-green: #4caf82; // kullanıcı grid kenarlığı
 
 // ── Hücre ─────────────────────────────────────────────────
 .cell {
-  width: 52px;
-  height: 52px;
-  border-radius: 9px;
+  width: clamp(32px, 8vw, 52px);
+  height: clamp(32px, 8vw, 52px);
+  border-radius: clamp(6px, 1vw, 9px);
   background: #e8f0f8;
   border: none;
   cursor: default;

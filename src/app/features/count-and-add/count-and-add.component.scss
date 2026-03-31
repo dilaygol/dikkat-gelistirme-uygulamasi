@@ -1,9 +1,10 @@
 @use 'styles/design-tokens' as *;
+@use 'styles/responsive' as *;
 
 .game-content {
     display: flex;
     flex-direction: column;
-    gap: 30px;
+    gap: clamp(16px, 3vw, 30px);
     align-items: center;
     width: 100%;
 }
@@ -11,34 +12,41 @@
 .math-row {
     display: flex;
     align-items: center;
-    gap: 16px;
+    flex-wrap: nowrap;
+    justify-content: center;
+    gap: clamp(4px, 1.5vw, 16px);
+    width: 100%;
+
+    > * {
+        flex-shrink: 1;
+    }
 }
 
 .object-box {
     display: flex;
     flex-wrap: wrap;
-    gap: 8px;
-    justify-content: space-evenly; // İçeriği kutuya eşit şekilde yayar
+    gap: clamp(2px, 1vw, 8px);
+    justify-content: space-evenly;
     align-items: center;
-    width: 200px; // Genişliği artırdık
-    min-height: 100px;
-    padding: 12px 20px; // Yanlardan biraz daha boşluk
+    width: clamp(70px, 22vw, 200px);
+    min-height: clamp(40px, 10vw, 100px);
+    padding: clamp(4px, 1vw, 12px) clamp(6px, 1vw, 20px);
     border: 3px solid #cdd9e8;
     border-radius: 16px;
     background: #ffffff;
-    font-size: 2rem;
+    font-size: clamp(1.4rem, 3vw, 2rem);
 }
 
 .math-sign {
-    font-size: 3rem;
+    font-size: clamp(2rem, 4vw, 3rem);
     font-weight: 900;
     color: #5b9bd5;
 }
 
 .answer-input {
-    width: 100px;
-    height: 100px;
-    font-size: 3.5rem;
+    width: clamp(45px, 12vw, 100px);
+    height: clamp(45px, 12vw, 100px);
+    font-size: clamp(2rem, 5vw, 3.5rem);
     text-align: center;
     border: 3px solid #cdd9e8;
     border-radius: 16px;
@@ -60,18 +68,16 @@
         margin: 0;
     }
 
-    // Migrated from number-sequence: The wrapper/input gets show-hint 
     &.show-hint {
         &::placeholder {
             color: rgba($color-nav, 0.6);
             font-weight: 900;
             opacity: 1;
-            /* Firefox automatically reduces opacity */
         }
     }
 
     &.error {
-        color: #e55039; // $color-error-tx equivalent
+        color: #e55039;
     }
 
     &:focus {
@@ -80,7 +86,7 @@
 
     &:disabled {
         background: #f8f9fa;
-        color: #2ecc71; // Success color when completed
+        color: #2ecc71;
         border-color: #2ecc71;
         cursor: not-allowed;
     }

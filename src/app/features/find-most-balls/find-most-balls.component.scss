@@ -1,9 +1,11 @@
 @use 'styles/design-tokens' as *;
+@use 'styles/responsive' as *;
 
 .groups-container {
     display: flex;
+    flex-wrap: wrap;
     flex-direction: column;
-    gap: 15px;
+    gap: clamp(8px, 1.5vw, 15px);
     width: 100%;
     max-width: 650px;
     margin: 0 auto;
@@ -12,7 +14,7 @@
 .group-row-wrapper {
     display: flex;
     align-items: center;
-    gap: 20px;
+    gap: clamp(10px, 2vw, 20px);
     width: 100%;
     cursor: pointer;
 }
@@ -23,9 +25,8 @@
     align-items: center;
     border: 3px solid var(--group-color) !important;
     border-radius: 0 80px 80px 0;
-    padding: 10px 0;
-    /* Removing horizontal padding to allow full width for centering */
-    min-height: 100px;
+    padding: clamp(6px, 1.2vw, 10px) 0;
+    min-height: clamp(60px, 14vw, 100px);
     background-color: transparent;
     transition: transform 0.2s, background-color 0.2s;
     user-select: none;
@@ -36,7 +37,7 @@
     flex-direction: column;
     justify-content: center;
     width: 100%;
-    gap: 15px;
+    gap: clamp(8px, 1.5vw, 15px);
 }
 
 .ball-row {
@@ -48,67 +49,56 @@
 .layout-1 {
     .ball-row {
         justify-content: center;
-        gap: 25px;
+        gap: clamp(12px, 3vw, 25px);
     }
-
-    .top-row {
-        transform: translateX(-15px);
-    }
-
-    .bottom-row {
-        transform: translateX(15px);
-    }
+    .top-row { transform: translateX(-15px); }
+    .bottom-row { transform: translateX(15px); }
 }
 
 .layout-2 {
     .ball-row {
         justify-content: center;
-        gap: 35px;
+        gap: clamp(16px, 4vw, 35px);
     }
 }
 
 .layout-3 {
     .ball-row {
         justify-content: center;
-        gap: 20px;
+        gap: clamp(10px, 2.5vw, 20px);
     }
-
-    .bottom-row {
-        /* 4 balls */
-        transform: translateX(10px);
-    }
+    .bottom-row { transform: translateX(10px); }
 }
 
 .ball-wrapper {
-    width: 48px;
-    height: 48px;
+    width: clamp(32px, 7vw, 48px);
+    height: clamp(32px, 7vw, 48px);
     border-radius: 50%;
     background-size: contain;
-    background-repeat: no-origin;
+    background-repeat: no-repeat;
     background-position: center;
     filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.15));
 
-    // Placeholder Emojis if real images are not available
     &.basket::before {
         content: '🏀';
-        font-size: 38px;
-        line-height: 48px;
+        font-size: clamp(26px, 5.5vw, 38px);
+        line-height: clamp(32px, 7vw, 48px);
         text-align: center;
         display: block;
     }
 
     &.soccer::before {
         content: '⚽';
-        font-size: 38px;
-        line-height: 48px;
+        font-size: clamp(26px, 5.5vw, 38px);
+        line-height: clamp(32px, 7vw, 48px);
         text-align: center;
         display: block;
     }
 }
 
 .group-checkbox {
-    width: 32px;
-    height: 32px;
+    width: clamp(24px, 4.5vw, 32px);
+    height: clamp(24px, 4.5vw, 32px);
     border: 3px solid #ccc;
     background-color: #fff;
     border-radius: 6px;
@@ -120,7 +110,7 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) inset;
 
     .material-icons {
-        font-size: 20px;
+        font-size: clamp(14px, 3vw, 20px);
     }
 }
 

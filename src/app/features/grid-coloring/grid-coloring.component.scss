@@ -1,55 +1,9 @@
 @use 'sass:color';
 @use 'styles/design-tokens' as *;
+@use 'styles/responsive' as *;
 
-$color-cell: #673ab7; // deep purple
-$color-accent-user: #32c459; // green for UI labels
-
-// ── Animasyonlar ───────────────────────────────────────────
-@keyframes cellPop {
-    0% {
-        transform: scale(0.8);
-    }
-
-    60% {
-        transform: scale(1.1);
-    }
-
-    100% {
-        transform: scale(1);
-    }
-}
-
-@keyframes hintPulse {
-
-    0%,
-    100% {
-        box-shadow: 0 0 0 0 rgba(241, 196, 15, 0);
-        transform: scale(1);
-    }
-
-    50% {
-        box-shadow: 0 0 12px 4px rgba(241, 196, 15, 0.8);
-        transform: scale(1.08);
-    }
-}
-
-@keyframes hintShake {
-
-    0%,
-    100% {
-        transform: translateX(0);
-    }
-
-    20%,
-    60% {
-        transform: translateX(-3px);
-    }
-
-    40%,
-    80% {
-        transform: translateX(3px);
-    }
-}
+$color-cell: #673ab7;
+$color-accent-user: #32c459;
 
 // ── Animasyonlar ───────────────────────────────────────────
 @keyframes cellPop {
@@ -100,11 +54,10 @@ $color-accent-user: #32c459; // green for UI labels
 
 .game-content {
     display: flex;
-    gap: 30px;
+    gap: clamp(14px, 3vw, 30px);
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
-    /* wraps on small screens */
     width: 100%;
 }
 
@@ -112,19 +65,19 @@ $color-accent-user: #32c459; // green for UI labels
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 10px;
+    gap: clamp(6px, 1.2vw, 10px);
 }
 
 .grid-wrapper {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 8px;
+    gap: clamp(4px, 1vw, 8px);
 }
 
 .grid-label {
     font-family: 'Nunito', sans-serif;
-    font-size: 0.8rem;
+    font-size: clamp(0.65rem, 1.2vw, 0.8rem);
     font-weight: 900;
     letter-spacing: 1.5px;
     color: #7a8fa6;
@@ -141,7 +94,7 @@ $color-accent-user: #32c459; // green for UI labels
     color: $color-accent-user;
 
     .material-icons {
-        font-size: 28px;
+        font-size: clamp(20px, 4vw, 28px);
         font-weight: bold;
     }
 }
@@ -149,10 +102,8 @@ $color-accent-user: #32c459; // green for UI labels
 .grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    /* In the original image the grid has solid black lines. Pattern matching has rounded padded grids */
-    /* Following Pattern Matching UI style: padded grey-ish board */
-    gap: 4px;
-    padding: 12px;
+    gap: clamp(2px, 0.5vw, 4px);
+    padding: clamp(8px, 1.5vw, 12px);
     border-radius: 12px;
     background: #ffffff;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
@@ -168,21 +119,16 @@ $color-accent-user: #32c459; // green for UI labels
 }
 
 .cell {
-    width: clamp(60px, 12vw, 85px);
-    /* Enine daha uzun (Yatay Dikdörtgen) */
-    height: clamp(35px, 7vw, 45px);
-    /* Yükseklik daha kısa */
+    width: clamp(40px, 10vw, 85px);
+    height: clamp(25px, 5.5vw, 45px);
     border-radius: 6px;
     background: #e8f0f8;
     border: none;
-    /* overrides buttons */
     padding: 0;
     margin: 0;
     cursor: default;
     transition: background 0.1s;
 
-    /* Using component specific classes only for non-interactive state colors */
-    /* Note: NOT using .selected or .hint locally */
     &.filled {
         background: $color-cell;
     }
@@ -213,8 +159,6 @@ button.cell {
         outline-offset: 2px;
     }
 
-    /* We still want local hover specific logic to only trigger when not filled and not hinted */
-    /* So we augment but not hardcode global hover here */
     &:hover:not(.user-filled) {
         background: color.adjust(#e8f0f8, $lightness: -5%);
     }

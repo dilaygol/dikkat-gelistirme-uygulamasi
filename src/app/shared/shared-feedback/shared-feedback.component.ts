@@ -31,15 +31,17 @@ import { FeedbackService } from '../../core/services/feedback.service';
       background: rgba(214,245,227,.95); 
       color: #276749;
       font-family: 'Nunito', sans-serif; 
-      font-size: 1.2rem; 
+      font-size: clamp(1rem, 2vw, 1.2rem); 
       font-weight: 900;
-      padding: 18px 32px; 
+      padding: clamp(12px, 2.5vw, 18px) clamp(20px, 4vw, 32px); 
       border-radius: 18px;
       box-shadow: 0 8px 28px rgba(39,103,73,.18);
       text-align: center; 
       z-index: 9999;
       animation: overlayPop .4s cubic-bezier(.34,1.56,.64,1);
       cursor: pointer;
+      max-width: 90vw;
+      word-wrap: break-word;
     }
 
     .complete-overlay.error {

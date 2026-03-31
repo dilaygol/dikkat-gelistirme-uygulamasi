@@ -1,4 +1,5 @@
 @use '../../../styles/design-tokens' as *;
+@use '../../../styles/responsive' as *;
 
 // ── Host (Global Full-Screen Layout) ──────────────────────
 :host {
@@ -9,13 +10,21 @@
     justify-content: center;
     background: $color-bg;
     overflow: hidden;
+
+    @include mobile {
+        overflow-x: hidden;
+        overflow-y: auto;
+        height: auto;
+        min-height: 100vh;
+        min-height: 100dvh;
+    }
 }
 
 .circle-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 32px;
-    padding: 24px;
+    gap: clamp(12px, 2.5vw, 32px);
+    padding: clamp(12px, 2.5vw, 24px);
 
     // Make it responsive for smaller screens
     @media (max-width: 768px) {
@@ -30,8 +39,8 @@
 }
 
 .circle-item {
-    width: 120px;
-    height: 120px;
+    width: clamp(80px, 16vw, 120px);
+    height: clamp(80px, 16vw, 120px);
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -65,7 +74,7 @@
 
     // Number text styling
     .number-text {
-        font-size: 4rem;
+        font-size: clamp(2.5rem, 6vw, 4rem);
         font-weight: 800;
         text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 
