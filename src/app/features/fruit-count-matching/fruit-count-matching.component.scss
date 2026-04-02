@@ -10,23 +10,33 @@
     padding: clamp(10px, 2.5vw, 20px);
     height: 100%;
     align-items: center;
+
+    @include mobile {
+        gap: clamp(4px, 2vw, 16px);
+        padding: clamp(4px, 1.5vw, 10px);
+    }
 }
 
 .fruits-column {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    gap: clamp(14px, 3vw, 30px);
+    gap: clamp(8px, 2vw, 30px);
     flex: 1;
-    min-width: clamp(100px, 20vw, 250px);
+    min-width: 0;
+
+    @include mobile {
+        gap: clamp(6px, 1.5vw, 14px);
+    }
 }
 
 .fruit-group {
     display: flex;
     align-items: center;
-    gap: -15px;
-    padding: clamp(10px, 2vw, 15px) clamp(12px, 2.5vw, 20px);
-    min-height: clamp(50px, 10vw, 80px);
+    flex-wrap: nowrap;
+    gap: 0;
+    padding: clamp(6px, 1.5vw, 15px) clamp(6px, 1.5vw, 20px);
+    min-height: clamp(40px, 8vw, 80px);
     border-radius: 20px;
     background: transparent;
     cursor: pointer;
@@ -40,6 +50,12 @@
         pointer-events: none;
         filter: grayscale(0.5);
     }
+
+    @include mobile {
+        padding: clamp(4px, 1vw, 8px) clamp(4px, 1vw, 10px);
+        min-height: clamp(32px, 7vw, 50px);
+        border-radius: 14px;
+    }
 }
 
 .left-column .fruit-group {
@@ -51,15 +67,25 @@
 }
 
 .fruit-icon {
-    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-size: clamp(1.2rem, 3.2vw, 2.8rem);
     line-height: 1;
     filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.15));
-    margin-right: -10px;
+    margin-right: clamp(-8px, -1vw, -3px);
+    flex-shrink: 1;
+
+    @include small-mobile {
+        font-size: clamp(1rem, 2.8vw, 1.6rem);
+        margin-right: clamp(-5px, -0.8vw, -2px);
+    }
 }
 
 .right-column .fruit-icon {
     margin-right: 0;
-    margin-left: -10px;
+    margin-left: clamp(-8px, -1vw, -3px);
+
+    @include small-mobile {
+        margin-left: clamp(-5px, -0.8vw, -2px);
+    }
 }
 
 .left-column .fruit-icon:last-child {

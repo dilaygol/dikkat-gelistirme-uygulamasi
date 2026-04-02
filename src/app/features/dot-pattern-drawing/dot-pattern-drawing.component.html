@@ -19,7 +19,7 @@
                 <div class="board-wrapper">
                     <div class="board-header example">ÖRNEK DESEN</div>
                     <div class="svg-container">
-                        <svg [attr.width]="SVG_SIZE" [attr.height]="SVG_SIZE">
+                        <svg [attr.viewBox]="'0 0 ' + SVG_SIZE + ' ' + SVG_SIZE">
                             <!-- Target Edges -->
                             @for (edge of getParsedEdges(targetEdges); track $index) {
                             <line [attr.x1]="edge.from.x" [attr.y1]="edge.from.y" [attr.x2]="edge.to.x"
@@ -41,7 +41,7 @@
                 <div class="board-wrapper user" [class.error]="feedbackState === 'wrong' && hasChecked">
                     <div class="board-header user">SENİN SIRAN</div>
                     <div class="svg-container interactive" [class.locked]="isNextUnlocked">
-                        <svg [attr.width]="SVG_SIZE" [attr.height]="SVG_SIZE">
+                        <svg [attr.viewBox]="'0 0 ' + SVG_SIZE + ' ' + SVG_SIZE">
                             <!-- Hints (Target Edges with low opacity) -->
                             @if (showHint && !isNextUnlocked) {
                             @for (edge of getParsedEdges(targetEdges); track $index) {

@@ -12,6 +12,15 @@
     padding: 0;
 }
 
+// Tüm scrollbar'ları gizle — uygulama tam ekran, scroll gerekmez
+*::-webkit-scrollbar {
+    display: none;
+}
+* {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
 body {
     font-family: 'Nunito', sans-serif;
     background: $color-bg;
@@ -51,6 +60,10 @@ app-root> :not(router-outlet):not(app-shared-feedback) {
         min-height: 100vh !important;
         min-height: 100dvh !important;
     }
+
+    @include tablet {
+        overflow: hidden !important;
+    }
 }
 
 // Başlık elementleri font-family'yi body'den miras alsın
@@ -88,7 +101,7 @@ h6 {
 
     @include tablet {
         width: 100vw;
-        height: min(740px, 100vh);
+        height: min(100vh, 100dvh);
     }
 }
 
@@ -124,6 +137,15 @@ h6 {
         overflow-y: visible; // dikey büyümeye izin ver
         padding: 0;          // ok butonları için daha fazla alan
         gap: 0;
+    }
+
+    @include tablet {
+        overflow-y: auto;
+        scrollbar-width: none;           // Firefox
+        -ms-overflow-style: none;        // IE/Edge
+        &::-webkit-scrollbar {           // Chrome/Safari
+            display: none;
+        }
     }
 }
 
