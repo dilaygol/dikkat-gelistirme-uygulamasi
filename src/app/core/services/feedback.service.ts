@@ -20,6 +20,14 @@ export class FeedbackService {
         }, 2500);
     }
 
+    showCorrect(): void {
+        this.showFeedback('success', 'Harika! Doğru cevap! 🎨');
+    }
+
+    showWrong(): void {
+        this.showFeedback('error', 'Tekrar Denemelisin 🧐');
+    }
+
     hideFeedback(): void {
         this.state.update(s => ({ ...s, visible: false }));
         if (this.timer) clearTimeout(this.timer);
