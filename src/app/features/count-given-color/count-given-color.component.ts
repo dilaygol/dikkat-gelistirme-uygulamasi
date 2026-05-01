@@ -126,6 +126,6 @@ export class CountGivenColorComponent implements OnInit {
     goPrev(): void { this.router.navigate(['/same-word-find']); }
     goNext(): void {
         if (!this.isNextUnlocked) return;
-        this.router.navigate(['/end']);
+        this.router.navigate(['/star-difference']);
     }
 }

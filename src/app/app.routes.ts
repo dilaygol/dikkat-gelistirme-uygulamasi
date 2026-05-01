@@ -92,6 +92,15 @@ import { CountSidesComponent } from './features/count-sides/count-sides.componen
 import { SortBySizeComponent } from './features/sort-by-size/sort-by-size.component';
 import { SameWordFindComponent } from './features/same-word-find/same-word-find.component';
 import { CountGivenColorComponent } from './features/count-given-color/count-given-color.component';
+import { StarDifferenceComponent } from './features/star-difference/star-difference.component';
+import { FruitSequenceComponent } from './features/fruit-sequence/fruit-sequence.component';
+import { ArrowGridCopyComponent } from './features/arrow-grid-copy/arrow-grid-copy.component';
+import { ColorPatternCompletionComponent } from './features/color-pattern-completion/color-pattern-completion.component';
+import { NumberGridMatchComponent } from './features/number-grid-match/number-grid-match.component';
+import { DigitRowFinderComponent } from './features/digit-row-finder/digit-row-finder.component';
+import { NumberColorMatchComponent } from './features/number-color-match/number-color-match.component';
+import { SymbolSequenceMatchComponent } from './features/symbol-sequence-match/symbol-sequence-match.component';
+import { ShapeMatrixComponent } from './features/shape-matrix/shape-matrix.component';
 
 export const routes: Routes = [
     { path: '', component: StartPageComponent, pathMatch: 'full' },
@@ -186,6 +195,15 @@ export const routes: Routes = [
     { path: 'sort-by-size', component: SortBySizeComponent },
     { path: 'same-word-find', component: SameWordFindComponent },
     { path: 'count-given-color', component: CountGivenColorComponent },
+    { path: 'star-difference', component: StarDifferenceComponent },
+    { path: 'fruit-sequence', component: FruitSequenceComponent },
+    { path: 'arrow-grid-copy', component: ArrowGridCopyComponent },
+    { path: 'color-pattern-completion', component: ColorPatternCompletionComponent },
+    { path: 'number-grid-match', component: NumberGridMatchComponent },
+    { path: 'digit-row-finder', component: DigitRowFinderComponent },
+    { path: 'number-color-match', component: NumberColorMatchComponent },
+    { path: 'symbol-sequence-match', component: SymbolSequenceMatchComponent },
+    { path: 'shape-matrix', component: ShapeMatrixComponent },
     { path: 'end', component: EndPageComponent },
     { path: '**', redirectTo: '' },
 ];
