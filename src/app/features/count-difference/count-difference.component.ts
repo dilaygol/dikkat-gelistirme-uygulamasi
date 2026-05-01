@@ -7,68 +7,65 @@ import { HintService } from '../../core/services/hint.service';
 import { ActionButtonsComponent } from '../../shared/action-buttons/action-buttons.component';
 import { ActivityHeaderComponent } from '../../shared/activity-header/activity-header.component';
 
-export interface MissingNumberQuestion {
+export interface DiffQuestion {
     id: number;
-    sequence: (number | null)[]; // null = boş/eksik
-    missingIndex: number;
+    emoji: string;
+    leftCount: number;
+    rightCount: number;
     answer: number;
     options: number[];
-    selectedOption: number | null;
+    selectedAnswer: number | null;
     color: string;
 }
 
 interface SavedState {
-    selections: (number | null)[];
+    answers: (number | null)[];
     feedbackState: 'correct' | 'wrong' | null;
 }
 
-const ID = 'missing-number';
+const ID = 'count-difference';
 
-const QUESTIONS: Omit<MissingNumberQuestion, 'selectedOption'>[] = [
+const QUESTIONS: Omit<DiffQuestion, 'selectedAnswer'>[] = [
     {
         id: 0,
-        sequence: [2, 4, null, 8, 10],
-        missingIndex: 2,
-        answer: 6,
-        options: [5, 6, 7, 9],
-        color: '#f9a825',
+        emoji: '🍎',
+        leftCount: 7,
+        rightCount: 4,
+        answer: 3,
+        options: [2, 3, 4, 5], // 3 is 2nd
+        color: '#ef5350',
     },
     {
         id: 1,
-        sequence: [10, 20, 30, null, 50],
-        missingIndex: 3,
-        answer: 40,
-        options: [35, 40, 45, 55],
-        color: '#66bb6a',
-    },
-    {
-        id: 2,
-        sequence: [1, null, 3, 4, 5],
-        missingIndex: 1,
-        answer: 2,
-        options: [1, 2, 6, 7],
+        emoji: '🚗',
+        leftCount: 5,
+        rightCount: 8,
+        answer: 3,
+        options: [4, 1, 3, 2], // 3 is 3rd
         color: '#42a5f5',
     },
     {
-        id: 3,
-        sequence: [3, 6, 9, null, 15],
-        missingIndex: 3,
-        answer: 12,
-        options: [10, 11, 12, 13],
-        color: '#ab47bc',
+        id: 2,
+        emoji: '🌻',
+        leftCount: 9,
+        rightCount: 3,
+        answer: 6,
+        options: [3, 4, 5, 6], // 6 is 4th
+        color: '#66bb6a',
     },
 ];
 
 
+
 @Component({
-    selector: 'app-missing-number',
+    selector: 'app-count-difference',
     standalone: true,
     imports: [CommonModule, ActionButtonsComponent, ActivityHeaderComponent],
-    templateUrl: './missing-number.component.html',
-    styleUrl: './missing-number.component.scss',
+    templateUrl: './count-difference.component.html',
+    styleUrl: './count-difference.component.scss',
 })
-export class MissingNumberComponent implements OnInit {
-    questions: MissingNumberQuestion[] = this.createFreshQuestions();
+export class CountDifferenceComponent implements OnInit {
+    questions: DiffQuestion[] = this.createFreshQuestions();
     feedbackState: 'correct' | 'wrong' | null = null;
 
     constructor(
@@ -90,26 +87,30 @@ export class MissingNumberComponent implements OnInit {
         const saved = this.gs.getData<SavedState>(ID);
         if (saved) {
             this.feedbackState = saved.feedbackState;
-            saved.selections.forEach((sel, i) => {
-                if (this.questions[i]) this.questions[i].selectedOption = sel;
+            saved.answers.forEach((ans, i) => {
+                if (this.questions[i]) this.questions[i].selectedAnswer = ans;
             });
         }
     }
 
-    private createFreshQuestions(): MissingNumberQuestion[] {
-        return QUESTIONS.map(q => ({ ...q, selectedOption: null }));
+    private createFreshQuestions(): DiffQuestion[] {
+        return QUESTIONS.map(q => ({ ...q, selectedAnswer: null }));
     }
 
     private persist(): void {
         this.gs.save(ID, {
-            selections: this.questions.map(q => q.selectedOption),
+            answers: this.questions.map(q => q.selectedAnswer),
             feedbackState: this.feedbackState,
         });
     }
 
-    selectOption(question: MissingNumberQuestion, option: number): void {
+    getArray(n: number): number[] {
+        return new Array(n).fill(0);
+    }
+
+    selectAnswer(question: DiffQuestion, option: number): void {
         if (this.feedbackState === 'correct') return;
-        question.selectedOption = option;
+        question.selectedAnswer = option;
         this.feedbackState = null;
         this.persist();
     }
@@ -122,37 +123,37 @@ export class MissingNumberComponent implements OnInit {
     }
 
     checkAnswers(): void {
-        const anySelected = this.questions.some(q => q.selectedOption !== null);
+        const anySelected = this.questions.some(q => q.selectedAnswer !== null);
         if (!anySelected) {
-            this.fb.showFeedback('error', 'Lütfen önce bir seçim yapın!');
+            this.fb.showFeedback('error', 'Lütfen önce cevaplarınızı seçin!');
             return;
         }
 
-        const allCorrect = this.questions.every(q => q.selectedOption === q.answer);
+        const allCorrect = this.questions.every(q => q.selectedAnswer === q.answer);
 
         if (allCorrect) {
             this.feedbackState = 'correct';
             this.gs.markCompleted(ID);
             this.hintService.resetErrors(ID);
-            this.fb.showFeedback('success', 'Tebrikler! Eksik sayıları doğru buldun! 🎉');
+            this.fb.showFeedback('success', 'Tebrikler! Sayı farklarını doğru buldun! 🎯');
         } else {
             this.hintService.registerError(ID);
             this.feedbackState = 'wrong';
 
             if (this.showHint) {
                 this.questions.forEach(q => {
-                    if (q.selectedOption !== q.answer) q.selectedOption = null;
+                    if (q.selectedAnswer !== q.answer) q.selectedAnswer = null;
                 });
             }
 
-            this.fb.showFeedback('error', 'Bazı yanıtlar yanlış, tekrar dene!');
+            this.fb.showFeedback('error', 'Bazı yanıtlar hatalı, tekrar saymayı dene!');
         }
         this.persist();
     }
 
-    goPrev(): void { this.router.navigate(['/letter-hunt']); }
+    goPrev(): void { this.router.navigate(['/first-letter-match']); }
     goNext(): void {
         if (!this.isNextUnlocked) return;
-        this.router.navigate(['/odd-category-out']);
+        this.router.navigate(['/number-ordering']);
     }
 }

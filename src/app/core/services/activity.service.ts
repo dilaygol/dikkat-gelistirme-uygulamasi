@@ -20,7 +20,7 @@ export class ActivityService {
         'finding-green-lines', 'incorrect-numbers', 'water-capacity', 'fruit-size-ranking',
         'elderly-people', 'find-different', 'cylinder-selection', 'pattern-completion',
         'shape-counting', 'happy-children', 'different-mountain', 'letter-grid',
-        'ice-cream-shape', 'most-colorful-ball', 'cat-position', 'dot-grid-copy', 'bike-matching', 'pencil-matching', 'symbol-grid-copy', 'ball-matching', 'orange-different', 'river-branches', 'symbol-grid-matching', 'shape-match-find', 'count-apples', 'ball-sequence', 'snake-letter', 'letter-color-match', 'fruit-subtraction', 'triangle-match', 'set-match', 'profession-matching', 'fruit-basket', 'flower-order', 'symbol-color-match', 'object-addition', 'symbol-block-match', 'shade-sorting-2', 'balance-scale', 'two-feature-filter', 'subtle-difference', 'letter-hunt', 'missing-number'
+        'ice-cream-shape', 'most-colorful-ball', 'cat-position', 'dot-grid-copy', 'bike-matching', 'pencil-matching', 'symbol-grid-copy', 'ball-matching', 'orange-different', 'river-branches', 'symbol-grid-matching', 'shape-match-find', 'count-apples', 'ball-sequence', 'snake-letter', 'letter-color-match', 'fruit-subtraction', 'triangle-match', 'set-match', 'profession-matching', 'fruit-basket', 'flower-order', 'symbol-color-match', 'object-addition', 'symbol-block-match', 'shade-sorting-2', 'balance-scale', 'two-feature-filter', 'subtle-difference', 'letter-hunt', 'missing-number', 'odd-category-out', 'mirror-letter', 'letter-count', 'first-letter-match', 'count-difference', 'number-ordering', 'rotate-shape', 'count-sides', 'sort-by-size', 'same-word-find', 'count-given-color'
     ];
 
     private currentPath$ = new BehaviorSubject<string>('');
