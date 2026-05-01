@@ -111,6 +111,6 @@ export class IceCreamShapeComponent implements OnInit {
 
     goNext(): void {
         if (!this.isNextUnlocked) return;
-        this.router.navigate(['/end']);
+        this.router.navigate(['/most-colorful-ball']);
     }
 }

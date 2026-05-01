@@ -8,15 +8,35 @@
 // ── Animasyonlar ───────────────────────────────────────────
 
 @keyframes foundPop {
-    0% { transform: scale(.8); opacity: .6; }
-    60% { transform: scale(1.15); }
-    100% { transform: scale(1); opacity: 1; }
+    0% {
+        transform: scale(.8);
+        opacity: .6;
+    }
+
+    60% {
+        transform: scale(1.15);
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
 }
 
 @keyframes overlayPop {
-    0% { transform: scale(.7) translate(-50%, -50%); opacity: 0; }
-    70% { transform: scale(1.05) translate(-50%, -50%); }
-    100% { transform: scale(1) translate(-50%, -50%); opacity: 1; }
+    0% {
+        transform: scale(.7) translate(-50%, -50%);
+        opacity: 0;
+    }
+
+    70% {
+        transform: scale(1.05) translate(-50%, -50%);
+    }
+
+    100% {
+        transform: scale(1) translate(-50%, -50%);
+        opacity: 1;
+    }
 }
 
 // Filter and Host ──────────────────────────────────────────────────
@@ -114,11 +134,14 @@
 
 // ── Üçgen için Özel İpucu Parlaması (Dikdörtgen yerine şekli sarması için) ──
 @keyframes triangleHintPulse {
-    0%, 100% {
+
+    0%,
+    100% {
         filter: drop-shadow(0 0 4px rgba(241, 196, 15, 0.4));
         box-shadow: none !important;
         transform: scale(1);
     }
+
     50% {
         filter: drop-shadow(0 0 14px rgba(241, 196, 15, 0.9));
         box-shadow: none !important;
@@ -173,7 +196,7 @@
 
 .progress-bar-fill {
     height: 100%;
-    background: linear-gradient(90deg, hsl(30, 100%, 88%), hsl(25, 100%, 38%));
+    background: linear-gradient(90deg, hsl(182, 100%, 88%), hsl(189, 100%, 23%));
     border-radius: 20px;
     transition: width .3s ease;
 }

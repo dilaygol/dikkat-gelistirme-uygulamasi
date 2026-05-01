@@ -7,7 +7,7 @@ import { HintService } from '../../core/services/hint.service';
 import { ActionButtonsComponent } from '../../shared/action-buttons/action-buttons.component';
 import { ActivityHeaderComponent } from '../../shared/activity-header/activity-header.component';
 
-interface TriangleItem {
+interface CircleItem {
     id: number;
     order: number;
     shade: string;
@@ -17,20 +17,21 @@ interface TriangleItem {
 }
 
 interface ShadeSortState {
-    triangles: TriangleItem[];
+    circles: CircleItem[];
     currentStep: number;
 }
 
-const ID = 'shade-sorting';
+const ID = 'shade-sorting-2';
 
 @Component({
-    selector: 'app-shade-sorting',
+    selector: 'app-shade-sorting-2',
     standalone: true,
     imports: [CommonModule, ActionButtonsComponent, ActivityHeaderComponent],
-    templateUrl: './shade-sorting.component.html',
-    styleUrl: './shade-sorting.component.scss',
+    templateUrl: './shade-sorting-2.component.html',
+    styleUrl: './shade-sorting-2.component.scss',
 })
-export class ShadeSortingComponent implements OnInit {
+export class ShadeSorting2Component implements OnInit {
+
     constructor(
         private router: Router,
         private gs: GameStateService,
@@ -38,7 +39,7 @@ export class ShadeSortingComponent implements OnInit {
         private hintService: HintService
     ) { }
 
-    triangles: TriangleItem[] = [];
+    circles: CircleItem[] = [];
     currentStep = 1;
 
     get showHint(): boolean {
@@ -51,8 +52,7 @@ export class ShadeSortingComponent implements OnInit {
     ngOnInit(): void {
         const saved = this.gs.getData<ShadeSortState>(ID);
         if (saved) {
-            // Kaydedilmiş durum var → geri yükle
-            this.triangles = saved.triangles;
+            this.circles = saved.circles;
             this.currentStep = saved.currentStep;
         } else {
             this.initGame();
@@ -62,63 +62,60 @@ export class ShadeSortingComponent implements OnInit {
     initGame(): void {
         this.currentStep = 1;
         this.hintService.resetErrors(ID);
-        this.triangles = this.buildAndScatter();
+        this.circles = this.buildAndScatter();
     }
 
-    private buildAndScatter(): TriangleItem[] {
-        const hStart = 182, hEnd = 189;
-        const lStart = 95, lEnd = 12;
-        const hStep = (hEnd - hStart) / 11;
+    private buildAndScatter(): CircleItem[] {
+        const hue = 265; // mor
+        const lStart = 93, lEnd = 18;
         const lStep = (lStart - lEnd) / 11;
 
-        const items: TriangleItem[] = Array.from({ length: 12 }, (_, i) => ({
+        const items: CircleItem[] = Array.from({ length: 12 }, (_, i) => ({
             id: i, order: i + 1,
-            shade: `hsl(${Math.round(hStart + i * hStep)}, 100%, ${Math.round(lStart - i * lStep)}%)`,
+            shade: `hsl(${hue}, 90%, ${Math.round(lStart - i * lStep)}%)`,
             found: false, foundStep: undefined, isShaking: false
         }));
         // Sabit karışık sıra
-        const fixedOrder = [9, 2, 6, 11, 0, 7, 4, 10, 3, 8, 1, 5];
+        const fixedOrder = [8, 1, 10, 4, 11, 2, 7, 0, 5, 9, 3, 6];
         return fixedOrder.map((origIdx) => items[origIdx]);
     }
 
-    /** Ülüğü bulunan üçgene tıklandığında doğrulama yapar */
-    onTriangleClick(tri: TriangleItem): void {
-        if (tri.found || this.isComplete) return;
-        if (tri.order === this.currentStep) {
-            tri.found = true;
-            tri.foundStep = this.currentStep;
+    onCircleClick(circle: CircleItem): void {
+        if (circle.found || this.isComplete) return;
+        if (circle.order === this.currentStep) {
+            circle.found = true;
+            circle.foundStep = this.currentStep;
             this.currentStep++;
-            this.hintService.resetErrors(ID); // Doğru bulununca o adımın hatası sıfırlanır
+            this.hintService.resetErrors(ID);
             this.persist();
             if (this.isComplete) {
                 this.gs.markCompleted(ID);
                 this.fb.showFeedback('success', 'Harika bir iş çıkardın!');
             }
         } else {
-            tri.isShaking = true;
+            circle.isShaking = true;
             this.hintService.registerError(ID);
-            setTimeout(() => (tri.isShaking = false), 500);
+            setTimeout(() => (circle.isShaking = false), 500);
             this.persist();
         }
     }
 
     private persist(): void {
         this.gs.save(ID, {
-            triangles: this.triangles,
+            circles: this.circles,
             currentStep: this.currentStep
         });
     }
 
-    /** Tüm ilerlemeyi sıfırlar; sıra sabitlenir */
     restartGame(): void {
         this.gs.clear(ID);
         this.hintService.resetErrors(ID);
         this.initGame();
     }
 
-    goPrev(): void { this.router.navigate(['/odd-direction']); }
+    goPrev(): void { this.router.navigate(['/symbol-block-match']); }
     goNext(): void {
         if (!this.isNextUnlocked) return;
-        this.router.navigate(['/number-sequence']);
+        this.router.navigate(['/balance-scale']);
     }
 }
