@@ -45,7 +45,7 @@ export class ShadeSortingComponent implements OnInit {
         return this.hintService.shouldShowHint(ID);
     }
 
-    get isComplete(): boolean { return this.currentStep > 16; }
+    get isComplete(): boolean { return this.currentStep > 12; }
     get isNextUnlocked(): boolean { return this.isComplete || this.gs.isCompleted(ID); }
 
     ngOnInit(): void {
@@ -66,21 +66,18 @@ export class ShadeSortingComponent implements OnInit {
     }
 
     private buildAndScatter(): TriangleItem[] {
-        const hStart = 30, hEnd = 25;
-        const sStart = 100, sEnd = 100;
-        const lStart = 88, lEnd = 38;
+        const hStart = 182, hEnd = 189;
+        const lStart = 95, lEnd = 12;
+        const hStep = (hEnd - hStart) / 11;
+        const lStep = (lStart - lEnd) / 11;
 
-        const hStep = (hStart - hEnd) / 15;
-        const sStep = (sStart - sEnd) / 15;
-        const lStep = (lStart - lEnd) / 15;
-
-        const items: TriangleItem[] = Array.from({ length: 16 }, (_, i) => ({
+        const items: TriangleItem[] = Array.from({ length: 12 }, (_, i) => ({
             id: i, order: i + 1,
-            shade: `hsl(${Math.round(hStart - i * hStep)}, ${Math.round(sStart - i * sStep)}%, ${Math.round(lStart - i * lStep)}%)`,
+            shade: `hsl(${Math.round(hStart + i * hStep)}, 100%, ${Math.round(lStart - i * lStep)}%)`,
             found: false, foundStep: undefined, isShaking: false
         }));
-        // Sabit karışık sıra – her oyunda aynı görünüm
-        const fixedOrder = [12, 3, 7, 15, 0, 10, 5, 13, 8, 1, 14, 6, 11, 4, 9, 2];
+        // Sabit karışık sıra
+        const fixedOrder = [9, 2, 6, 11, 0, 7, 4, 10, 3, 8, 1, 5];
         return fixedOrder.map((origIdx) => items[origIdx]);
     }
 

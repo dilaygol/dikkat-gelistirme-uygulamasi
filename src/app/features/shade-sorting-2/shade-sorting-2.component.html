@@ -1,0 +1,51 @@
+<div class="page-frame">
+
+    <div class="frame-top">
+        <app-activity-header icons="🎨 🔵 ⭕"
+            instruction="Daireleri en açıktan en koyuya doğru sıralayarak yerleştir.">
+        </app-activity-header>
+    </div>
+
+    <div class="frame-middle">
+
+        <button class="nav-btn" (click)="goPrev()" aria-label="Önceki etkinlik">
+            <span class="material-icons">arrow_back</span>
+        </button>
+
+        <div class="game-content canvas-area">
+            @for (circle of circles; track circle.id) {
+            <div class="circle-wrap"
+                 [class.hover]="!circle.found"
+                 [class.found]="circle.found"
+                 [class.shake]="circle.isShaking"
+                 [class.hint]="showHint && !circle.found && circle.order === currentStep"
+                 (click)="onCircleClick(circle)"
+                 role="button" tabindex="0"
+                 (keydown.enter)="onCircleClick(circle)">
+                <div class="circle" [style.background]="circle.shade"></div>
+                @if (circle.found) {
+                    <span class="step-label">{{ circle.foundStep }}</span>
+                }
+            </div>
+            }
+        </div>
+
+        <button class="nav-btn" [class.locked]="!isNextUnlocked" [disabled]="!isNextUnlocked"
+            (click)="goNext()" aria-label="Sonraki etkinlik">
+            <span class="material-icons">arrow_forward</span>
+        </button>
+
+    </div>
+
+    <div class="progress-strip">
+        <div class="progress-bar-wrap" aria-label="İlerleme">
+            <div class="progress-bar-fill" [style.width.%]="((currentStep - 1) / 12) * 100"></div>
+            <span class="progress-text">{{ currentStep - 1 }} / 12</span>
+        </div>
+    </div>
+
+    <div class="frame-bottom">
+        <app-action-buttons [checkAlwaysDisabled]="true" (reset)="restartGame()" />
+    </div>
+
+</div>

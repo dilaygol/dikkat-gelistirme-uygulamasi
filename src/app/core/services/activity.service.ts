@@ -35,7 +35,10 @@ export class ActivityService {
         'finding-red-lines', 'uppercase-lowercase', 'word-shape-matching',
         'pattern-transfer', 'ladybug-spots', 'rotate-grid', 'color-by-number',
         'toothbrush-selection', 'symbol-addition-v2', 'cat-sequence',
-        'missing-number-grid', 'veg-grid-transfer', 'symbol-sequence-placement'
+        'missing-number-grid', 'veg-grid-transfer', 'symbol-sequence-placement',
+        'most-colorful-ball', 'cat-position', 'dot-grid-copy', 'bike-matching', 'pencil-matching', 'symbol-grid-copy', 'ball-matching', 'orange-different', 'river-branches', 'symbol-grid-matching', 'shape-match-find', 'count-apples', 'ball-sequence', 'snake-letter', 'letter-color-match', 'fruit-subtraction', 'triangle-match', 'set-match', 'profession-matching', 'fruit-basket', 'flower-order', 'symbol-color-match', 'object-addition', 'symbol-block-match', 'shade-sorting-2', 'balance-scale', 'two-feature-filter', 'subtle-difference', 'letter-hunt', 'missing-number', 'odd-category-out', 'mirror-letter', 'letter-count', 'first-letter-match', 'count-difference', 'number-ordering', 'rotate-shape', 'count-sides', 'sort-by-size', 'same-word-find', 'count-given-color', 'star-difference',
+        'fruit-sequence', 'arrow-grid-copy', 'color-pattern-completion',
+        'number-grid-match', 'digit-row-finder', 'number-color-match', 'symbol-sequence-match', 'shape-matrix'
     ];
 
     private currentPath$ = new BehaviorSubject<string>('');

@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import { PatternMatchingComponent } from './features/pattern-matching/pattern-matching.component';
 import { OddDirectionComponent } from './features/odd-direction/odd-direction.component';
 import { ShadeSortingComponent } from './features/shade-sorting/shade-sorting.component';
+import { ShadeSorting2Component } from './features/shade-sorting-2/shade-sorting-2.component';
 import { NumberSequenceComponent } from './features/number-sequence/number-sequence.component';
 import { SymbolMatchingComponent } from './features/symbol-matching/symbol-matching.component';
 import { MultiConditionSelectionComponent } from './features/multi-condition-selection/multi-condition-selection.component';
@@ -19,6 +20,7 @@ import { LivingThingsComponent } from './features/living-things/living-things';
 import { TrafficSignMatchingComponent } from './features/traffic-sign-matching/traffic-sign-matching.component';
 import { AbacusCountingComponent } from './features/abacus-counting/abacus-counting.component';
 import { DotPatternDrawingComponent } from './features/dot-pattern-drawing/dot-pattern-drawing.component';
+import { DotGridCopyComponent } from './features/dot-grid-copy/dot-grid-copy.component';
 import { FruitCountMatchingComponent } from './features/fruit-count-matching/fruit-count-matching.component';
 import { FindMostBallsComponent } from './features/find-most-balls/find-most-balls.component';
 import { ShadowMatchingComponent } from './features/shadow-matching/shadow-matching.component';
@@ -101,12 +103,61 @@ import { CatSequenceComponent } from './features/cat-sequence/cat-sequence.compo
 import { MissingNumberGridComponent } from './features/missing-number-grid/missing-number-grid.component';
 import { VegGridTransferComponent } from './features/veg-grid-transfer/veg-grid-transfer.component';
 import { SymbolSequencePlacementComponent } from './features/symbol-sequence-placement/symbol-sequence-placement.component';
+import { MostColorfulBallComponent } from './features/most-colorful-ball/most-colorful-ball.component';
+import { CatPositionComponent } from './features/cat-position/cat-position.component';
+import { BikeMatchingComponent } from './features/bike-matching/bike-matching.component';
+import { PencilMatchingComponent } from './features/pencil-matching/pencil-matching.component';
+import { SymbolGridCopyComponent } from './features/symbol-grid-copy/symbol-grid-copy.component';
+import { BallMatchingComponent } from './features/ball-matching/ball-matching.component';
+import { OrangeDifferentComponent } from './features/orange-different/orange-different.component';
+import { RiverBranchesComponent } from './features/river-branches/river-branches.component';
+import { SymbolGridMatchingComponent } from './features/symbol-grid-matching/symbol-grid-matching.component';
+import { ShapeMatchFindComponent } from './features/shape-match-find/shape-match-find.component';
+import { CountApplesComponent } from './features/count-apples/count-apples.component';
+import { BallSequenceComponent } from './features/ball-sequence/ball-sequence.component';
+import { SnakeLetterComponent } from './features/snake-letter/snake-letter.component';
+import { LetterColorMatchComponent } from './features/letter-color-match/letter-color-match.component';
+import { FruitSubtractionComponent } from './features/fruit-subtraction/fruit-subtraction.component';
+import { ObjectAdditionComponent } from './features/object-addition/object-addition.component';
+import { TriangleMatchComponent } from './features/triangle-match/triangle-match.component';
+import { SetMatchComponent } from './features/set-match/set-match.component';
+import { ProfessionMatchingComponent } from './features/profession-matching/profession-matching.component';
+import { FruitBasketComponent } from './features/fruit-basket/fruit-basket.component';
+import { FlowerOrderComponent } from './features/flower-order/flower-order.component';
+import { SymbolColorMatchComponent } from './features/symbol-color-match/symbol-color-match.component';
+import { SymbolBlockMatchComponent } from './features/symbol-block-match/symbol-block-match.component';
+import { BalanceScaleComponent } from './features/balance-scale/balance-scale.component';
+import { TwoFeatureFilterComponent } from './features/two-feature-filter/two-feature-filter.component';
+import { SubtleDifferenceComponent } from './features/subtle-difference/subtle-difference.component';
+import { LetterHuntComponent } from './features/letter-hunt/letter-hunt.component';
+import { MissingNumberComponent } from './features/missing-number/missing-number.component';
+import { OddCategoryOutComponent } from './features/odd-category-out/odd-category-out.component';
+import { MirrorLetterComponent } from './features/mirror-letter/mirror-letter.component';
+import { LetterCountComponent } from './features/letter-count/letter-count.component';
+import { FirstLetterMatchComponent } from './features/first-letter-match/first-letter-match.component';
+import { CountDifferenceComponent } from './features/count-difference/count-difference.component';
+import { NumberOrderingComponent } from './features/number-ordering/number-ordering.component';
+import { RotateShapeComponent } from './features/rotate-shape/rotate-shape.component';
+import { CountSidesComponent } from './features/count-sides/count-sides.component';
+import { SortBySizeComponent } from './features/sort-by-size/sort-by-size.component';
+import { SameWordFindComponent } from './features/same-word-find/same-word-find.component';
+import { CountGivenColorComponent } from './features/count-given-color/count-given-color.component';
+import { StarDifferenceComponent } from './features/star-difference/star-difference.component';
+import { FruitSequenceComponent } from './features/fruit-sequence/fruit-sequence.component';
+import { ArrowGridCopyComponent } from './features/arrow-grid-copy/arrow-grid-copy.component';
+import { ColorPatternCompletionComponent } from './features/color-pattern-completion/color-pattern-completion.component';
+import { NumberGridMatchComponent } from './features/number-grid-match/number-grid-match.component';
+import { DigitRowFinderComponent } from './features/digit-row-finder/digit-row-finder.component';
+import { NumberColorMatchComponent } from './features/number-color-match/number-color-match.component';
+import { SymbolSequenceMatchComponent } from './features/symbol-sequence-match/symbol-sequence-match.component';
+import { ShapeMatrixComponent } from './features/shape-matrix/shape-matrix.component';
 
 export const routes: Routes = [
     { path: '', component: StartPageComponent, pathMatch: 'full' },
     { path: 'pattern', component: PatternMatchingComponent },
     { path: 'odd-direction', component: OddDirectionComponent },
     { path: 'shade-sorting', component: ShadeSortingComponent },
+    { path: 'shade-sorting-2', component: ShadeSorting2Component },
     { path: 'number-sequence', component: NumberSequenceComponent },
     { path: 'symbol-matching', component: SymbolMatchingComponent },
     { path: 'multi-condition-selection', component: MultiConditionSelectionComponent },
@@ -204,6 +255,55 @@ export const routes: Routes = [
     { path: 'missing-number-grid', component: MissingNumberGridComponent },
     { path: 'veg-grid-transfer', component: VegGridTransferComponent },
     { path: 'symbol-sequence-placement', component: SymbolSequencePlacementComponent },
+    { path: 'most-colorful-ball', component: MostColorfulBallComponent },
+    { path: 'cat-position', component: CatPositionComponent },
+    { path: 'dot-grid-copy', component: DotGridCopyComponent },
+    { path: 'bike-matching', component: BikeMatchingComponent },
+    { path: 'pencil-matching', component: PencilMatchingComponent },
+    { path: 'symbol-grid-copy', component: SymbolGridCopyComponent },
+    { path: 'ball-matching', component: BallMatchingComponent },
+    { path: 'orange-different', component: OrangeDifferentComponent },
+    { path: 'river-branches', component: RiverBranchesComponent },
+    { path: 'symbol-grid-matching', component: SymbolGridMatchingComponent },
+    { path: 'shape-match-find', component: ShapeMatchFindComponent },
+    { path: 'count-apples', component: CountApplesComponent },
+    { path: 'ball-sequence', component: BallSequenceComponent },
+    { path: 'snake-letter', component: SnakeLetterComponent },
+    { path: 'letter-color-match', component: LetterColorMatchComponent },
+    { path: 'fruit-subtraction', component: FruitSubtractionComponent },
+    { path: 'triangle-match', component: TriangleMatchComponent },
+    { path: 'set-match', component: SetMatchComponent },
+    { path: 'profession-matching', component: ProfessionMatchingComponent },
+    { path: 'fruit-basket', component: FruitBasketComponent },
+    { path: 'flower-order', component: FlowerOrderComponent },
+    { path: 'symbol-color-match', component: SymbolColorMatchComponent },
+    { path: 'object-addition', component: ObjectAdditionComponent },
+    { path: 'symbol-block-match', component: SymbolBlockMatchComponent },
+    { path: 'balance-scale', component: BalanceScaleComponent },
+    { path: 'two-feature-filter', component: TwoFeatureFilterComponent },
+    { path: 'subtle-difference', component: SubtleDifferenceComponent },
+    { path: 'letter-hunt', component: LetterHuntComponent },
+    { path: 'missing-number', component: MissingNumberComponent },
+    { path: 'odd-category-out', component: OddCategoryOutComponent },
+    { path: 'mirror-letter', component: MirrorLetterComponent },
+    { path: 'letter-count', component: LetterCountComponent },
+    { path: 'first-letter-match', component: FirstLetterMatchComponent },
+    { path: 'count-difference', component: CountDifferenceComponent },
+    { path: 'number-ordering', component: NumberOrderingComponent },
+    { path: 'rotate-shape', component: RotateShapeComponent },
+    { path: 'count-sides', component: CountSidesComponent },
+    { path: 'sort-by-size', component: SortBySizeComponent },
+    { path: 'same-word-find', component: SameWordFindComponent },
+    { path: 'count-given-color', component: CountGivenColorComponent },
+    { path: 'star-difference', component: StarDifferenceComponent },
+    { path: 'fruit-sequence', component: FruitSequenceComponent },
+    { path: 'arrow-grid-copy', component: ArrowGridCopyComponent },
+    { path: 'color-pattern-completion', component: ColorPatternCompletionComponent },
+    { path: 'number-grid-match', component: NumberGridMatchComponent },
+    { path: 'digit-row-finder', component: DigitRowFinderComponent },
+    { path: 'number-color-match', component: NumberColorMatchComponent },
+    { path: 'symbol-sequence-match', component: SymbolSequenceMatchComponent },
+    { path: 'shape-matrix', component: ShapeMatrixComponent },
     { path: 'end', component: EndPageComponent },
     { path: '**', redirectTo: '' },
 ];
