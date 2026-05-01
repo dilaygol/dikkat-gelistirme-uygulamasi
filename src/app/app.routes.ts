@@ -54,7 +54,7 @@ import { EndPageComponent } from './features/end-page/end-page.component';
 import { SchoolProfessionComponent } from './features/school-profession/school-profession.component';
 import { TallestAnimalComponent } from './features/tallest-animal/tallest-animal.component';
 import { ShapeCornersComponent } from './features/shape-corners/shape-corners.component';
-import { PencilMatchingComponent } from './features/pencil-matching/pencil-matching.component';
+import { PencilMatchingV2Component } from './features/pencil-matching-v2/pencil-matching-v2.component';
 import { ShapeCountColoringComponent } from './features/shape-count-coloring/shape-count-coloring.component';
 import { SportMatchingComponent } from './features/sport-matching/sport-matching.component';
 import { LetterCountingComponent } from './features/letter-counting/letter-counting.component';
@@ -72,7 +72,7 @@ import { PatternMatchingThreeComponent } from './features/pattern-matching-three
 import { ZebraLetterSelectionComponent } from './features/zebra-letter-selection/zebra-letter-selection.component';
 import { ShapeMatchingDrawnComponent } from './features/shape-matching-drawn/shape-matching-drawn.component';
 import { WatermelonMathComponent } from './features/watermelon-math/watermelon-math.component';
-import { FruitSequenceComponent } from './features/fruit-sequence/fruit-sequence.component';
+import { FruitSequenceV2Component } from './features/fruit-sequence-v2/fruit-sequence-v2.component';
 import { DoctorSuitabilityComponent } from './features/doctor-suitability/doctor-suitability.component';
 import { FruitGroupMatchingComponent } from './features/fruit-group-matching/fruit-group-matching.component';
 import { OrangeColoringComponent } from './features/orange-coloring/orange-coloring.component';
@@ -157,7 +157,7 @@ export const routes: Routes = [
     { path: 'school-profession', component: SchoolProfessionComponent },
     { path: 'tallest-animal', component: TallestAnimalComponent },
     { path: 'shape-corners', component: ShapeCornersComponent },
-    { path: 'pencil-matching', component: PencilMatchingComponent },
+    { path: 'pencil-matching-v2', component: PencilMatchingV2Component },
     { path: 'shape-count-coloring', component: ShapeCountColoringComponent },
     { path: 'sport-matching', component: SportMatchingComponent },
     { path: 'letter-counting', component: LetterCountingComponent },
@@ -175,7 +175,7 @@ export const routes: Routes = [
     { path: 'zebra-letters', component: ZebraLetterSelectionComponent },
     { path: 'shape-matching-drawn', component: ShapeMatchingDrawnComponent },
     { path: 'watermelon-math', component: WatermelonMathComponent },
-    { path: 'fruit-sequence', component: FruitSequenceComponent },
+    { path: 'fruit-sequence-v2', component: FruitSequenceV2Component },
     { path: 'doctor-suitability', component: DoctorSuitabilityComponent },
     { path: 'fruit-group-matching', component: FruitGroupMatchingComponent },
     { path: 'orange-coloring', component: OrangeColoringComponent },

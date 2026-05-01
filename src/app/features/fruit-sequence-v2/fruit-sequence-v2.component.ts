@@ -14,16 +14,16 @@ interface FruitColumn {
   isShaking?: boolean;
 }
 
-const ID = 'fruit-sequence';
+const ID = 'fruit-sequence-v2';
 
 @Component({
-  selector: 'app-fruit-sequence',
+  selector: 'app-fruit-sequence-v2',
   standalone: true,
   imports: [CommonModule, ActionButtonsComponent, ActivityHeaderComponent, SharedFeedbackComponent],
-  templateUrl: './fruit-sequence.component.html',
-  styleUrl: './fruit-sequence.component.scss'
+  templateUrl: './fruit-sequence-v2.component.html',
+  styleUrl: './fruit-sequence-v2.component.scss'
 })
-export class FruitSequenceComponent implements OnInit {
+export class FruitSequenceV2Component implements OnInit {
   private activityService = inject(ActivityService);
   private feedbackService = inject(FeedbackService);
   private gameStateService = inject(GameStateService);

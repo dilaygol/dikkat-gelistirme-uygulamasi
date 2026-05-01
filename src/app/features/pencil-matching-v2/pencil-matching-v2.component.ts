@@ -29,16 +29,16 @@ export interface PencilMatchingState {
   feedbackState: 'correct' | 'wrong' | null;
 }
 
-const ID = 'pencil-matching';
+const ID = 'pencil-matching-v2';
 
 @Component({
-  selector: 'app-pencil-matching',
+  selector: 'app-pencil-matching-v2',
   standalone: true,
   imports: [CommonModule, ActionButtonsComponent, ActivityHeaderComponent, SharedFeedbackComponent],
-  templateUrl: './pencil-matching.component.html',
-  styleUrl: './pencil-matching.component.scss'
+  templateUrl: './pencil-matching-v2.component.html',
+  styleUrl: './pencil-matching-v2.component.scss'
 })
-export class PencilMatchingComponent implements OnInit {
+export class PencilMatchingV2Component implements OnInit {
 
   // Pencils ordered by length: Green(longest) > Purple > Brown > Blue > Yellow(shortest)
   pencils: PencilItem[] = [
