@@ -81,6 +81,26 @@ import { TwoFeatureFilterComponent } from './features/two-feature-filter/two-fea
 import { SubtleDifferenceComponent } from './features/subtle-difference/subtle-difference.component';
 import { LetterHuntComponent } from './features/letter-hunt/letter-hunt.component';
 import { MissingNumberComponent } from './features/missing-number/missing-number.component';
+import { OddCategoryOutComponent } from './features/odd-category-out/odd-category-out.component';
+import { MirrorLetterComponent } from './features/mirror-letter/mirror-letter.component';
+import { LetterCountComponent } from './features/letter-count/letter-count.component';
+import { FirstLetterMatchComponent } from './features/first-letter-match/first-letter-match.component';
+import { CountDifferenceComponent } from './features/count-difference/count-difference.component';
+import { NumberOrderingComponent } from './features/number-ordering/number-ordering.component';
+import { RotateShapeComponent } from './features/rotate-shape/rotate-shape.component';
+import { CountSidesComponent } from './features/count-sides/count-sides.component';
+import { SortBySizeComponent } from './features/sort-by-size/sort-by-size.component';
+import { SameWordFindComponent } from './features/same-word-find/same-word-find.component';
+import { CountGivenColorComponent } from './features/count-given-color/count-given-color.component';
+import { StarDifferenceComponent } from './features/star-difference/star-difference.component';
+import { FruitSequenceComponent } from './features/fruit-sequence/fruit-sequence.component';
+import { ArrowGridCopyComponent } from './features/arrow-grid-copy/arrow-grid-copy.component';
+import { ColorPatternCompletionComponent } from './features/color-pattern-completion/color-pattern-completion.component';
+import { NumberGridMatchComponent } from './features/number-grid-match/number-grid-match.component';
+import { DigitRowFinderComponent } from './features/digit-row-finder/digit-row-finder.component';
+import { NumberColorMatchComponent } from './features/number-color-match/number-color-match.component';
+import { SymbolSequenceMatchComponent } from './features/symbol-sequence-match/symbol-sequence-match.component';
+import { ShapeMatrixComponent } from './features/shape-matrix/shape-matrix.component';
 
 export const routes: Routes = [
     { path: '', component: StartPageComponent, pathMatch: 'full' },
@@ -164,6 +184,26 @@ export const routes: Routes = [
     { path: 'subtle-difference', component: SubtleDifferenceComponent },
     { path: 'letter-hunt', component: LetterHuntComponent },
     { path: 'missing-number', component: MissingNumberComponent },
+    { path: 'odd-category-out', component: OddCategoryOutComponent },
+    { path: 'mirror-letter', component: MirrorLetterComponent },
+    { path: 'letter-count', component: LetterCountComponent },
+    { path: 'first-letter-match', component: FirstLetterMatchComponent },
+    { path: 'count-difference', component: CountDifferenceComponent },
+    { path: 'number-ordering', component: NumberOrderingComponent },
+    { path: 'rotate-shape', component: RotateShapeComponent },
+    { path: 'count-sides', component: CountSidesComponent },
+    { path: 'sort-by-size', component: SortBySizeComponent },
+    { path: 'same-word-find', component: SameWordFindComponent },
+    { path: 'count-given-color', component: CountGivenColorComponent },
+    { path: 'star-difference', component: StarDifferenceComponent },
+    { path: 'fruit-sequence', component: FruitSequenceComponent },
+    { path: 'arrow-grid-copy', component: ArrowGridCopyComponent },
+    { path: 'color-pattern-completion', component: ColorPatternCompletionComponent },
+    { path: 'number-grid-match', component: NumberGridMatchComponent },
+    { path: 'digit-row-finder', component: DigitRowFinderComponent },
+    { path: 'number-color-match', component: NumberColorMatchComponent },
+    { path: 'symbol-sequence-match', component: SymbolSequenceMatchComponent },
+    { path: 'shape-matrix', component: ShapeMatrixComponent },
     { path: 'end', component: EndPageComponent },
     { path: '**', redirectTo: '' },
 ];
