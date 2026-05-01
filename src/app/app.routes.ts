@@ -51,6 +51,56 @@ import { LetterGridComponent } from './features/letter-grid/letter-grid.componen
 import { IceCreamShapeComponent } from './features/ice-cream-shape/ice-cream-shape.component';
 import { StartPageComponent } from './features/start-page/start-page.component';
 import { EndPageComponent } from './features/end-page/end-page.component';
+import { SchoolProfessionComponent } from './features/school-profession/school-profession.component';
+import { TallestAnimalComponent } from './features/tallest-animal/tallest-animal.component';
+import { ShapeCornersComponent } from './features/shape-corners/shape-corners.component';
+import { PencilMatchingComponent } from './features/pencil-matching/pencil-matching.component';
+import { ShapeCountColoringComponent } from './features/shape-count-coloring/shape-count-coloring.component';
+import { SportMatchingComponent } from './features/sport-matching/sport-matching.component';
+import { LetterCountingComponent } from './features/letter-counting/letter-counting.component';
+import { ElephantDirectionComponent } from './features/elephant-direction/elephant-direction.component';
+import { SymbolAdditionComponent } from './features/symbol-addition/symbol-addition.component';
+import { GridColoringNumbersComponent } from './features/grid-coloring-numbers/grid-coloring-numbers.component';
+import { ChildBicycleMatchingComponent } from './features/child-bicycle-matching/child-bicycle-matching.component';
+import { SymbolPairMatchingComponent } from './features/symbol-pair-matching/symbol-pair-matching.component';
+import { HouseDoorDirectionComponent } from './features/house-door-direction/house-door-direction.component';
+import { CountMatchingV2Component } from './features/count-matching-v2/count-matching-v2.component';
+import { RectangleSelectionComponent } from './features/rectangle-selection/rectangle-selection.component';
+import { CountSixSelectionComponent } from './features/count-six-selection/count-six-selection.component';
+import { ElectricApplianceSelectionComponent } from './features/electric-appliance-selection/electric-appliance-selection.component';
+import { PatternMatchingThreeComponent } from './features/pattern-matching-three/pattern-matching-three.component';
+import { ZebraLetterSelectionComponent } from './features/zebra-letter-selection/zebra-letter-selection.component';
+import { ShapeMatchingDrawnComponent } from './features/shape-matching-drawn/shape-matching-drawn.component';
+import { WatermelonMathComponent } from './features/watermelon-math/watermelon-math.component';
+import { FruitSequenceComponent } from './features/fruit-sequence/fruit-sequence.component';
+import { DoctorSuitabilityComponent } from './features/doctor-suitability/doctor-suitability.component';
+import { FruitGroupMatchingComponent } from './features/fruit-group-matching/fruit-group-matching.component';
+import { OrangeColoringComponent } from './features/orange-coloring/orange-coloring.component';
+import { SymbolGridCountingComponent } from './features/symbol-grid-counting/symbol-grid-counting.component';
+import { ObjectCountSelectionComponent } from './features/object-count-selection/object-count-selection.component';
+import { FewestTrianglesComponent } from './features/fewest-triangles/fewest-triangles.component';
+import { FavoriteActivityComponent } from './features/favorite-activity/favorite-activity.component';
+import { CountMatchingV3Component } from './features/count-matching-v3/count-matching-v3.component';
+import { EggSubtractionComponent } from './features/egg-subtraction/egg-subtraction.component';
+import { HouseItemsComponent } from './features/house-items/house-items.component';
+import { PinkGridComponent } from './features/pink-grid/pink-grid.component';
+import { LetterCountingV2Component } from './features/letter-counting-v2/letter-counting-v2.component';
+import { ShapeCountColoringV2Component } from './features/shape-count-coloring-v2/shape-count-coloring-v2.component';
+import { SadExpressionsComponent } from './features/sad-expressions/sad-expressions.component';
+import { GeometricSequenceComponent } from './features/geometric-sequence/geometric-sequence.component';
+import { FindingRedLinesComponent } from './features/finding-red-lines/finding-red-lines.component';
+import { UppercaseLowercaseComponent } from './features/uppercase-lowercase/uppercase-lowercase.component';
+import { WordShapeMatchingComponent } from './features/word-shape-matching/word-shape-matching.component';
+import { PatternTransferComponent } from './features/pattern-transfer/pattern-transfer.component';
+import { LadybugSpotsComponent } from './features/ladybug-spots/ladybug-spots.component';
+import { RotateGridComponent } from './features/rotate-grid/rotate-grid.component';
+import { ColorByNumberComponent } from './features/color-by-number/color-by-number.component';
+import { ToothbrushSelectionComponent } from './features/toothbrush-selection/toothbrush-selection.component';
+import { SymbolAdditionV2Component } from './features/symbol-addition-v2/symbol-addition-v2.component';
+import { CatSequenceComponent } from './features/cat-sequence/cat-sequence.component';
+import { MissingNumberGridComponent } from './features/missing-number-grid/missing-number-grid.component';
+import { VegGridTransferComponent } from './features/veg-grid-transfer/veg-grid-transfer.component';
+import { SymbolSequencePlacementComponent } from './features/symbol-sequence-placement/symbol-sequence-placement.component';
 
 export const routes: Routes = [
     { path: '', component: StartPageComponent, pathMatch: 'full' },
@@ -104,6 +154,56 @@ export const routes: Routes = [
     { path: 'different-mountain', component: DifferentMountainComponent },
     { path: 'letter-grid', component: LetterGridComponent },
     { path: 'ice-cream-shape', component: IceCreamShapeComponent },
+    { path: 'school-profession', component: SchoolProfessionComponent },
+    { path: 'tallest-animal', component: TallestAnimalComponent },
+    { path: 'shape-corners', component: ShapeCornersComponent },
+    { path: 'pencil-matching', component: PencilMatchingComponent },
+    { path: 'shape-count-coloring', component: ShapeCountColoringComponent },
+    { path: 'sport-matching', component: SportMatchingComponent },
+    { path: 'letter-counting', component: LetterCountingComponent },
+    { path: 'elephant-direction', component: ElephantDirectionComponent },
+    { path: 'symbol-addition', component: SymbolAdditionComponent },
+    { path: 'grid-coloring-numbers', component: GridColoringNumbersComponent },
+    { path: 'child-bicycle-matching', component: ChildBicycleMatchingComponent },
+    { path: 'symbol-pair-matching', component: SymbolPairMatchingComponent },
+    { path: 'house-door-direction', component: HouseDoorDirectionComponent },
+    { path: 'count-matching-v2', component: CountMatchingV2Component },
+    { path: 'rectangle-selection', component: RectangleSelectionComponent },
+    { path: 'count-six-selection', component: CountSixSelectionComponent },
+    { path: 'electric-appliance-selection', component: ElectricApplianceSelectionComponent },
+    { path: 'pattern-3', component: PatternMatchingThreeComponent },
+    { path: 'zebra-letters', component: ZebraLetterSelectionComponent },
+    { path: 'shape-matching-drawn', component: ShapeMatchingDrawnComponent },
+    { path: 'watermelon-math', component: WatermelonMathComponent },
+    { path: 'fruit-sequence', component: FruitSequenceComponent },
+    { path: 'doctor-suitability', component: DoctorSuitabilityComponent },
+    { path: 'fruit-group-matching', component: FruitGroupMatchingComponent },
+    { path: 'orange-coloring', component: OrangeColoringComponent },
+    { path: 'symbol-grid-counting', component: SymbolGridCountingComponent },
+    { path: 'object-count-selection', component: ObjectCountSelectionComponent },
+    { path: 'fewest-triangles', component: FewestTrianglesComponent },
+    { path: 'favorite-activity', component: FavoriteActivityComponent },
+    { path: 'count-matching-v3', component: CountMatchingV3Component },
+    { path: 'egg-subtraction', component: EggSubtractionComponent },
+    { path: 'house-items', component: HouseItemsComponent },
+    { path: 'pink-grid', component: PinkGridComponent },
+    { path: 'letter-counting-v2', component: LetterCountingV2Component },
+    { path: 'shape-count-coloring-v2', component: ShapeCountColoringV2Component },
+    { path: 'sad-expressions', component: SadExpressionsComponent },
+    { path: 'geometric-sequence', component: GeometricSequenceComponent },
+    { path: 'finding-red-lines', component: FindingRedLinesComponent },
+    { path: 'uppercase-lowercase', component: UppercaseLowercaseComponent },
+    { path: 'word-shape-matching', component: WordShapeMatchingComponent },
+    { path: 'pattern-transfer', component: PatternTransferComponent },
+    { path: 'ladybug-spots', component: LadybugSpotsComponent },
+    { path: 'rotate-grid', component: RotateGridComponent },
+    { path: 'color-by-number', component: ColorByNumberComponent },
+    { path: 'toothbrush-selection', component: ToothbrushSelectionComponent },
+    { path: 'symbol-addition-v2', component: SymbolAdditionV2Component },
+    { path: 'cat-sequence', component: CatSequenceComponent },
+    { path: 'missing-number-grid', component: MissingNumberGridComponent },
+    { path: 'veg-grid-transfer', component: VegGridTransferComponent },
+    { path: 'symbol-sequence-placement', component: SymbolSequencePlacementComponent },
     { path: 'end', component: EndPageComponent },
     { path: '**', redirectTo: '' },
 ];

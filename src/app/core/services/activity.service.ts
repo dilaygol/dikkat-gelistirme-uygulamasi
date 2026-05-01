@@ -20,7 +20,22 @@ export class ActivityService {
         'finding-green-lines', 'incorrect-numbers', 'water-capacity', 'fruit-size-ranking',
         'elderly-people', 'find-different', 'cylinder-selection', 'pattern-completion',
         'shape-counting', 'happy-children', 'different-mountain', 'letter-grid',
-        'ice-cream-shape'
+        'ice-cream-shape', 'school-profession', 'tallest-animal', 'shape-corners',
+        'pencil-matching', 'shape-count-coloring', 'sport-matching', 'letter-counting',
+        'elephant-direction', 'symbol-addition', 'grid-coloring-numbers',
+        'child-bicycle-matching', 'symbol-pair-matching', 'house-door-direction', 'count-matching-v2',
+        'rectangle-selection', 'count-six-selection', 'electric-appliance-selection',
+        'pattern-3', 'zebra-letters', 'shape-matching-drawn',
+        'watermelon-math', 'fruit-sequence',
+        'doctor-suitability', 'fruit-group-matching',
+        'orange-coloring',
+        'symbol-grid-counting', 'object-count-selection', 'fewest-triangles',
+        'favorite-activity', 'count-matching-v3', 'egg-subtraction',
+        'house-items', 'pink-grid', 'letter-counting-v2', 'shape-count-coloring-v2', 'sad-expressions', 'geometric-sequence',
+        'finding-red-lines', 'uppercase-lowercase', 'word-shape-matching',
+        'pattern-transfer', 'ladybug-spots', 'rotate-grid', 'color-by-number',
+        'toothbrush-selection', 'symbol-addition-v2', 'cat-sequence',
+        'missing-number-grid', 'veg-grid-transfer', 'symbol-sequence-placement'
     ];
 
     private currentPath$ = new BehaviorSubject<string>('');
@@ -57,4 +72,24 @@ export class ActivityService {
         map(index => index + 1),
         shareReplay(1)
     );
+
+    next(): void {
+        const currentPath = this.currentPath$.value;
+        const index = this.activityPaths.indexOf(currentPath);
+        if (index !== -1 && index < this.activityPaths.length - 1) {
+            this.router.navigate([`/${this.activityPaths[index + 1]}`]);
+        } else if (index === this.activityPaths.length - 1) {
+            this.router.navigate(['/end']);
+        }
+    }
+
+    prev(): void {
+        const currentPath = this.currentPath$.value;
+        const index = this.activityPaths.indexOf(currentPath);
+        if (index > 0) {
+            this.router.navigate([`/${this.activityPaths[index - 1]}`]);
+        } else {
+            this.router.navigate(['/']);
+        }
+    }
 }
