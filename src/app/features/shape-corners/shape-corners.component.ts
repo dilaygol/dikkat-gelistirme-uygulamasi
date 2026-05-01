@@ -162,6 +162,6 @@ export class ShapeCornersComponent implements OnInit {
 
   goNext(): void {
     if (!this.isNextUnlocked) return;
-    this.router.navigate(['/pencil-matching']);
+    this.router.navigate(['/pencil-matching-v2']);
   }
 }

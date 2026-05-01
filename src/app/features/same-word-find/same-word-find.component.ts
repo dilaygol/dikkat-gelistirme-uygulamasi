@@ -72,16 +72,40 @@ export class SameWordFindComponent implements OnInit {
             { id: 2, target: 'KİTAP', alternatives: ['KİPTA', 'KİTAAP', 'KİTAB'], color: '#66bb6a' }
         ];
 
-        return data.map(d => {
-            const options: WordOption[] = [
-                { id: d.id * 10 + 0, text: d.target, isCorrect: true, isSelected: false },
-                { id: d.id * 10 + 1, text: d.target, isCorrect: true, isSelected: false },
-                { id: d.id * 10 + 2, text: d.alternatives[0], isCorrect: false, isSelected: false },
-                { id: d.id * 10 + 3, text: d.alternatives[1], isCorrect: false, isSelected: false },
-                { id: d.id * 10 + 4, text: d.alternatives[2], isCorrect: false, isSelected: false }
-            ];
-            return { id: d.id, target: d.target, options, color: d.color };
-        });
+        // Her set için doğru cevaplar farklı sabit pozisyonlarda - yenilemede değişmez
+        const fixedOrders: WordOption[][] = [
+            // ARABA: doğru→2. ve 4. şık
+            [
+                { id: 0, text: data[0].alternatives[0], isCorrect: false, isSelected: false }, // ARBA
+                { id: 1, text: data[0].target,          isCorrect: true,  isSelected: false }, // ARABA ✓
+                { id: 2, text: data[0].alternatives[1], isCorrect: false, isSelected: false }, // ARAABA
+                { id: 3, text: data[0].target,          isCorrect: true,  isSelected: false }, // ARABA ✓
+                { id: 4, text: data[0].alternatives[2], isCorrect: false, isSelected: false }, // ARIBA
+            ],
+            // KALEM: doğru→1. ve 4. şık
+            [
+                { id: 10, text: data[1].target,          isCorrect: true,  isSelected: false }, // KALEM ✓
+                { id: 11, text: data[1].alternatives[0], isCorrect: false, isSelected: false }, // KALAM
+                { id: 12, text: data[1].alternatives[1], isCorrect: false, isSelected: false }, // KELEM
+                { id: 13, text: data[1].target,          isCorrect: true,  isSelected: false }, // KALEM ✓
+                { id: 14, text: data[1].alternatives[2], isCorrect: false, isSelected: false }, // KALEEM
+            ],
+            // KİTAP: doğru→3. ve 5. şık
+            [
+                { id: 20, text: data[2].alternatives[0], isCorrect: false, isSelected: false }, // KİPTA
+                { id: 21, text: data[2].alternatives[1], isCorrect: false, isSelected: false }, // KİTAAP
+                { id: 22, text: data[2].target,          isCorrect: true,  isSelected: false }, // KİTAP ✓
+                { id: 23, text: data[2].alternatives[2], isCorrect: false, isSelected: false }, // KİTAB
+                { id: 24, text: data[2].target,          isCorrect: true,  isSelected: false }, // KİTAP ✓
+            ],
+        ];
+
+        return data.map((d, i) => ({
+            id: d.id,
+            target: d.target,
+            options: fixedOrders[i],
+            color: d.color
+        }));
     }
 
     private persist(): void {

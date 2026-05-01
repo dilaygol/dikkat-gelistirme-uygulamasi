@@ -117,7 +117,7 @@ export class ShapeCountColoringComponent implements OnInit {
   }
 
   goPrev(): void {
-    this.router.navigate(['/pencil-matching']);
+    this.router.navigate(['/pencil-matching-v2']);
   }
 
   goNext(): void {

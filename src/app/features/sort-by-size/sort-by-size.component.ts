@@ -72,15 +72,22 @@ export class SortBySizeComponent implements OnInit {
             { id: 2, emoji: '🚗', color: '#42a5f5' }
         ];
 
-        return data.map(d => {
-            const items: SizeItem[] = [
-                { id: d.id * 10 + 0, emoji: d.emoji, size: 'small', correctOrder: 1, userValue: '' },
+        // Her set için sabit ama farklı görüntüleme sırası - yenilemede değişmez
+        // Sıralar: [büyük, küçük, orta] / [orta, büyük, küçük] / [küçük, büyük, orta]
+        const fixedOrders: Array<[number, number, number]> = [
+            [2, 0, 1], // 🎈 Balon: büyük-küçük-orta
+            [1, 2, 0], // 🌳 Ağaç: orta-büyük-küçük
+            [0, 2, 1], // 🚗 Araba: küçük-büyük-orta
+        ];
+
+        return data.map((d, i) => {
+            const all: SizeItem[] = [
+                { id: d.id * 10 + 0, emoji: d.emoji, size: 'small',  correctOrder: 1, userValue: '' },
                 { id: d.id * 10 + 1, emoji: d.emoji, size: 'medium', correctOrder: 2, userValue: '' },
-                { id: d.id * 10 + 2, emoji: d.emoji, size: 'large', correctOrder: 3, userValue: '' }
+                { id: d.id * 10 + 2, emoji: d.emoji, size: 'large',  correctOrder: 3, userValue: '' }
             ];
-            // Shuffle items
-            const shuffled = [...items].sort(() => Math.random() - 0.5);
-            return { id: d.id, items: shuffled, color: d.color };
+            const [a, b, c] = fixedOrders[i];
+            return { id: d.id, items: [all[a], all[b], all[c]], color: d.color };
         });
     }
 
