@@ -118,14 +118,33 @@
 }
 
 @include mobile {
+    .questions-list {
+        gap: 6px;
+    }
     .question-block {
         flex-direction: column;
-        padding: 12px;
-        gap: 12px;
+        padding: 6px 10px;
+        gap: 6px;
+        border-radius: 12px;
     }
     
+    .letter-circle {
+        width: 44px;
+        height: 44px;
+        font-size: 1.5rem;
+        border-width: 2px;
+    }
+
     .items-row {
         width: 100%;
         grid-template-columns: repeat(2, 1fr);
+        gap: 4px;
+    }
+
+    .item-card {
+        padding: 4px 2px;
+        border-radius: 10px;
+        .emoji { font-size: 1.2rem; }
+        .name { font-size: 0.65rem; }
     }
 }

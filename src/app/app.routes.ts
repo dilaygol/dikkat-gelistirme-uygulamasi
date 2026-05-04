@@ -1,309 +1,157 @@
 import { Routes } from '@angular/router';
-import { PatternMatchingComponent } from './features/pattern-matching/pattern-matching.component';
-import { OddDirectionComponent } from './features/odd-direction/odd-direction.component';
-import { ShadeSortingComponent } from './features/shade-sorting/shade-sorting.component';
-import { ShadeSorting2Component } from './features/shade-sorting-2/shade-sorting-2.component';
-import { NumberSequenceComponent } from './features/number-sequence/number-sequence.component';
-import { SymbolMatchingComponent } from './features/symbol-matching/symbol-matching.component';
-import { MultiConditionSelectionComponent } from './features/multi-condition-selection/multi-condition-selection.component';
-import { AnimalPositionComponent } from './features/animal-position/animal-position.component';
-import { PatternMatchingTwoComponent } from './features/pattern-matching-two/pattern-matching-two.component';
-import { ShapeColoringComponent } from './features/shape-coloring/shape-coloring.component';
-import { LiquidSelectionComponent } from './features/liquid-selection/liquid-selection.component';
-import { LongestRopeComponent } from './features/longest-rope/longest-rope.component';
-import { LetterMatchingComponent } from './features/letter-matching/letter-matching.component';
-import { ShapePatternComponent } from './features/shape-pattern/shape-pattern.component';
-import { BoardLetterMatchingComponent } from './features/board-letter-matching/board-letter-matching.component';
-import { ShapeToColorMatchComponent } from './features/shape-to-color-match/shape-to-color-match.component';
-import { SequenceRuleBreakerComponent } from './features/sequence-rule-breaker/sequence-rule-breaker.component';
-import { LivingThingsComponent } from './features/living-things/living-things';
-import { TrafficSignMatchingComponent } from './features/traffic-sign-matching/traffic-sign-matching.component';
-import { AbacusCountingComponent } from './features/abacus-counting/abacus-counting.component';
-import { DotPatternDrawingComponent } from './features/dot-pattern-drawing/dot-pattern-drawing.component';
-import { DotGridCopyComponent } from './features/dot-grid-copy/dot-grid-copy.component';
-import { FruitCountMatchingComponent } from './features/fruit-count-matching/fruit-count-matching.component';
-import { FindMostBallsComponent } from './features/find-most-balls/find-most-balls.component';
-import { ShadowMatchingComponent } from './features/shadow-matching/shadow-matching.component';
-import { LetterSequenceComponent } from './features/letter-sequence/letter-sequence.component';
-import { IdenticalPatternComponent } from './features/identical-pattern/identical-pattern.component';
-import { MatchSizeComponent } from './features/match-size/match-size.component';
-import { GridColoringComponent } from './features/grid-coloring/grid-coloring.component';
-import { FindSameSymbolsComponent } from './features/find-same-symbols/find-same-symbols.component';
-import { FindNumbersComponent } from './features/find-numbers/find-numbers.component';
-import { FindReversedEComponent } from './features/find-reversed-e/find-reversed-e.component';
-import { CountAndAddComponent } from './features/count-and-add/count-and-add.component';
-import { RhythmicCountingComponent } from './features/rhythmic-counting/rhythmic-counting.component';
-import { TopViewComponent } from './features/top-view/top-view.component';
-import { BoxColoringComponent } from './features/box-coloring/box-coloring.component';
-import { TriangleSizeComponent } from './features/triangle-size/triangle-size.component';
-import { FlowerColoringComponent } from './features/flower-coloring/flower-coloring.component';
-import { NotInWordComponent } from './features/not-in-word/not-in-word.component';
-import { FindingGreenLinesComponent } from './features/finding-green-lines/finding-green-lines.component';
-import { IncorrectNumbersComponent } from './features/incorrect-numbers/incorrect-numbers.component';
-import { WaterCapacityComponent } from './features/water-capacity/water-capacity.component';
-import { FruitSizeRankingComponent } from './features/fruit-size-ranking/fruit-size-ranking.component';
-import { ElderlyPeopleComponent } from './features/elderly-people/elderly-people.component';
-import { FindDifferentComponent } from './features/find-different/find-different.component';
-import { CylinderSelectionComponent } from './features/cylinder-selection/cylinder-selection.component';
-import { PatternCompletionComponent } from './features/pattern-completion/pattern-completion.component';
-import { ShapeCountingComponent } from './features/shape-counting/shape-counting.component';
-import { HappyChildrenComponent } from './features/happy-children/happy-children.component';
-import { DifferentMountainComponent } from './features/different-mountain/different-mountain.component';
-import { LetterGridComponent } from './features/letter-grid/letter-grid.component';
-import { IceCreamShapeComponent } from './features/ice-cream-shape/ice-cream-shape.component';
-import { StartPageComponent } from './features/start-page/start-page.component';
-import { EndPageComponent } from './features/end-page/end-page.component';
-import { SchoolProfessionComponent } from './features/school-profession/school-profession.component';
-import { TallestAnimalComponent } from './features/tallest-animal/tallest-animal.component';
-import { ShapeCornersComponent } from './features/shape-corners/shape-corners.component';
-import { PencilMatchingV2Component } from './features/pencil-matching-v2/pencil-matching-v2.component';
-import { ShapeCountColoringComponent } from './features/shape-count-coloring/shape-count-coloring.component';
-import { SportMatchingComponent } from './features/sport-matching/sport-matching.component';
-import { LetterCountingComponent } from './features/letter-counting/letter-counting.component';
-import { ElephantDirectionComponent } from './features/elephant-direction/elephant-direction.component';
-import { SymbolAdditionComponent } from './features/symbol-addition/symbol-addition.component';
-import { GridColoringNumbersComponent } from './features/grid-coloring-numbers/grid-coloring-numbers.component';
-import { ChildBicycleMatchingComponent } from './features/child-bicycle-matching/child-bicycle-matching.component';
-import { SymbolPairMatchingComponent } from './features/symbol-pair-matching/symbol-pair-matching.component';
-import { HouseDoorDirectionComponent } from './features/house-door-direction/house-door-direction.component';
-import { CountMatchingV2Component } from './features/count-matching-v2/count-matching-v2.component';
-import { RectangleSelectionComponent } from './features/rectangle-selection/rectangle-selection.component';
-import { CountSixSelectionComponent } from './features/count-six-selection/count-six-selection.component';
-import { ElectricApplianceSelectionComponent } from './features/electric-appliance-selection/electric-appliance-selection.component';
-import { PatternMatchingThreeComponent } from './features/pattern-matching-three/pattern-matching-three.component';
-import { ZebraLetterSelectionComponent } from './features/zebra-letter-selection/zebra-letter-selection.component';
-import { ShapeMatchingDrawnComponent } from './features/shape-matching-drawn/shape-matching-drawn.component';
-import { WatermelonMathComponent } from './features/watermelon-math/watermelon-math.component';
-import { FruitSequenceV2Component } from './features/fruit-sequence-v2/fruit-sequence-v2.component';
-import { DoctorSuitabilityComponent } from './features/doctor-suitability/doctor-suitability.component';
-import { FruitGroupMatchingComponent } from './features/fruit-group-matching/fruit-group-matching.component';
-import { OrangeColoringComponent } from './features/orange-coloring/orange-coloring.component';
-import { SymbolGridCountingComponent } from './features/symbol-grid-counting/symbol-grid-counting.component';
-import { ObjectCountSelectionComponent } from './features/object-count-selection/object-count-selection.component';
-import { FewestTrianglesComponent } from './features/fewest-triangles/fewest-triangles.component';
-import { FavoriteActivityComponent } from './features/favorite-activity/favorite-activity.component';
-import { CountMatchingV3Component } from './features/count-matching-v3/count-matching-v3.component';
-import { EggSubtractionComponent } from './features/egg-subtraction/egg-subtraction.component';
-import { HouseItemsComponent } from './features/house-items/house-items.component';
-import { PinkGridComponent } from './features/pink-grid/pink-grid.component';
-import { LetterCountingV2Component } from './features/letter-counting-v2/letter-counting-v2.component';
-import { ShapeCountColoringV2Component } from './features/shape-count-coloring-v2/shape-count-coloring-v2.component';
-import { SadExpressionsComponent } from './features/sad-expressions/sad-expressions.component';
-import { GeometricSequenceComponent } from './features/geometric-sequence/geometric-sequence.component';
-import { FindingRedLinesComponent } from './features/finding-red-lines/finding-red-lines.component';
-import { UppercaseLowercaseComponent } from './features/uppercase-lowercase/uppercase-lowercase.component';
-import { WordShapeMatchingComponent } from './features/word-shape-matching/word-shape-matching.component';
-import { PatternTransferComponent } from './features/pattern-transfer/pattern-transfer.component';
-import { LadybugSpotsComponent } from './features/ladybug-spots/ladybug-spots.component';
-import { RotateGridComponent } from './features/rotate-grid/rotate-grid.component';
-import { ColorByNumberComponent } from './features/color-by-number/color-by-number.component';
-import { ToothbrushSelectionComponent } from './features/toothbrush-selection/toothbrush-selection.component';
-import { SymbolAdditionV2Component } from './features/symbol-addition-v2/symbol-addition-v2.component';
-import { CatSequenceComponent } from './features/cat-sequence/cat-sequence.component';
-import { MissingNumberGridComponent } from './features/missing-number-grid/missing-number-grid.component';
-import { VegGridTransferComponent } from './features/veg-grid-transfer/veg-grid-transfer.component';
-import { SymbolSequencePlacementComponent } from './features/symbol-sequence-placement/symbol-sequence-placement.component';
-import { MostColorfulBallComponent } from './features/most-colorful-ball/most-colorful-ball.component';
-import { CatPositionComponent } from './features/cat-position/cat-position.component';
-import { BikeMatchingComponent } from './features/bike-matching/bike-matching.component';
-import { PencilMatchingComponent } from './features/pencil-matching/pencil-matching.component';
-import { SymbolGridCopyComponent } from './features/symbol-grid-copy/symbol-grid-copy.component';
-import { BallMatchingComponent } from './features/ball-matching/ball-matching.component';
-import { OrangeDifferentComponent } from './features/orange-different/orange-different.component';
-import { RiverBranchesComponent } from './features/river-branches/river-branches.component';
-import { SymbolGridMatchingComponent } from './features/symbol-grid-matching/symbol-grid-matching.component';
-import { ShapeMatchFindComponent } from './features/shape-match-find/shape-match-find.component';
-import { CountApplesComponent } from './features/count-apples/count-apples.component';
-import { BallSequenceComponent } from './features/ball-sequence/ball-sequence.component';
-import { SnakeLetterComponent } from './features/snake-letter/snake-letter.component';
-import { LetterColorMatchComponent } from './features/letter-color-match/letter-color-match.component';
-import { FruitSubtractionComponent } from './features/fruit-subtraction/fruit-subtraction.component';
-import { ObjectAdditionComponent } from './features/object-addition/object-addition.component';
-import { TriangleMatchComponent } from './features/triangle-match/triangle-match.component';
-import { SetMatchComponent } from './features/set-match/set-match.component';
-import { ProfessionMatchingComponent } from './features/profession-matching/profession-matching.component';
-import { FruitBasketComponent } from './features/fruit-basket/fruit-basket.component';
-import { FlowerOrderComponent } from './features/flower-order/flower-order.component';
-import { SymbolColorMatchComponent } from './features/symbol-color-match/symbol-color-match.component';
-import { SymbolBlockMatchComponent } from './features/symbol-block-match/symbol-block-match.component';
-import { BalanceScaleComponent } from './features/balance-scale/balance-scale.component';
-import { TwoFeatureFilterComponent } from './features/two-feature-filter/two-feature-filter.component';
-import { SubtleDifferenceComponent } from './features/subtle-difference/subtle-difference.component';
-import { LetterHuntComponent } from './features/letter-hunt/letter-hunt.component';
-import { MissingNumberComponent } from './features/missing-number/missing-number.component';
-import { OddCategoryOutComponent } from './features/odd-category-out/odd-category-out.component';
-import { MirrorLetterComponent } from './features/mirror-letter/mirror-letter.component';
-import { LetterCountComponent } from './features/letter-count/letter-count.component';
-import { FirstLetterMatchComponent } from './features/first-letter-match/first-letter-match.component';
-import { CountDifferenceComponent } from './features/count-difference/count-difference.component';
-import { NumberOrderingComponent } from './features/number-ordering/number-ordering.component';
-import { RotateShapeComponent } from './features/rotate-shape/rotate-shape.component';
-import { CountSidesComponent } from './features/count-sides/count-sides.component';
-import { SortBySizeComponent } from './features/sort-by-size/sort-by-size.component';
-import { SameWordFindComponent } from './features/same-word-find/same-word-find.component';
-import { CountGivenColorComponent } from './features/count-given-color/count-given-color.component';
-import { StarDifferenceComponent } from './features/star-difference/star-difference.component';
-import { FruitSequenceComponent } from './features/fruit-sequence/fruit-sequence.component';
-import { ArrowGridCopyComponent } from './features/arrow-grid-copy/arrow-grid-copy.component';
-import { ColorPatternCompletionComponent } from './features/color-pattern-completion/color-pattern-completion.component';
-import { NumberGridMatchComponent } from './features/number-grid-match/number-grid-match.component';
-import { DigitRowFinderComponent } from './features/digit-row-finder/digit-row-finder.component';
-import { NumberColorMatchComponent } from './features/number-color-match/number-color-match.component';
-import { SymbolSequenceMatchComponent } from './features/symbol-sequence-match/symbol-sequence-match.component';
-import { ShapeMatrixComponent } from './features/shape-matrix/shape-matrix.component';
 
 export const routes: Routes = [
-    { path: '', component: StartPageComponent, pathMatch: 'full' },
-    { path: 'pattern', component: PatternMatchingComponent },
-    { path: 'odd-direction', component: OddDirectionComponent },
-    { path: 'shade-sorting', component: ShadeSortingComponent },
-    { path: 'shade-sorting-2', component: ShadeSorting2Component },
-    { path: 'number-sequence', component: NumberSequenceComponent },
-    { path: 'symbol-matching', component: SymbolMatchingComponent },
-    { path: 'multi-condition-selection', component: MultiConditionSelectionComponent },
-    { path: 'animal-position', component: AnimalPositionComponent },
-    { path: 'pattern-2', component: PatternMatchingTwoComponent },
-    { path: 'shape-coloring', component: ShapeColoringComponent },
-    { path: 'liquid-selection', component: LiquidSelectionComponent },
-    { path: 'longest-rope', component: LongestRopeComponent },
-    { path: 'letter-matching', component: LetterMatchingComponent },
-    { path: 'shape-pattern', component: ShapePatternComponent },
-    { path: 'board-letter-matching', component: BoardLetterMatchingComponent },
-    { path: 'shape-to-color-match', component: ShapeToColorMatchComponent },
-    { path: 'sequence-rule-breaker', component: SequenceRuleBreakerComponent },
-    { path: 'living-things', component: LivingThingsComponent },
-    { path: 'traffic-sign-matching', component: TrafficSignMatchingComponent },
-    { path: 'abacus-counting', component: AbacusCountingComponent },
-    { path: 'dot-pattern-drawing', component: DotPatternDrawingComponent },
-    { path: 'fruit-count-matching', component: FruitCountMatchingComponent },
-    { path: 'find-most-balls', component: FindMostBallsComponent },
-    { path: 'shadow-matching', component: ShadowMatchingComponent },
-    { path: 'letter-sequence', component: LetterSequenceComponent },
-    { path: 'identical-pattern', component: IdenticalPatternComponent },
-    { path: 'match-size', component: MatchSizeComponent },
-    { path: 'grid-coloring', component: GridColoringComponent },
-    { path: 'find-same-symbols', component: FindSameSymbolsComponent },
-    { path: 'find-numbers', component: FindNumbersComponent },
-    { path: 'find-reversed-e', component: FindReversedEComponent },
-    { path: 'count-and-add', component: CountAndAddComponent },
-    { path: 'rhythmic-counting', component: RhythmicCountingComponent },
-    { path: 'top-view', component: TopViewComponent },
-    { path: 'box-coloring', component: BoxColoringComponent },
-    { path: 'triangle-size', component: TriangleSizeComponent },
-    { path: 'flower-coloring', component: FlowerColoringComponent },
-    { path: 'not-in-word', component: NotInWordComponent },
-    { path: 'finding-green-lines', component: FindingGreenLinesComponent },
-    { path: 'incorrect-numbers', component: IncorrectNumbersComponent },
-    { path: 'water-capacity', component: WaterCapacityComponent },
-    { path: 'fruit-size-ranking', component: FruitSizeRankingComponent },
-    { path: 'elderly-people', component: ElderlyPeopleComponent },
-    { path: 'find-different', component: FindDifferentComponent },
-    { path: 'cylinder-selection', component: CylinderSelectionComponent },
-    { path: 'pattern-completion', component: PatternCompletionComponent },
-    { path: 'shape-counting', component: ShapeCountingComponent },
-    { path: 'happy-children', component: HappyChildrenComponent },
-    { path: 'different-mountain', component: DifferentMountainComponent },
-    { path: 'letter-grid', component: LetterGridComponent },
-    { path: 'ice-cream-shape', component: IceCreamShapeComponent },
-    { path: 'school-profession', component: SchoolProfessionComponent },
-    { path: 'tallest-animal', component: TallestAnimalComponent },
-    { path: 'shape-corners', component: ShapeCornersComponent },
-    { path: 'pencil-matching-v2', component: PencilMatchingV2Component },
-    { path: 'shape-count-coloring', component: ShapeCountColoringComponent },
-    { path: 'sport-matching', component: SportMatchingComponent },
-    { path: 'letter-counting', component: LetterCountingComponent },
-    { path: 'elephant-direction', component: ElephantDirectionComponent },
-    { path: 'symbol-addition', component: SymbolAdditionComponent },
-    { path: 'grid-coloring-numbers', component: GridColoringNumbersComponent },
-    { path: 'child-bicycle-matching', component: ChildBicycleMatchingComponent },
-    { path: 'symbol-pair-matching', component: SymbolPairMatchingComponent },
-    { path: 'house-door-direction', component: HouseDoorDirectionComponent },
-    { path: 'count-matching-v2', component: CountMatchingV2Component },
-    { path: 'rectangle-selection', component: RectangleSelectionComponent },
-    { path: 'count-six-selection', component: CountSixSelectionComponent },
-    { path: 'electric-appliance-selection', component: ElectricApplianceSelectionComponent },
-    { path: 'pattern-3', component: PatternMatchingThreeComponent },
-    { path: 'zebra-letters', component: ZebraLetterSelectionComponent },
-    { path: 'shape-matching-drawn', component: ShapeMatchingDrawnComponent },
-    { path: 'watermelon-math', component: WatermelonMathComponent },
-    { path: 'fruit-sequence-v2', component: FruitSequenceV2Component },
-    { path: 'doctor-suitability', component: DoctorSuitabilityComponent },
-    { path: 'fruit-group-matching', component: FruitGroupMatchingComponent },
-    { path: 'orange-coloring', component: OrangeColoringComponent },
-    { path: 'symbol-grid-counting', component: SymbolGridCountingComponent },
-    { path: 'object-count-selection', component: ObjectCountSelectionComponent },
-    { path: 'fewest-triangles', component: FewestTrianglesComponent },
-    { path: 'favorite-activity', component: FavoriteActivityComponent },
-    { path: 'count-matching-v3', component: CountMatchingV3Component },
-    { path: 'egg-subtraction', component: EggSubtractionComponent },
-    { path: 'house-items', component: HouseItemsComponent },
-    { path: 'pink-grid', component: PinkGridComponent },
-    { path: 'letter-counting-v2', component: LetterCountingV2Component },
-    { path: 'shape-count-coloring-v2', component: ShapeCountColoringV2Component },
-    { path: 'sad-expressions', component: SadExpressionsComponent },
-    { path: 'geometric-sequence', component: GeometricSequenceComponent },
-    { path: 'finding-red-lines', component: FindingRedLinesComponent },
-    { path: 'uppercase-lowercase', component: UppercaseLowercaseComponent },
-    { path: 'word-shape-matching', component: WordShapeMatchingComponent },
-    { path: 'pattern-transfer', component: PatternTransferComponent },
-    { path: 'ladybug-spots', component: LadybugSpotsComponent },
-    { path: 'rotate-grid', component: RotateGridComponent },
-    { path: 'color-by-number', component: ColorByNumberComponent },
-    { path: 'toothbrush-selection', component: ToothbrushSelectionComponent },
-    { path: 'symbol-addition-v2', component: SymbolAdditionV2Component },
-    { path: 'cat-sequence', component: CatSequenceComponent },
-    { path: 'missing-number-grid', component: MissingNumberGridComponent },
-    { path: 'veg-grid-transfer', component: VegGridTransferComponent },
-    { path: 'symbol-sequence-placement', component: SymbolSequencePlacementComponent },
-    { path: 'most-colorful-ball', component: MostColorfulBallComponent },
-    { path: 'cat-position', component: CatPositionComponent },
-    { path: 'dot-grid-copy', component: DotGridCopyComponent },
-    { path: 'bike-matching', component: BikeMatchingComponent },
-    { path: 'pencil-matching', component: PencilMatchingComponent },
-    { path: 'symbol-grid-copy', component: SymbolGridCopyComponent },
-    { path: 'ball-matching', component: BallMatchingComponent },
-    { path: 'orange-different', component: OrangeDifferentComponent },
-    { path: 'river-branches', component: RiverBranchesComponent },
-    { path: 'symbol-grid-matching', component: SymbolGridMatchingComponent },
-    { path: 'shape-match-find', component: ShapeMatchFindComponent },
-    { path: 'count-apples', component: CountApplesComponent },
-    { path: 'ball-sequence', component: BallSequenceComponent },
-    { path: 'snake-letter', component: SnakeLetterComponent },
-    { path: 'letter-color-match', component: LetterColorMatchComponent },
-    { path: 'fruit-subtraction', component: FruitSubtractionComponent },
-    { path: 'triangle-match', component: TriangleMatchComponent },
-    { path: 'set-match', component: SetMatchComponent },
-    { path: 'profession-matching', component: ProfessionMatchingComponent },
-    { path: 'fruit-basket', component: FruitBasketComponent },
-    { path: 'flower-order', component: FlowerOrderComponent },
-    { path: 'symbol-color-match', component: SymbolColorMatchComponent },
-    { path: 'object-addition', component: ObjectAdditionComponent },
-    { path: 'symbol-block-match', component: SymbolBlockMatchComponent },
-    { path: 'balance-scale', component: BalanceScaleComponent },
-    { path: 'two-feature-filter', component: TwoFeatureFilterComponent },
-    { path: 'subtle-difference', component: SubtleDifferenceComponent },
-    { path: 'letter-hunt', component: LetterHuntComponent },
-    { path: 'missing-number', component: MissingNumberComponent },
-    { path: 'odd-category-out', component: OddCategoryOutComponent },
-    { path: 'mirror-letter', component: MirrorLetterComponent },
-    { path: 'letter-count', component: LetterCountComponent },
-    { path: 'first-letter-match', component: FirstLetterMatchComponent },
-    { path: 'count-difference', component: CountDifferenceComponent },
-    { path: 'number-ordering', component: NumberOrderingComponent },
-    { path: 'rotate-shape', component: RotateShapeComponent },
-    { path: 'count-sides', component: CountSidesComponent },
-    { path: 'sort-by-size', component: SortBySizeComponent },
-    { path: 'same-word-find', component: SameWordFindComponent },
-    { path: 'count-given-color', component: CountGivenColorComponent },
-    { path: 'star-difference', component: StarDifferenceComponent },
-    { path: 'fruit-sequence', component: FruitSequenceComponent },
-    { path: 'arrow-grid-copy', component: ArrowGridCopyComponent },
-    { path: 'color-pattern-completion', component: ColorPatternCompletionComponent },
-    { path: 'number-grid-match', component: NumberGridMatchComponent },
-    { path: 'digit-row-finder', component: DigitRowFinderComponent },
-    { path: 'number-color-match', component: NumberColorMatchComponent },
-    { path: 'symbol-sequence-match', component: SymbolSequenceMatchComponent },
-    { path: 'shape-matrix', component: ShapeMatrixComponent },
-    { path: 'end', component: EndPageComponent },
+    { path: '', loadComponent: () => import('./features/start-page/start-page.component').then(m => m.StartPageComponent), pathMatch: 'full' },
+    { path: 'pattern', loadComponent: () => import('./features/pattern-matching/pattern-matching.component').then(m => m.PatternMatchingComponent) },
+    { path: 'odd-direction', loadComponent: () => import('./features/odd-direction/odd-direction.component').then(m => m.OddDirectionComponent) },
+    { path: 'shade-sorting', loadComponent: () => import('./features/shade-sorting/shade-sorting.component').then(m => m.ShadeSortingComponent) },
+    { path: 'shade-sorting-2', loadComponent: () => import('./features/shade-sorting-2/shade-sorting-2.component').then(m => m.ShadeSorting2Component) },
+    { path: 'number-sequence', loadComponent: () => import('./features/number-sequence/number-sequence.component').then(m => m.NumberSequenceComponent) },
+    { path: 'symbol-matching', loadComponent: () => import('./features/symbol-matching/symbol-matching.component').then(m => m.SymbolMatchingComponent) },
+    { path: 'multi-condition-selection', loadComponent: () => import('./features/multi-condition-selection/multi-condition-selection.component').then(m => m.MultiConditionSelectionComponent) },
+    { path: 'animal-position', loadComponent: () => import('./features/animal-position/animal-position.component').then(m => m.AnimalPositionComponent) },
+    { path: 'pattern-2', loadComponent: () => import('./features/pattern-matching-two/pattern-matching-two.component').then(m => m.PatternMatchingTwoComponent) },
+    { path: 'shape-coloring', loadComponent: () => import('./features/shape-coloring/shape-coloring.component').then(m => m.ShapeColoringComponent) },
+    { path: 'liquid-selection', loadComponent: () => import('./features/liquid-selection/liquid-selection.component').then(m => m.LiquidSelectionComponent) },
+    { path: 'longest-rope', loadComponent: () => import('./features/longest-rope/longest-rope.component').then(m => m.LongestRopeComponent) },
+    { path: 'letter-matching', loadComponent: () => import('./features/letter-matching/letter-matching.component').then(m => m.LetterMatchingComponent) },
+    { path: 'shape-pattern', loadComponent: () => import('./features/shape-pattern/shape-pattern.component').then(m => m.ShapePatternComponent) },
+    { path: 'board-letter-matching', loadComponent: () => import('./features/board-letter-matching/board-letter-matching.component').then(m => m.BoardLetterMatchingComponent) },
+    { path: 'shape-to-color-match', loadComponent: () => import('./features/shape-to-color-match/shape-to-color-match.component').then(m => m.ShapeToColorMatchComponent) },
+    { path: 'sequence-rule-breaker', loadComponent: () => import('./features/sequence-rule-breaker/sequence-rule-breaker.component').then(m => m.SequenceRuleBreakerComponent) },
+    { path: 'living-things', loadComponent: () => import('./features/living-things/living-things').then(m => m.LivingThingsComponent) },
+    { path: 'traffic-sign-matching', loadComponent: () => import('./features/traffic-sign-matching/traffic-sign-matching.component').then(m => m.TrafficSignMatchingComponent) },
+    { path: 'abacus-counting', loadComponent: () => import('./features/abacus-counting/abacus-counting.component').then(m => m.AbacusCountingComponent) },
+    { path: 'dot-pattern-drawing', loadComponent: () => import('./features/dot-pattern-drawing/dot-pattern-drawing.component').then(m => m.DotPatternDrawingComponent) },
+    { path: 'fruit-count-matching', loadComponent: () => import('./features/fruit-count-matching/fruit-count-matching.component').then(m => m.FruitCountMatchingComponent) },
+    { path: 'find-most-balls', loadComponent: () => import('./features/find-most-balls/find-most-balls.component').then(m => m.FindMostBallsComponent) },
+    { path: 'shadow-matching', loadComponent: () => import('./features/shadow-matching/shadow-matching.component').then(m => m.ShadowMatchingComponent) },
+    { path: 'letter-sequence', loadComponent: () => import('./features/letter-sequence/letter-sequence.component').then(m => m.LetterSequenceComponent) },
+    { path: 'identical-pattern', loadComponent: () => import('./features/identical-pattern/identical-pattern.component').then(m => m.IdenticalPatternComponent) },
+    { path: 'match-size', loadComponent: () => import('./features/match-size/match-size.component').then(m => m.MatchSizeComponent) },
+    { path: 'grid-coloring', loadComponent: () => import('./features/grid-coloring/grid-coloring.component').then(m => m.GridColoringComponent) },
+    { path: 'find-same-symbols', loadComponent: () => import('./features/find-same-symbols/find-same-symbols.component').then(m => m.FindSameSymbolsComponent) },
+    { path: 'find-numbers', loadComponent: () => import('./features/find-numbers/find-numbers.component').then(m => m.FindNumbersComponent) },
+    { path: 'find-reversed-e', loadComponent: () => import('./features/find-reversed-e/find-reversed-e.component').then(m => m.FindReversedEComponent) },
+    { path: 'count-and-add', loadComponent: () => import('./features/count-and-add/count-and-add.component').then(m => m.CountAndAddComponent) },
+    { path: 'rhythmic-counting', loadComponent: () => import('./features/rhythmic-counting/rhythmic-counting.component').then(m => m.RhythmicCountingComponent) },
+    { path: 'top-view', loadComponent: () => import('./features/top-view/top-view.component').then(m => m.TopViewComponent) },
+    { path: 'box-coloring', loadComponent: () => import('./features/box-coloring/box-coloring.component').then(m => m.BoxColoringComponent) },
+    { path: 'triangle-size', loadComponent: () => import('./features/triangle-size/triangle-size.component').then(m => m.TriangleSizeComponent) },
+    { path: 'flower-coloring', loadComponent: () => import('./features/flower-coloring/flower-coloring.component').then(m => m.FlowerColoringComponent) },
+    { path: 'not-in-word', loadComponent: () => import('./features/not-in-word/not-in-word.component').then(m => m.NotInWordComponent) },
+    { path: 'finding-green-lines', loadComponent: () => import('./features/finding-green-lines/finding-green-lines.component').then(m => m.FindingGreenLinesComponent) },
+    { path: 'incorrect-numbers', loadComponent: () => import('./features/incorrect-numbers/incorrect-numbers.component').then(m => m.IncorrectNumbersComponent) },
+    { path: 'water-capacity', loadComponent: () => import('./features/water-capacity/water-capacity.component').then(m => m.WaterCapacityComponent) },
+    { path: 'fruit-size-ranking', loadComponent: () => import('./features/fruit-size-ranking/fruit-size-ranking.component').then(m => m.FruitSizeRankingComponent) },
+    { path: 'elderly-people', loadComponent: () => import('./features/elderly-people/elderly-people.component').then(m => m.ElderlyPeopleComponent) },
+    { path: 'find-different', loadComponent: () => import('./features/find-different/find-different.component').then(m => m.FindDifferentComponent) },
+    { path: 'cylinder-selection', loadComponent: () => import('./features/cylinder-selection/cylinder-selection.component').then(m => m.CylinderSelectionComponent) },
+    { path: 'pattern-completion', loadComponent: () => import('./features/pattern-completion/pattern-completion.component').then(m => m.PatternCompletionComponent) },
+    { path: 'shape-counting', loadComponent: () => import('./features/shape-counting/shape-counting.component').then(m => m.ShapeCountingComponent) },
+    { path: 'happy-children', loadComponent: () => import('./features/happy-children/happy-children.component').then(m => m.HappyChildrenComponent) },
+    { path: 'different-mountain', loadComponent: () => import('./features/different-mountain/different-mountain.component').then(m => m.DifferentMountainComponent) },
+    { path: 'letter-grid', loadComponent: () => import('./features/letter-grid/letter-grid.component').then(m => m.LetterGridComponent) },
+    { path: 'ice-cream-shape', loadComponent: () => import('./features/ice-cream-shape/ice-cream-shape.component').then(m => m.IceCreamShapeComponent) },
+    { path: 'school-profession', loadComponent: () => import('./features/school-profession/school-profession.component').then(m => m.SchoolProfessionComponent) },
+    { path: 'tallest-animal', loadComponent: () => import('./features/tallest-animal/tallest-animal.component').then(m => m.TallestAnimalComponent) },
+    { path: 'shape-corners', loadComponent: () => import('./features/shape-corners/shape-corners.component').then(m => m.ShapeCornersComponent) },
+    { path: 'pencil-matching-v2', loadComponent: () => import('./features/pencil-matching-v2/pencil-matching-v2.component').then(m => m.PencilMatchingV2Component) },
+    { path: 'shape-count-coloring', loadComponent: () => import('./features/shape-count-coloring/shape-count-coloring.component').then(m => m.ShapeCountColoringComponent) },
+    { path: 'sport-matching', loadComponent: () => import('./features/sport-matching/sport-matching.component').then(m => m.SportMatchingComponent) },
+    { path: 'letter-counting', loadComponent: () => import('./features/letter-counting/letter-counting.component').then(m => m.LetterCountingComponent) },
+    { path: 'elephant-direction', loadComponent: () => import('./features/elephant-direction/elephant-direction.component').then(m => m.ElephantDirectionComponent) },
+    { path: 'symbol-addition', loadComponent: () => import('./features/symbol-addition/symbol-addition.component').then(m => m.SymbolAdditionComponent) },
+    { path: 'grid-coloring-numbers', loadComponent: () => import('./features/grid-coloring-numbers/grid-coloring-numbers.component').then(m => m.GridColoringNumbersComponent) },
+    { path: 'child-bicycle-matching', loadComponent: () => import('./features/child-bicycle-matching/child-bicycle-matching.component').then(m => m.ChildBicycleMatchingComponent) },
+    { path: 'symbol-pair-matching', loadComponent: () => import('./features/symbol-pair-matching/symbol-pair-matching.component').then(m => m.SymbolPairMatchingComponent) },
+    { path: 'house-door-direction', loadComponent: () => import('./features/house-door-direction/house-door-direction.component').then(m => m.HouseDoorDirectionComponent) },
+    { path: 'count-matching-v2', loadComponent: () => import('./features/count-matching-v2/count-matching-v2.component').then(m => m.CountMatchingV2Component) },
+    { path: 'rectangle-selection', loadComponent: () => import('./features/rectangle-selection/rectangle-selection.component').then(m => m.RectangleSelectionComponent) },
+    { path: 'count-six-selection', loadComponent: () => import('./features/count-six-selection/count-six-selection.component').then(m => m.CountSixSelectionComponent) },
+    { path: 'electric-appliance-selection', loadComponent: () => import('./features/electric-appliance-selection/electric-appliance-selection.component').then(m => m.ElectricApplianceSelectionComponent) },
+    { path: 'pattern-3', loadComponent: () => import('./features/pattern-matching-three/pattern-matching-three.component').then(m => m.PatternMatchingThreeComponent) },
+    { path: 'zebra-letters', loadComponent: () => import('./features/zebra-letter-selection/zebra-letter-selection.component').then(m => m.ZebraLetterSelectionComponent) },
+    { path: 'shape-matching-drawn', loadComponent: () => import('./features/shape-matching-drawn/shape-matching-drawn.component').then(m => m.ShapeMatchingDrawnComponent) },
+    { path: 'watermelon-math', loadComponent: () => import('./features/watermelon-math/watermelon-math.component').then(m => m.WatermelonMathComponent) },
+    { path: 'fruit-sequence-v2', loadComponent: () => import('./features/fruit-sequence-v2/fruit-sequence-v2.component').then(m => m.FruitSequenceV2Component) },
+    { path: 'doctor-suitability', loadComponent: () => import('./features/doctor-suitability/doctor-suitability.component').then(m => m.DoctorSuitabilityComponent) },
+    { path: 'fruit-group-matching', loadComponent: () => import('./features/fruit-group-matching/fruit-group-matching.component').then(m => m.FruitGroupMatchingComponent) },
+    { path: 'orange-coloring', loadComponent: () => import('./features/orange-coloring/orange-coloring.component').then(m => m.OrangeColoringComponent) },
+    { path: 'symbol-grid-counting', loadComponent: () => import('./features/symbol-grid-counting/symbol-grid-counting.component').then(m => m.SymbolGridCountingComponent) },
+    { path: 'object-count-selection', loadComponent: () => import('./features/object-count-selection/object-count-selection.component').then(m => m.ObjectCountSelectionComponent) },
+    { path: 'fewest-triangles', loadComponent: () => import('./features/fewest-triangles/fewest-triangles.component').then(m => m.FewestTrianglesComponent) },
+    { path: 'favorite-activity', loadComponent: () => import('./features/favorite-activity/favorite-activity.component').then(m => m.FavoriteActivityComponent) },
+    { path: 'count-matching-v3', loadComponent: () => import('./features/count-matching-v3/count-matching-v3.component').then(m => m.CountMatchingV3Component) },
+    { path: 'egg-subtraction', loadComponent: () => import('./features/egg-subtraction/egg-subtraction.component').then(m => m.EggSubtractionComponent) },
+    { path: 'house-items', loadComponent: () => import('./features/house-items/house-items.component').then(m => m.HouseItemsComponent) },
+    { path: 'pink-grid', loadComponent: () => import('./features/pink-grid/pink-grid.component').then(m => m.PinkGridComponent) },
+    { path: 'letter-counting-v2', loadComponent: () => import('./features/letter-counting-v2/letter-counting-v2.component').then(m => m.LetterCountingV2Component) },
+    { path: 'shape-count-coloring-v2', loadComponent: () => import('./features/shape-count-coloring-v2/shape-count-coloring-v2.component').then(m => m.ShapeCountColoringV2Component) },
+    { path: 'sad-expressions', loadComponent: () => import('./features/sad-expressions/sad-expressions.component').then(m => m.SadExpressionsComponent) },
+    { path: 'geometric-sequence', loadComponent: () => import('./features/geometric-sequence/geometric-sequence.component').then(m => m.GeometricSequenceComponent) },
+    { path: 'finding-red-lines', loadComponent: () => import('./features/finding-red-lines/finding-red-lines.component').then(m => m.FindingRedLinesComponent) },
+    { path: 'uppercase-lowercase', loadComponent: () => import('./features/uppercase-lowercase/uppercase-lowercase.component').then(m => m.UppercaseLowercaseComponent) },
+    { path: 'word-shape-matching', loadComponent: () => import('./features/word-shape-matching/word-shape-matching.component').then(m => m.WordShapeMatchingComponent) },
+    { path: 'pattern-transfer', loadComponent: () => import('./features/pattern-transfer/pattern-transfer.component').then(m => m.PatternTransferComponent) },
+    { path: 'ladybug-spots', loadComponent: () => import('./features/ladybug-spots/ladybug-spots.component').then(m => m.LadybugSpotsComponent) },
+    { path: 'rotate-grid', loadComponent: () => import('./features/rotate-grid/rotate-grid.component').then(m => m.RotateGridComponent) },
+    { path: 'color-by-number', loadComponent: () => import('./features/color-by-number/color-by-number.component').then(m => m.ColorByNumberComponent) },
+    { path: 'toothbrush-selection', loadComponent: () => import('./features/toothbrush-selection/toothbrush-selection.component').then(m => m.ToothbrushSelectionComponent) },
+    { path: 'symbol-addition-v2', loadComponent: () => import('./features/symbol-addition-v2/symbol-addition-v2.component').then(m => m.SymbolAdditionV2Component) },
+    { path: 'cat-sequence', loadComponent: () => import('./features/cat-sequence/cat-sequence.component').then(m => m.CatSequenceComponent) },
+    { path: 'missing-number-grid', loadComponent: () => import('./features/missing-number-grid/missing-number-grid.component').then(m => m.MissingNumberGridComponent) },
+    { path: 'veg-grid-transfer', loadComponent: () => import('./features/veg-grid-transfer/veg-grid-transfer.component').then(m => m.VegGridTransferComponent) },
+    { path: 'symbol-sequence-placement', loadComponent: () => import('./features/symbol-sequence-placement/symbol-sequence-placement.component').then(m => m.SymbolSequencePlacementComponent) },
+    { path: 'most-colorful-ball', loadComponent: () => import('./features/most-colorful-ball/most-colorful-ball.component').then(m => m.MostColorfulBallComponent) },
+    { path: 'cat-position', loadComponent: () => import('./features/cat-position/cat-position.component').then(m => m.CatPositionComponent) },
+    { path: 'dot-grid-copy', loadComponent: () => import('./features/dot-grid-copy/dot-grid-copy.component').then(m => m.DotGridCopyComponent) },
+    { path: 'bike-matching', loadComponent: () => import('./features/bike-matching/bike-matching.component').then(m => m.BikeMatchingComponent) },
+    { path: 'pencil-matching', loadComponent: () => import('./features/pencil-matching/pencil-matching.component').then(m => m.PencilMatchingComponent) },
+    { path: 'symbol-grid-copy', loadComponent: () => import('./features/symbol-grid-copy/symbol-grid-copy.component').then(m => m.SymbolGridCopyComponent) },
+    { path: 'ball-matching', loadComponent: () => import('./features/ball-matching/ball-matching.component').then(m => m.BallMatchingComponent) },
+    { path: 'orange-different', loadComponent: () => import('./features/orange-different/orange-different.component').then(m => m.OrangeDifferentComponent) },
+    { path: 'river-branches', loadComponent: () => import('./features/river-branches/river-branches.component').then(m => m.RiverBranchesComponent) },
+    { path: 'symbol-grid-matching', loadComponent: () => import('./features/symbol-grid-matching/symbol-grid-matching.component').then(m => m.SymbolGridMatchingComponent) },
+    { path: 'shape-match-find', loadComponent: () => import('./features/shape-match-find/shape-match-find.component').then(m => m.ShapeMatchFindComponent) },
+    { path: 'count-apples', loadComponent: () => import('./features/count-apples/count-apples.component').then(m => m.CountApplesComponent) },
+    { path: 'ball-sequence', loadComponent: () => import('./features/ball-sequence/ball-sequence.component').then(m => m.BallSequenceComponent) },
+    { path: 'snake-letter', loadComponent: () => import('./features/snake-letter/snake-letter.component').then(m => m.SnakeLetterComponent) },
+    { path: 'letter-color-match', loadComponent: () => import('./features/letter-color-match/letter-color-match.component').then(m => m.LetterColorMatchComponent) },
+    { path: 'fruit-subtraction', loadComponent: () => import('./features/fruit-subtraction/fruit-subtraction.component').then(m => m.FruitSubtractionComponent) },
+    { path: 'triangle-match', loadComponent: () => import('./features/triangle-match/triangle-match.component').then(m => m.TriangleMatchComponent) },
+    { path: 'set-match', loadComponent: () => import('./features/set-match/set-match.component').then(m => m.SetMatchComponent) },
+    { path: 'profession-matching', loadComponent: () => import('./features/profession-matching/profession-matching.component').then(m => m.ProfessionMatchingComponent) },
+    { path: 'fruit-basket', loadComponent: () => import('./features/fruit-basket/fruit-basket.component').then(m => m.FruitBasketComponent) },
+    { path: 'flower-order', loadComponent: () => import('./features/flower-order/flower-order.component').then(m => m.FlowerOrderComponent) },
+    { path: 'symbol-color-match', loadComponent: () => import('./features/symbol-color-match/symbol-color-match.component').then(m => m.SymbolColorMatchComponent) },
+    { path: 'object-addition', loadComponent: () => import('./features/object-addition/object-addition.component').then(m => m.ObjectAdditionComponent) },
+    { path: 'symbol-block-match', loadComponent: () => import('./features/symbol-block-match/symbol-block-match.component').then(m => m.SymbolBlockMatchComponent) },
+    { path: 'balance-scale', loadComponent: () => import('./features/balance-scale/balance-scale.component').then(m => m.BalanceScaleComponent) },
+    { path: 'two-feature-filter', loadComponent: () => import('./features/two-feature-filter/two-feature-filter.component').then(m => m.TwoFeatureFilterComponent) },
+    { path: 'subtle-difference', loadComponent: () => import('./features/subtle-difference/subtle-difference.component').then(m => m.SubtleDifferenceComponent) },
+    { path: 'letter-hunt', loadComponent: () => import('./features/letter-hunt/letter-hunt.component').then(m => m.LetterHuntComponent) },
+    { path: 'missing-number', loadComponent: () => import('./features/missing-number/missing-number.component').then(m => m.MissingNumberComponent) },
+    { path: 'odd-category-out', loadComponent: () => import('./features/odd-category-out/odd-category-out.component').then(m => m.OddCategoryOutComponent) },
+    { path: 'mirror-letter', loadComponent: () => import('./features/mirror-letter/mirror-letter.component').then(m => m.MirrorLetterComponent) },
+    { path: 'letter-count', loadComponent: () => import('./features/letter-count/letter-count.component').then(m => m.LetterCountComponent) },
+    { path: 'first-letter-match', loadComponent: () => import('./features/first-letter-match/first-letter-match.component').then(m => m.FirstLetterMatchComponent) },
+    { path: 'count-difference', loadComponent: () => import('./features/count-difference/count-difference.component').then(m => m.CountDifferenceComponent) },
+    { path: 'number-ordering', loadComponent: () => import('./features/number-ordering/number-ordering.component').then(m => m.NumberOrderingComponent) },
+    { path: 'rotate-shape', loadComponent: () => import('./features/rotate-shape/rotate-shape.component').then(m => m.RotateShapeComponent) },
+    { path: 'count-sides', loadComponent: () => import('./features/count-sides/count-sides.component').then(m => m.CountSidesComponent) },
+    { path: 'sort-by-size', loadComponent: () => import('./features/sort-by-size/sort-by-size.component').then(m => m.SortBySizeComponent) },
+    { path: 'same-word-find', loadComponent: () => import('./features/same-word-find/same-word-find.component').then(m => m.SameWordFindComponent) },
+    { path: 'count-given-color', loadComponent: () => import('./features/count-given-color/count-given-color.component').then(m => m.CountGivenColorComponent) },
+    { path: 'star-difference', loadComponent: () => import('./features/star-difference/star-difference.component').then(m => m.StarDifferenceComponent) },
+    { path: 'fruit-sequence', loadComponent: () => import('./features/fruit-sequence/fruit-sequence.component').then(m => m.FruitSequenceComponent) },
+    { path: 'arrow-grid-copy', loadComponent: () => import('./features/arrow-grid-copy/arrow-grid-copy.component').then(m => m.ArrowGridCopyComponent) },
+    { path: 'color-pattern-completion', loadComponent: () => import('./features/color-pattern-completion/color-pattern-completion.component').then(m => m.ColorPatternCompletionComponent) },
+    { path: 'number-grid-match', loadComponent: () => import('./features/number-grid-match/number-grid-match.component').then(m => m.NumberGridMatchComponent) },
+    { path: 'digit-row-finder', loadComponent: () => import('./features/digit-row-finder/digit-row-finder.component').then(m => m.DigitRowFinderComponent) },
+    { path: 'number-color-match', loadComponent: () => import('./features/number-color-match/number-color-match.component').then(m => m.NumberColorMatchComponent) },
+    { path: 'symbol-sequence-match', loadComponent: () => import('./features/symbol-sequence-match/symbol-sequence-match.component').then(m => m.SymbolSequenceMatchComponent) },
+    { path: 'shape-matrix', loadComponent: () => import('./features/shape-matrix/shape-matrix.component').then(m => m.ShapeMatrixComponent) },
+    { path: 'end', loadComponent: () => import('./features/end-page/end-page.component').then(m => m.EndPageComponent) },
     { path: '**', redirectTo: '' },
 ];

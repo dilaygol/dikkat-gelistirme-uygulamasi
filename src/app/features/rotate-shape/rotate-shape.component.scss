@@ -158,53 +158,53 @@
 
 @include mobile {
     .questions-list {
-        gap: 10px;
+        gap: 8px;
     }
     .question-block {
         display: flex !important;
         flex-direction: row !important;
         align-items: center;
-        padding: 8px;
-        gap: 8px;
+        padding: 6px 10px;
+        gap: 6px;
         border-radius: 12px;
     }
     
     .reference-side {
         padding: 4px;
-        min-width: 70px;
+        min-width: 60px;
         background: #f1f4f9;
 
         .shape-container.ref {
-            width: 40px;
-            height: 40px;
-            .cell { width: 9px; height: 9px; }
+            width: 36px;
+            height: 36px;
+            .cell { width: 8px; height: 8px; }
         }
 
         .label {
-            display: none; // Mobil için yazıyı gizle, alan kazandır
+            display: none;
         }
     }
 
     .divider {
         width: 1.5px;
-        height: 50px;
+        height: 40px;
         margin: 0 4px;
         background: #e0e6f0;
     }
     
     .options-side {
         display: grid !important;
-        grid-template-columns: repeat(2, 1fr) !important;
+        grid-template-columns: repeat(4, 1fr) !important; // Try 4 columns to save vertical space?
         gap: 4px;
         flex: 1;
 
         .option-card {
-            padding: 4px;
+            padding: 2px;
             border-width: 1.5px;
             .shape-container {
-                width: 32px;
-                height: 32px;
-                .cell { width: 7px; height: 7px; }
+                width: 28px;
+                height: 28px;
+                .cell { width: 6px; height: 6px; }
             }
         }
     }

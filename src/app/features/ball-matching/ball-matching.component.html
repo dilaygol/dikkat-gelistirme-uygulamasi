@@ -50,6 +50,6 @@
     </div>
 
     <div class="frame-bottom">
-        <app-action-buttons [checkAlwaysDisabled]="true" (reset)="clearSelection()" />
+        <app-action-buttons [isCompleted]="isNextUnlocked" (reset)="clearSelection()" (check)="checkAnswer()" />
     </div>
 </div>

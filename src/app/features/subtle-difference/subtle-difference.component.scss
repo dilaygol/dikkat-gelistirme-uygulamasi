@@ -36,10 +36,11 @@
     max-height: 420px;
 
     @include mobile {
-        width: min(88vw, calc(100dvh - 280px));
-        height: min(calc(100dvh - 280px), 88vw);
+        width: min(80vw, calc(100svh - 330px));
+        height: min(calc(100svh - 330px), 80vw);
         max-width: none;
         max-height: none;
+        gap: 6px;
     }
 }
 
@@ -78,6 +79,12 @@
     }
 
     &:disabled { cursor: default; }
+
+    @include mobile {
+        border-width: 2px;
+        border-radius: 10px;
+        padding: 3px;
+    }
 }
 
 .flower {

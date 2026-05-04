@@ -54,7 +54,6 @@ const DISTRACTORS: Array<{ color: string; symbols: string[] }> = [
 export class BallMatchingComponent implements OnInit {
 
     balls: Ball[] = [];
-    firstSelectedId: number | null = null;
     isChecking = false;
 
     constructor(
@@ -131,59 +130,56 @@ export class BallMatchingComponent implements OnInit {
         const ball = this.balls.find(b => b.id === id)!;
         if (ball.isMatched) return;
 
-        // Deselect if tapping the same ball again
+        const selectedCount = this.balls.filter(b => b.isSelected).length;
+
         if (ball.isSelected) {
             ball.isSelected = false;
-            this.firstSelectedId = null;
-            return;
-        }
-
-        // First pick
-        if (this.firstSelectedId === null) {
+        } else if (selectedCount < 2) {
             ball.isSelected = true;
-            this.firstSelectedId = id;
+        }
+    }
+
+    checkAnswer(): void {
+        if (this.isChecking || this.isNextUnlocked) return;
+
+        const selectedBalls = this.balls.filter(b => b.isSelected);
+        if (selectedBalls.length !== 2) {
+            this.fb.showFeedback('error', 'Lütfen aynı olduğunu düşündüğün iki topu seç.');
             return;
         }
 
-        // Second pick — compare
-        const first = this.balls.find(b => b.id === this.firstSelectedId)!;
-        ball.isSelected = true;
         this.isChecking = true;
+        const [first, second] = selectedBalls;
 
-        if (first.pairId === ball.pairId) {
+        if (first.pairId === second.pairId) {
             // ✓ Correct! Only pairId 0 can match
             first.isMatched = true;
-            ball.isMatched = true;
+            second.isMatched = true;
             first.isSelected = false;
-            ball.isSelected = false;
-            this.firstSelectedId = null;
+            second.isSelected = false;
             this.isChecking = false;
 
             this.gs.markCompleted(ID);
             this.hintService.resetErrors(ID);
-            this.fb.showFeedback('success', 'Buldu! İki özdeş topu buldun!');
+            this.fb.showFeedback('success', 'Harika! İki özdeş topu buldun!');
             this.persist();
         } else {
-            // ✗ Wrong — shake both, then deselect
+            // ✗ Wrong — shake both
             this.hintService.registerError(ID);
             first.isWrong = true;
-            ball.isWrong = true;
-            this.fb.showFeedback('error', 'Bu toplar aynı değil! Renk ve desene dikkat et.');
+            second.isWrong = true;
+            this.fb.showFeedback('error', 'Bu toplar aynı değil! Tekrar dene.');
 
             setTimeout(() => {
                 first.isWrong = false;
-                ball.isWrong = false;
-                first.isSelected = false;
-                ball.isSelected = false;
-                this.firstSelectedId = null;
+                second.isWrong = false;
                 this.isChecking = false;
-            }, 650);
+            }, 800);
         }
     }
 
     clearSelection(): void {
         this.balls = this.createBalls();
-        this.firstSelectedId = null;
         this.isChecking = false;
         this.gs.clear(ID);
         this.hintService.resetErrors(ID);

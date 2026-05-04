@@ -112,7 +112,7 @@ export class SchoolProfessionComponent implements OnInit {
   }
 
   goPrev(): void {
-    this.router.navigate(['/ice-cream-shape']);
+    this.router.navigate(['/shape-matrix']);
   }
 
   goNext(): void {

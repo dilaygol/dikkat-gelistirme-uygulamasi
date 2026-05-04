@@ -154,19 +154,42 @@
 }
 
 @include mobile {
-    .letter-grid {
-        grid-template-columns: repeat(4, 1fr);
+    .questions-list {
+        gap: 6px;
     }
     
     .question-block {
         flex-direction: column;
         align-items: stretch;
+        padding: 6px 10px;
+        gap: 8px;
+        border-radius: 14px;
     }
     
     .target-indicator {
         width: 100%;
-        height: 40px;
+        height: 34px;
         flex-direction: row;
         gap: 8px;
+        border-radius: 10px;
+        .target-char { font-size: 1.4rem; }
+    }
+
+    .letter-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 3px;
+    }
+
+    .char-cell {
+        font-size: 0.85rem;
+    }
+
+    .options-group {
+        gap: 4px;
+    }
+
+    .option-btn {
+        height: 30px;
+        font-size: 0.95rem;
     }
 }

@@ -135,6 +135,6 @@ export class ShapeMatrixComponent implements OnInit {
     goPrev(): void { this.router.navigate(['/symbol-sequence-match']); }
     goNext(): void {
         if (!this.isNextUnlocked) return;
-        this.router.navigate(['/end']);
+        this.router.navigate(['/school-profession']);
     }
 }
