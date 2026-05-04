@@ -73,6 +73,14 @@
 .sport-icon {
     font-size: clamp(2rem, 6vw, 3.2rem);
     line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hoop-svg {
+    width: clamp(2.5rem, 7vw, 3.8rem);
+    height: clamp(2.5rem, 7vw, 3.8rem);
 }
 
 .sport-name {

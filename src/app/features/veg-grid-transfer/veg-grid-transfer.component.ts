@@ -46,7 +46,7 @@ export class VegGridTransferComponent implements OnInit {
     { id: 2, emoji: '🍆' }, // Eggplant
     { id: 3, emoji: '🌶️' }, // Pepper
     { id: 4, emoji: '🍌' }, // Banana
-    { id: 6, emoji: '🌽' }  // Corn
+    { id: 5, emoji: '🌽' }  // Corn
   ];
 
   grid: GridCell[] = [
@@ -56,9 +56,9 @@ export class VegGridTransferComponent implements OnInit {
     { id: 4, vegId: 3, emoji: '🌶️', userNumber: null },
     { id: 5, vegId: 1, emoji: '🥕', userNumber: null },
     { id: 6, vegId: 4, emoji: '🍌', userNumber: null },
-    { id: 7, vegId: 6, emoji: '🌽', userNumber: null },
+    { id: 7, vegId: 5, emoji: '🌽', userNumber: null },
     { id: 8, vegId: 1, emoji: '🥕', userNumber: null },
-    { id: 9, vegId: 6, emoji: '🌽', userNumber: null },
+    { id: 9, vegId: 5, emoji: '🌽', userNumber: null },
   ];
 
   feedbackState: 'correct' | 'wrong' | null = null;
