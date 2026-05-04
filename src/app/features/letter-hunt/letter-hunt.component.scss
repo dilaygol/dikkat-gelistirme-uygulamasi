@@ -102,20 +102,48 @@
         animation: hint-pulse 1s ease-in-out infinite;
     }
 
-    &:disabled { cursor: default; }
+    &:disabled {
+        cursor: default;
+    }
 }
 
 @keyframes shake {
-    0%, 100% { transform: translateX(0); }
-    25%      { transform: translateX(-5px); }
-    75%      { transform: translateX(5px); }
+
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+
+    25% {
+        transform: translateX(-5px);
+    }
+
+    75% {
+        transform: translateX(5px);
+    }
 }
 
 @keyframes hint-pulse {
-    0%, 100% { box-shadow: 0 0 0 2px rgba(255, 193, 7, 0.3); }
-    50%      { box-shadow: 0 0 0 6px rgba(255, 193, 7, 0.6); }
+
+    0%,
+    100% {
+        box-shadow: 0 0 0 2px rgba(255, 193, 7, 0.3);
+    }
+
+    50% {
+        box-shadow: 0 0 0 6px rgba(255, 193, 7, 0.6);
+    }
 }
 
 @media (max-width: 600px) {
-    .cell { font-size: clamp(14px, 4.5vw, 22px); }
+    .grid {
+        width: min(85vw, calc((100svh - 320px) * 8 / 6));
+        gap: 4px;
+    }
+
+    .cell {
+        font-size: clamp(14px, 4vw, 20px);
+        border-radius: 6px;
+        border-width: 1.5px;
+    }
 }

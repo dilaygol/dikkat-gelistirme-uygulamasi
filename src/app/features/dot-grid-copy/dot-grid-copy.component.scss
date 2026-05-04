@@ -65,7 +65,7 @@
     width: 100%;
 
     @include mobile {
-        max-width: clamp(180px, 65vw, 260px);
+        max-width: clamp(140px, 50vw, 190px);
     }
 
     &.user.error {
