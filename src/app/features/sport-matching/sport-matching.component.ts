@@ -42,7 +42,7 @@ export class SportMatchingComponent implements OnInit {
   sports: SportItem[] = [
     { id: 1, name: 'Tenis',      emoji: '🎾' },
     { id: 2, name: 'Okçuluk',    emoji: '🏹' },
-    { id: 3, name: 'Basketbol',  emoji: '🧺' }, // Basketbol Potası (Hoop)
+    { id: 3, name: 'Basketbol',  emoji: 'svg:hoop' }, // Basketbol Potası (Hoop)
   ];
 
   objects: ObjectItem[] = [
